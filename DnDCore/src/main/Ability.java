@@ -2,9 +2,9 @@ package main;
 
 public class Ability {
 	public String name;
-	public Character.STATS stat;
+	public DnDCharacter.STATS stat;
 	
-	public Ability(String name, Character.STATS mainstat) {
+	public Ability(String name, DnDCharacter.STATS mainstat) {
 		this.name=name;
 		this.stat=mainstat;
 	}

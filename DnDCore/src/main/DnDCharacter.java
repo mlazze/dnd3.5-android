@@ -3,18 +3,27 @@ package main;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
-public class Character implements Serializable{
-	/**
-	 * 
-	 */
+import main.Equipment.TYPE;
+
+public class DnDCharacter implements Serializable {
+	public static class NotEnoughAmmoException extends RuntimeException {
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static class InvalidCharacterException extends RuntimeException {
+		private static final long serialVersionUID = 1L;
+
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	public static enum STATS {
 		STR, DEX, CON, INT, WIS, CHA
 	}
 
-	public static String statToString(STATS s) {
+	private static String statToString(STATS s) {
 		switch (s) {
 		case STR:
 			return "Strenght";
@@ -34,7 +43,7 @@ public class Character implements Serializable{
 	}
 
 	public static enum SAVING {
-		REFLEX(1), FORTITUDE(2), WILL(4);
+		FORTITUDE(2), REFLEX(1), WILL(4);
 		private final int val;
 
 		private SAVING(int v) {
@@ -47,74 +56,80 @@ public class Character implements Serializable{
 	}
 
 	// main stats
-	private int[] stats;
+	public int[] stats;
 
 	// savingthrows base stats
-	private int[] savingthrowsbases;
+	public int[] savingthrowsbases;
 
 	// infos
-	private int level;
-	private String name;
-	private int runspeed;
-	private HashMap<String,Integer> classes;
-	private ArrayList<Integer> liferolls;
-	private ArrayList<String> knownlanguages;
-	private ArrayList<Integer> basicattackbonus;
-	private int armorbonus;
-	private int shieldbonus;
-	private int naturalarmor;
-	private int deflectionarmor;
-	private int spellresist;
-	private int damagereduction;
+	public int level;
+	public String name;
+	public int runspeed;
+	public HashMap<DNDCLASS, Integer> classes;
+	public ArrayList<Integer> liferolls;
+	public ArrayList<String> knownlanguages;
+	public ArrayList<Integer> basicattackbonus;
+	public int armorbonus;
+	public int shieldbonus;
+	public int naturalarmor;
+	public int deflectionarmor;
+	public int spellresist;
+	public int damagereduction;
+	public int tempAC;
 
 	// abilities
-	private HashMap<Ability, Integer> abilities;
-	private ArrayList<String> specialabilities;
-	private ArrayList<Feat> feats;
-	private ArrayList<Spell> knownspells;
-	private ArrayList<HashMap<Spell, Integer>> chosenspells;
+	public HashMap<Ability, Integer> abilities;
+	public ArrayList<String> specialabilities;
+	public ArrayList<Feat> feats;
+	public ArrayList<Spell> knownspells;
+	public ArrayList<HashMap<Spell, Integer>> chosenspells;
 
 	// temporaries
-	private ArrayList<Integer> temphitpoints;
-	private int[] tempstats;
-	private int[] tempsavingthrows;
-	private ArrayList<String> tempstatuses;
+	public ArrayList<Integer> temphitpoints;
+	public int[] tempstats;
+	public int[] tempsavingthrows;
+	public ArrayList<String> tempstatuses;
 
 	// equipment & inventory
-	private ArrayList<Equipment> equipment;
-	private ArrayList<Weapon> weapons;
-	private HashMap<String, Integer> inventory;
+	public ArrayList<Equipment> equipment;
+	public ArrayList<Weapon> weapons;
+	public HashMap<String, Integer> inventory;
 
 	// other
-	private int mischitpointsmax;
-	private int miscAC;
-	private int miscinitiative;
-	private int[] miscsavingthrows;
-	private int[] miscmagicsavingthrows;
-	private int miscattackroll;
+	public int mischitpointsmax;
+	public int miscAC;
+	public int miscinitiative;
+	public int[] miscsavingthrows;
+	public int[] miscmagicsavingthrows;
+	public int miscattackroll;
 
 	// COSTR
-	public Character(String name, String mainclass, int[] stats) {
+	public DnDCharacter(String name, DNDCLASS mainclass, int[] stats,
+			int runspeed, int[] savingthrowsbases) {
 		this.name = name;
 		this.level = 1;
 		liferolls = new ArrayList<Integer>(1);
-		//implement classes api
-		liferolls.add(12);
-		this.runspeed = 12;
-		classes=new HashMap<String, Integer>();
+		// implement classes api
+		liferolls.add(DNDCLASS.getLifeDice(mainclass));
+		this.runspeed = runspeed;
+		classes = new HashMap<DNDCLASS, Integer>();
 		classes.put(mainclass, 1);
-		knownlanguages=new ArrayList<String>(1);
+		this.stats = stats;
+		this.savingthrowsbases = savingthrowsbases;
+		setupEmptyCharacter();
+	}
+
+	private void setupEmptyCharacter() {
+		knownlanguages = new ArrayList<String>(1);
 		knownlanguages.add("Common");
 		basicattackbonus = new ArrayList<Integer>(1);
 		basicattackbonus.add(1);
-		this.stats = stats;
-		this.savingthrowsbases = new int[] {0,0,0};
 		abilities = new HashMap<Ability, Integer>(0);
 		setDefaultAbilities();
 		specialabilities = new ArrayList<String>(0);
 		feats = new ArrayList<Feat>(0);
 		knownspells = new ArrayList<Spell>(0);
-		chosenspells = new ArrayList<HashMap<Spell,Integer>>(1);
+		chosenspells = new ArrayList<HashMap<Spell, Integer>>(1);
 		chosenspells.add(new HashMap<Spell, Integer>(0));
 		temphitpoints = new ArrayList<Integer>(0);
 		tempstats = new int[6];
@@ -125,34 +140,113 @@ public class Character implements Serializable{
 		inventory = new HashMap<String, Integer>(0);
 		miscsavingthrows = new int[3];
 		miscmagicsavingthrows = new int[3];
-		
 	}
 
 	private void setDefaultAbilities() {
-		return;		
+
 	}
-	
-	private boolean recalculate() {
-		return false;
+
+	public void recalculate() {
+//		DnDCharacter bak = (DnDCharacter) this.clone();
+
+		try {
+			getcurrentHP(); // just to check
+			getAbilities();
+			for (Weapon w : weapons) {
+				getAttackBonuses(w, 0);
+				getDamageCrit(w, null);
+			}
+			getEquipment();
+			getFeats();
+			getInititative();
+			getInventory();
+			getSpecialAbilities();
+			getSpells();
+			getSpellSets();
+			getSprovvista();
+			getStatuses();
+			getTotalHP();
+			getWeapons();
+			getTouch();
+			getAC();
+			calculateAC();
+			getAC();
+			variousChecks();
+
+		} catch (Exception e) {
+//			this = bak;
+			throw e;
+		}
 	}
-	
-	private boolean reset() {
+
+	private void variousChecks() {
+		boolean raise = false;
+
+		//
+		int level = 0;
+		for (int i : classes.values())
+			level += i;
+		if (level != this.level)
+			raise = true;
+		//
+
+		if (raise)
+			throw new InvalidCharacterException();
+	}
+
+	private void calculateAC() {
+		int temp = 0;
+		for (Equipment e : equipment) {
+			if (e.type != TYPE.SHIELD)
+				temp += e.acbonus;
+		}
+		armorbonus = temp;
+
+		temp = 0;
+		for (Equipment e : equipment) {
+			if (e.type == TYPE.SHIELD)
+				temp += e.acbonus;
+		}
+		shieldbonus = temp;
+
+		temp = 0;
+		for (Equipment e : equipment) {
+
+			temp += e.naturalbonus;
+		}
+		naturalarmor = temp;
+
+		temp = 0;
+		for (Equipment e : equipment) {
+
+			temp += e.deflectionbonus;
+		}
+		deflectionarmor = temp;
+
+	}
+
+	public boolean resettemp() {
 		temphitpoints = new ArrayList<Integer>(0);
 		tempstats = new int[6];
 		tempsavingthrows = new int[3];
 		tempstatuses = new ArrayList<String>(0);
-		return false;
+		tempAC = 0;
+		return true;
 	}
 
 	// METHODS
-	public int getMod(STATS stat) throws InvalidCharacterException {
+	public int getMod(STATS stat) {
+		return (getStat(stat) - 10) / 2;
+	}
+
+	public int getStat(STATS stat) {
 		if (stats[stat.ordinal()] <= 0)
 			throw new InvalidCharacterException();
 		int s = stats[stat.ordinal()] + tempstats[stat.ordinal()];
-		return (s - 10) / 2;
+		return s;
 	}
 
-	public int getTotalHP() throws InvalidCharacterException {
+	public int getTotalHP() {
 		if (level <= 0)
 			throw new InvalidCharacterException();
 		if (liferolls.size() != level)
@@ -163,51 +257,49 @@ public class Character implements Serializable{
 			res += i;
 		}
 
-		return res + getMod(STATS.CON) + mischitpointsmax;
+		return res + getMod(STATS.CON) * level + mischitpointsmax;
 	}
 
-	public int getAC() throws InvalidCharacterException {
+	public int getAC() {
 		return 10 + armorbonus + shieldbonus + getMod(STATS.DEX) + naturalarmor
-				+ deflectionarmor + miscAC;
+				+ deflectionarmor + miscAC + tempAC;
 	}
 
-	public int getTouch() throws InvalidCharacterException {
-		return 10 + getMod(STATS.DEX) + deflectionarmor + miscAC;
+	public int getTouch() {
+		return getAC() - armorbonus - shieldbonus - naturalarmor;
+		// return 10 + getMod(STATS.DEX) + deflectionarmor + miscAC;
 	}
 
-	public int getSprovvista() throws InvalidCharacterException {
-		return 10 + armorbonus + shieldbonus + naturalarmor + deflectionarmor
-				+ miscAC;
+	public int getSprovvista() {
+		return getAC() - getMod(STATS.DEX);
 	}
 
-	public int getcurrentHP() throws InvalidCharacterException {
+	public int getcurrentHP() {
 		int res = getTotalHP();
 		for (int i : temphitpoints)
 			res += i;
 		return res;
 	}
 
-	public int getInititative() throws InvalidCharacterException {
+	public int getInititative() {
 		return getMod(STATS.DEX) + miscinitiative;
 	}
 
-	public int getThrow(SAVING s) throws InvalidCharacterException {
+	public int getThrow(SAVING s) {
 		int index = s.ordinal();
-		if (savingthrowsbases[index] <= 0)
+		if (savingthrowsbases[index] < 0)
 			throw new InvalidCharacterException();
 
-		return savingthrowsbases[index] + getMod(STATS.values()[index])
+		return savingthrowsbases[index] + getMod(STATS.values()[s.getVal()])
 				+ miscmagicsavingthrows[index] + miscsavingthrows[index]
 				+ tempsavingthrows[index];
 	}
 
-	public int getAttackBonus(Weapon w, int mods)
-			throws InvalidCharacterException {
+	public int getAttackBonus(Weapon w, int mods) {
 		return getAttackBonus(w, 0, mods);
 	}
 
-	public int getAttackBonus(Weapon w, int index, int mods)
-			throws InvalidCharacterException {
+	public int getAttackBonus(Weapon w, int index, int mods) {
 		if (basicattackbonus.size() <= 0)
 			throw new InvalidCharacterException();
 		int baseattack = basicattackbonus.get(index);
@@ -216,18 +308,16 @@ public class Character implements Serializable{
 		return baseattack + mod + miscmod + mods;
 	}
 
-	public ArrayList<Integer> getAttackBonuses(Weapon w, int mods)
-			throws InvalidCharacterException {
+	public ArrayList<Integer> getAttackBonuses(Weapon w, int mods) {
 		ArrayList<Integer> res = new ArrayList<Integer>(0);
 		for (int i = 0; i < basicattackbonus.size(); i++)
 			res.add(getAttackBonus(w, i, mods));
 		return res;
 	}
 
-	public String getDamageNonCrit(Weapon w, String misc)
-			throws InvalidCharacterException {
-		if (w.ammo == null)
-			return "Not enough ammo";
+	public String getDamageNonCrit(Weapon w, String misc) {
+		if (w.ranged && w.ammo == null)
+			throw new NotEnoughAmmoException();
 		String res = "";
 		res += w.damagedices + " + ";
 		if (misc != null)
@@ -235,8 +325,7 @@ public class Character implements Serializable{
 		return res + (getMod(w.stat) * w.damagemod);
 	}
 
-	public String getDamageCrit(Weapon w, String misc)
-			throws InvalidCharacterException {
+	public String getDamageCrit(Weapon w, String misc) {
 		if (w.ammo == null)
 			return "Not enough ammo";
 		String res = "(";
@@ -247,20 +336,20 @@ public class Character implements Serializable{
 		return res + "x" + w.critmult;
 	}
 
-	public int getAbilityMod(Ability a) throws InvalidCharacterException {
+	public int getAbilityMod(Ability a) {
 		if (abilities == null)
 			throw new InvalidCharacterException();
 		return abilities.get(a) + getMod(a.stat);
 	}
 
-	public ArrayList<String> getAbilities() throws InvalidCharacterException {
+	public ArrayList<String> getAbilities() {
 		ArrayList<String> res = new ArrayList<String>(0);
 		for (Ability a : abilities.keySet())
 			res.add(a.toString() + " mod" + getAbilityMod(a));
 		return res;
 	}
 
-	public ArrayList<String> getEquipment() throws InvalidCharacterException {
+	public ArrayList<String> getEquipment() {
 		if (equipment == null)
 			throw new InvalidCharacterException();
 		ArrayList<String> res = new ArrayList<String>(0);
@@ -269,24 +358,27 @@ public class Character implements Serializable{
 		return res;
 	}
 
-	public ArrayList<String> getWeapons() throws InvalidCharacterException {
+	public ArrayList<String> getWeapons()  {
 		if (weapons == null)
 			throw new InvalidCharacterException();
 		ArrayList<String> res = new ArrayList<String>(0);
 		String temp = "";
 		for (Weapon w : weapons) {
 			temp = "";
-			temp += w.toString() + "\n";
-			temp += "ATK ROLLS: ";
+			temp += "[ATK ROLLS: ";
 			for (Integer i : getAttackBonuses(w, 0))
 				temp += i + "/";
 			temp = temp.substring(0, temp.length() - 1);
-			res.add(w.toString());
+			temp+="] [";
+			temp+= getDamageNonCrit(w, null) + "] ";
+			temp += w.toString() + "\n";
+			
+			res.add(temp);
 		}
 		return res;
 	}
 
-	public ArrayList<String> getFeats() throws InvalidCharacterException {
+	public ArrayList<String> getFeats()  {
 		if (feats == null)
 			throw new InvalidCharacterException();
 		ArrayList<String> res = new ArrayList<String>(0);
@@ -295,7 +387,7 @@ public class Character implements Serializable{
 		return res;
 	}
 
-	public ArrayList<String> getSpells() throws InvalidCharacterException {
+	public ArrayList<String> getSpells()  {
 		if (knownspells == null)
 			throw new InvalidCharacterException();
 		ArrayList<String> res = new ArrayList<String>(0);
@@ -304,7 +396,7 @@ public class Character implements Serializable{
 		return res;
 	}
 
-	public ArrayList<String> getSpellSets() throws InvalidCharacterException {
+	public ArrayList<String> getSpellSets()  {
 		if (chosenspells == null)
 			throw new InvalidCharacterException();
 		ArrayList<String> res = new ArrayList<String>(0);
@@ -325,13 +417,13 @@ public class Character implements Serializable{
 		return specialabilities;
 	}
 
-	public ArrayList<String> getLanguages() throws InvalidCharacterException {
+	public ArrayList<String> getLanguages()  {
 		if (knownlanguages == null)
 			throw new InvalidCharacterException();
 		return knownlanguages;
 	}
 
-	public ArrayList<String> getInventory() throws InvalidCharacterException {
+	public ArrayList<String> getInventory() {
 		if (inventory == null)
 			throw new InvalidCharacterException();
 		ArrayList<String> res = new ArrayList<String>(0);
@@ -340,14 +432,14 @@ public class Character implements Serializable{
 		return res;
 	}
 
-	public ArrayList<String> getStatuses() throws InvalidCharacterException {
+	public ArrayList<String> getStatuses()  {
 		if (tempstatuses == null)
 			throw new InvalidCharacterException();
 		return tempstatuses;
 	}
-	
+
 	public boolean levelup(String newclass) {
-		//clone
+		// clone
 		return false;
 	}
 
@@ -356,17 +448,17 @@ public class Character implements Serializable{
 		try {
 			res += "====INFOS====\n";
 			// infos
-			res += "-Nome: " + name + "\n";
-			for (String s : classes.keySet())
-				res += "-Class: " + s + " level + " + classes.get(s) + "\n";
-			res += "-Level: " + level + "\n";
-			res += "-Run Speed: " + runspeed + "\n";
+			res += "-Nome: " + getName() + "\n";
+			for (DNDCLASS s : getClasses())
+				res += "-Class: " + s + " level " + getClassLevel(s) + "\n";
+			res += "-ToTLevel: " + getGlobalLevel() + "\n";
+			res += "-Run Speed: " + getRunspeed() + "\n";
 
 			// stats
 			res += "====STATS====\n";
 			for (STATS s : STATS.values())
-				res += "-" + statToString(s) + ": " + stats[s.ordinal()]
-						+ " | MOD: " + getMod(s) + "\n";
+				res += "-" + statToString(s) + ": " + getStat(s) + " | MOD: "
+						+ getMod(s) + "\n";
 
 			// hp
 			res += "====HP====\n";
@@ -374,7 +466,7 @@ public class Character implements Serializable{
 			res += "-MAX Hp: " + getTotalHP() + "\n";
 			res += "-Curr Hp: " + getcurrentHP() + "\n";
 			res += "=HP LOG=\n";
-			for (Integer i : liferolls) {
+			for (int i : getTempHP()) {
 				if (i >= 0)
 					res += "+";
 				res += i + " ";
@@ -397,20 +489,20 @@ public class Character implements Serializable{
 			res += "-AC: " + getAC() + "\n";
 			res += "-Touch: " + getTouch() + "\n";
 			res += "-Sprovvista: " + getSprovvista() + "\n";
-			res += "-Damage Reduction: " + damagereduction + "\n";
-			res += "-Spell Resist: " + spellresist + "\n";
+			res += "-Damage Reduction: " + getDamageReduction() + "\n";
+			res += "-Spell Resist: " + getSpellResist() + "\n";
 
 			// attacks
 			// basicattackbonus
 			res += "====BASIC ATK BONUS====\n";
-			for (Integer i : basicattackbonus)
+			for (Integer i : getBasicAttackBonuses())
 				res += i + "/";
 			res = res.substring(0, res.length() - 1);
 			res += "\n";
 
 			res += "====WEAPONS====\n";
 			for (String w : getWeapons()) {
-				res += w + "\n\n";
+				res += w + "\n";
 			}
 
 			res += "====EQUIPMENT====\n";
@@ -450,6 +542,42 @@ public class Character implements Serializable{
 			res += "CHARACTER NOT READY\n";
 		}
 		return res;
+	}
+
+	private int getClassLevel(DNDCLASS s) {
+		return classes.get(s);
+	}
+
+	private int getRunspeed() {
+		return runspeed;
+	}
+
+	private int getGlobalLevel() {
+		return level;
+	}
+
+	private Set<DNDCLASS> getClasses() {
+		return classes.keySet();
+	}
+
+	private String getName() {
+		return name;
+	}
+
+	private ArrayList<Integer> getTempHP() {
+		return temphitpoints;
+	}
+
+	private int getSpellResist() {
+		return spellresist;
+	}
+
+	private int getDamageReduction() {
+		return damagereduction;
+	}
+
+	private ArrayList<Integer> getBasicAttackBonuses() {
+		return basicattackbonus;
 	}
 
 }
