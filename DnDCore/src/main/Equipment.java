@@ -18,7 +18,7 @@ public class Equipment {
 	public String name="none";
 	public TYPE type;
 	public int acbonus;
-	public int maxdex;
+	public int maxdex = 999;
 	public int savepenalty;
 	public int spellfail;
 	public int speed;

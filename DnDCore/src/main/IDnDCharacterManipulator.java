@@ -11,100 +11,101 @@ public interface IDnDCharacterManipulator {
 
 	public void clearMisc();
 
-	boolean clearTemp();
+	public void clearTemp();
 
 	// getters
 	public ArrayList<String> getAbilities();
 
-	int getAbilityMod(ABILITIES a);
+	public int getAbilityMod(ABILITIES a);
 
-	int getAC();
+	public int getAC();
 
-	int getAttackBonus(Weapon w, int mods);
+	public int getAttackBonus(Weapon w, int mods);
 
-	int getAttackBonus(Weapon w, int index, int mods);
+	public int getAttackBonus(Weapon w, int index, int mods);
 
-	ArrayList<Integer> getAttackBonuses(Weapon w, int mods);
+	public ArrayList<Integer> getAttackBonuses(Weapon w, int mods);
 
-	ArrayList<Integer> getBasicAttackBonuses();
+	public ArrayList<Integer> getBasicAttackBonuses();
 
-	Set<DNDCLASS> getClasses();
+	public Set<DNDCLASS> getClasses();
 
-	int getClassLevel(DNDCLASS s);
+	public int getClassLevel(DNDCLASS s);
 
-	int getcurrentHP();
+	public int getcurrentHP();
 
-	String getDamageCrit(Weapon w, String misc);
+	public String getDamageCrit(Weapon w, String misc);
 
-	String getDamageNonCrit(Weapon w, String misc);
+	public String getDamageNonCrit(Weapon w, String misc);
 
-	int getDamageReduction();
+	public int getDamageReduction();
 
-	ArrayList<String> getEquipment();
+	public ArrayList<String> getEquipment();
 
-	ArrayList<String> getFeats();
+	public ArrayList<String> getFeats();
 
-	int getGlobalLevel();
+	public int getGlobalLevel();
 
-	int getInititative();
+	public int getInititative();
 
-	ArrayList<String> getInventory();
+	public ArrayList<String> getInventory();
 
-	ArrayList<String> getLanguages();
+	public ArrayList<String> getLanguages();
 
-	int getMod(STATS stat);
+	public int getMod(STATS stat);
 
-	String getName();
+	public String getName();
 
-	int getRunspeed();
+	public int getRunspeed();
 
-	ArrayList<String> getSpecialAbilities() throws InvalidCharacterException;
+	public ArrayList<String> getSpecialAbilities()
+			throws InvalidCharacterException;
 
-	int getSpellResist();
+	public int getSpellResist();
 
-	ArrayList<String> getSpells();
+	public ArrayList<String> getSpells();
 
-	ArrayList<String> getSpellSets();
+	public ArrayList<String> getSpellSets();
 
-	int getSprovvista();
+	public int getSprovvista();
 
-	int getStat(STATS stat);
+	public int getStat(STATS stat);
 
-	ArrayList<String> getStatuses();
+	public ArrayList<String> getStatuses();
 
-	ArrayList<Integer> getTempHP();
+	public ArrayList<Integer> getTempHP();
 
-	int getThrow(SAVING s);
+	public int getThrow(SAVING s);
 
-	int getTotalHP();
+	public int getTotalHP();
 
-	int getTouch();
+	public int getTouch();
 
-	ArrayList<String> getWeapons();
+	public ArrayList<String> getWeapons();
 
-	void levelup(DNDCLASS improvedclass, int liferoll, int[] newattackrolls,
-			STATS newstat, int newstatdelta);
+	public void levelup(DNDCLASS improvedclass, int liferoll,
+			int[] newattackrolls, STATS newstat, int newstatdelta);
 
-	void recalculate();
+	public void recalculate();
 
-	void setAbility(ABILITIES ability, boolean forget);
+	public void setAbility(ABILITIES ability, boolean forget);
 
-	void setAbilitySkill(ABILITIES ability, int value);
+	public void setAbilitySkill(ABILITIES ability, int value);
 
-	void setAttackBonus(int index, int value, boolean clear);
+	public void setAttackBonus(int index, int value, boolean clear);
 
-	void setChosenSpellsofIndex(Spell spell, int index, int quantity,
+	public void setChosenSpellsofIndex(Spell spell, int index, int quantity,
 			boolean clear);
 
-	void setDamageReductionDelta(int value);
+	public void setDamageReductionDelta(int value);
 
-	void setEquipment(Equipment pieceofequipment, boolean clear);
+	public void setEquipment(Equipment pieceofequipment, boolean clear);
 
-	void setFeat(Feat feat, boolean clear);
+	public void setFeat(Feat feat, boolean clear);
 
-	void setInventory(String itemname, int quantity, boolean clear);
+	public void setInventory(String itemname, int quantity, boolean clear);
 
-	void setKnownLanguage(String language, boolean clear);
+	public void setKnownLanguage(String language, boolean clear);
 
 	public void setKnownSpell(Spell spell, boolean clear);
 

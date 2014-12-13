@@ -243,7 +243,17 @@ public class DnDCharacter implements Serializable {
 
 	// METHODS
 	public int getMod(STATS stat) {
-		return (getStat(stat) - 10) / 2;
+		int result=(getStat(stat) - 10) / 2;
+		
+		if (stat == STATS.DEX) {
+			int max = 999;
+		
+			for (Equipment e : equipment)
+				if (e.maxdex < max)
+					max = e.maxdex;
+			result = result>max?max:result;
+		}
+		return result;
 	}
 
 	public String getName() {

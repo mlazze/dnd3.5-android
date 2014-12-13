@@ -13,6 +13,11 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 	public DnDCharacterManipulator(String name, DNDCLASS mainclass,
 			int[] stats, int runspeed, int[] savingthrowsbases) {
 		super(name, mainclass, stats, runspeed, savingthrowsbases);
+		recalculate();
+	}
+	
+	public ArrayList<Integer> getliferolls() {
+		return liferolls;
 	}
 
 	private void calculateAC() {
@@ -53,22 +58,22 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 		miscinitiative = 0;
 		miscmagicsavingthrows = new int[] { 0, 0, 0 };
 		miscsavingthrows = new int[] { 0, 0, 0 };
+		recalculate();
 	}
 
-	public boolean clearTemp() {
+	public void clearTemp() {
 		temphitpoints = new ArrayList<Integer>(0);
 		tempstats = new int[6];
 		tempsavingthrows = new int[3];
 		tempstatuses = new ArrayList<String>(0);
 		tempAC = 0;
-		return true;
+		recalculate();
 	}
 
 	public void levelup(DNDCLASS improvedclass, int liferoll,
 			int[] newattackrolls, STATS newstat, int newstatdelta) {
+		clearMisc();
 		clearTemp();
-		recalculate();
-
 		if (liferoll > improvedclass.getLifeDice())
 			throw new DnDCharacter.InvalidCharacterException();
 
@@ -83,8 +88,8 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 		if (newstat != null) {
 			stats[newstat.ordinal()] += newstatdelta;
 		}
+		clearMisc();
 		clearTemp();
-		recalculate();
 
 	}
 
@@ -126,11 +131,13 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			abilities.remove(ability);
 		else
 			abilities.put(ability, 0);
+		recalculate();
 
 	}
 
 	public void setAbilitySkill(ABILITIES ability, int value) {
 		abilities.put(ability, value);
+		recalculate();
 	}
 
 	public void setAttackBonus(int index, int value, boolean clear) {
@@ -140,6 +147,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			basicattackbonus.set(index, value);
 		else
 			basicattackbonus.add(value);
+		recalculate();
 
 	}
 
@@ -150,11 +158,13 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			temp.remove(spell);
 		else
 			temp.put(spell, quantity);
+		recalculate();
 
 	}
 
 	public void setDamageReductionDelta(int value) {
 		damagereduction += value;
+		recalculate();
 	}
 
 	public void setEquipment(Equipment pieceofequipment, boolean clear) {
@@ -162,6 +172,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			equipment.remove(pieceofequipment);
 		else if (!equipment.contains(pieceofequipment))
 			equipment.add(pieceofequipment);
+		recalculate();
 	}
 
 	public void setFeat(Feat feat, boolean clear) {
@@ -169,6 +180,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			feats.remove(feat);
 		else if (!feats.contains(feat))
 			feats.add(feat);
+		recalculate();
 	}
 
 	public void setInventory(String itemname, int quantity, boolean clear) {
@@ -176,6 +188,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			inventory.remove(itemname);
 		else
 			inventory.put(itemname, quantity);
+		recalculate();
 	}
 
 	public void setKnownLanguage(String language, boolean clear) {
@@ -183,6 +196,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			knownlanguages.remove(language);
 		else if (!knownlanguages.contains(language))
 			knownlanguages.add(language);
+		recalculate();
 	}
 
 	public void setKnownSpell(Spell spell, boolean clear) {
@@ -191,23 +205,28 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			knownspells.remove(spell);
 		else if (!knownspells.contains(spell))
 			knownspells.add(spell);
+		recalculate();
 	}
 
 	public void setMiscACDelta(int value) {
 		miscAC += value;
+		recalculate();
 	}
 
 	public void setMiscAttackRollDelta(int value) {
 		miscattackroll += value;
+		recalculate();
 
 	}
 
 	public void setMiscHPMAXDelta(int value) {
 		mischitpointsmax += value;
+		recalculate();
 	}
 
 	public void setMiscInitiativeDelta(int value) {
 		miscinitiative += value;
+		recalculate();
 	}
 
 	public void setSavingThrowsDelta(SAVING s, int value, boolean magic) {
@@ -215,6 +234,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			miscsavingthrows[s.ordinal()] += value;
 		else
 			miscmagicsavingthrows[s.ordinal()] += value;
+		recalculate();
 	}
 
 	public void setSpecialAbility(String s, boolean clear) {
@@ -222,34 +242,42 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			specialabilities.remove(s);
 		else if (!specialabilities.contains(s))
 			specialabilities.add(s);
+		recalculate();
 	}
 
 	public void setSpellResistDelta(int value) {
 		spellresist += value;
+		recalculate();
 	}
 
 	public void setStat(STATS stat, int value) {
 		stats[stat.ordinal()] = value;
+		recalculate();
 	}
 
 	public void setStatDelta(STATS stat, int value) {
 		stats[stat.ordinal()] += value;
+		recalculate();
 	}
 
 	public void setTempACDelta(int value) {
 		tempAC += value;
+		recalculate();
 	}
 
 	public void setTempHPDelta(int value) {
 		temphitpoints.add(value);
+		recalculate();
 	}
 
 	public void setTempSavingDelta(SAVING saving, int value) {
 		tempsavingthrows[saving.ordinal()] += value;
+		recalculate();
 	}
 
 	public void setTempStatDelta(STATS stat, int value) {
 		tempstats[stat.ordinal()] += value;
+		recalculate();
 	}
 
 	public void setTempStatus(String s, boolean clear) {
@@ -257,6 +285,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			tempstatuses.remove(s);
 		else if (!tempstatuses.contains(s))
 			tempstatuses.add(s);
+		recalculate();
 	}
 
 	public void setWeapon(Weapon w, boolean clear) {
@@ -264,6 +293,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 			weapons.remove(w);
 		else if (!weapons.contains(w))
 			weapons.add(w);
+		recalculate();
 	}
 
 	public String toString() {
