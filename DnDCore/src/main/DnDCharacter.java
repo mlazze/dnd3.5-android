@@ -2,6 +2,7 @@ package main;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -78,7 +79,7 @@ public class DnDCharacter implements Serializable {
 	public int tempAC;
 
 	// abilities
-	public HashMap<Ability, Integer> abilities;
+	public HashMap<ABILITIES, Integer> abilities;
 	public ArrayList<String> specialabilities;
 	public ArrayList<Feat> feats;
 	public ArrayList<Spell> knownspells;
@@ -110,7 +111,7 @@ public class DnDCharacter implements Serializable {
 		this.level = 1;
 		liferolls = new ArrayList<Integer>(1);
 		// implement classes api
-		liferolls.add(DNDCLASS.getLifeDice(mainclass));
+		liferolls.add(mainclass.getLifeDice());
 		this.runspeed = runspeed;
 		classes = new HashMap<DNDCLASS, Integer>();
 		classes.put(mainclass, 1);
@@ -124,7 +125,7 @@ public class DnDCharacter implements Serializable {
 		knownlanguages.add("Common");
 		basicattackbonus = new ArrayList<Integer>(1);
 		basicattackbonus.add(1);
-		abilities = new HashMap<Ability, Integer>(0);
+		abilities = new HashMap<ABILITIES, Integer>(0);
 		setDefaultAbilities();
 		specialabilities = new ArrayList<String>(0);
 		feats = new ArrayList<Feat>(0);
@@ -143,11 +144,15 @@ public class DnDCharacter implements Serializable {
 	}
 
 	private void setDefaultAbilities() {
-
+		for (ABILITIES a : ABILITIES.values()) {
+			if (a.isDef()) {
+				abilities.put(a, 0);
+			}
+		}
 	}
 
 	public void recalculate() {
-//		DnDCharacter bak = (DnDCharacter) this.clone();
+		// DnDCharacter bak = (DnDCharacter) this.clone();
 
 		try {
 			getcurrentHP(); // just to check
@@ -174,7 +179,7 @@ public class DnDCharacter implements Serializable {
 			variousChecks();
 
 		} catch (Exception e) {
-//			this = bak;
+			// this = bak;
 			throw e;
 		}
 	}
@@ -336,16 +341,17 @@ public class DnDCharacter implements Serializable {
 		return res + "x" + w.critmult;
 	}
 
-	public int getAbilityMod(Ability a) {
+	public int getAbilityMod(ABILITIES a) {
 		if (abilities == null)
 			throw new InvalidCharacterException();
-		return abilities.get(a) + getMod(a.stat);
+		return abilities.get(a) + getMod(a.getStat());
 	}
 
 	public ArrayList<String> getAbilities() {
 		ArrayList<String> res = new ArrayList<String>(0);
-		for (Ability a : abilities.keySet())
+		for (ABILITIES a : abilities.keySet())
 			res.add(a.toString() + " mod" + getAbilityMod(a));
+		Collections.sort(res);
 		return res;
 	}
 
@@ -358,7 +364,7 @@ public class DnDCharacter implements Serializable {
 		return res;
 	}
 
-	public ArrayList<String> getWeapons()  {
+	public ArrayList<String> getWeapons() {
 		if (weapons == null)
 			throw new InvalidCharacterException();
 		ArrayList<String> res = new ArrayList<String>(0);
@@ -369,16 +375,16 @@ public class DnDCharacter implements Serializable {
 			for (Integer i : getAttackBonuses(w, 0))
 				temp += i + "/";
 			temp = temp.substring(0, temp.length() - 1);
-			temp+="] [";
-			temp+= getDamageNonCrit(w, null) + "] ";
-			temp += w.toString() + "\n";
-			
+			temp += "] [";
+			temp += getDamageNonCrit(w, null) + "] ";
+			temp += w.toString();
+
 			res.add(temp);
 		}
 		return res;
 	}
 
-	public ArrayList<String> getFeats()  {
+	public ArrayList<String> getFeats() {
 		if (feats == null)
 			throw new InvalidCharacterException();
 		ArrayList<String> res = new ArrayList<String>(0);
@@ -387,7 +393,7 @@ public class DnDCharacter implements Serializable {
 		return res;
 	}
 
-	public ArrayList<String> getSpells()  {
+	public ArrayList<String> getSpells() {
 		if (knownspells == null)
 			throw new InvalidCharacterException();
 		ArrayList<String> res = new ArrayList<String>(0);
@@ -396,7 +402,7 @@ public class DnDCharacter implements Serializable {
 		return res;
 	}
 
-	public ArrayList<String> getSpellSets()  {
+	public ArrayList<String> getSpellSets() {
 		if (chosenspells == null)
 			throw new InvalidCharacterException();
 		ArrayList<String> res = new ArrayList<String>(0);
@@ -404,8 +410,9 @@ public class DnDCharacter implements Serializable {
 		for (HashMap<Spell, Integer> h : chosenspells) {
 			temp = "";
 			for (Spell s : h.keySet())
-				temp = s.toString() + " x" + h.get(s);
-			res.add(temp);
+				temp += s.toString() + " x" + h.get(s);
+			if (!temp.equals(""))
+				res.add(temp);
 		}
 		return res;
 	}
@@ -417,7 +424,7 @@ public class DnDCharacter implements Serializable {
 		return specialabilities;
 	}
 
-	public ArrayList<String> getLanguages()  {
+	public ArrayList<String> getLanguages() {
 		if (knownlanguages == null)
 			throw new InvalidCharacterException();
 		return knownlanguages;
@@ -432,7 +439,7 @@ public class DnDCharacter implements Serializable {
 		return res;
 	}
 
-	public ArrayList<String> getStatuses()  {
+	public ArrayList<String> getStatuses() {
 		if (tempstatuses == null)
 			throw new InvalidCharacterException();
 		return tempstatuses;
@@ -465,18 +472,17 @@ public class DnDCharacter implements Serializable {
 
 			res += "-MAX Hp: " + getTotalHP() + "\n";
 			res += "-Curr Hp: " + getcurrentHP() + "\n";
-			res += "=HP LOG=\n";
+			res += "===HP LOG===\n";
 			for (int i : getTempHP()) {
 				if (i >= 0)
 					res += "+";
 				res += i + " ";
 			}
-			res += "\n";
 
 			// statuses
 			res += "====STATUSES====\n";
 			for (String f : getStatuses())
-				res += f + "\n\n";
+				res += f + "\n";
 
 			// rolls
 			res += "====S.THROWS====\n";
@@ -507,36 +513,35 @@ public class DnDCharacter implements Serializable {
 
 			res += "====EQUIPMENT====\n";
 			for (String e : getEquipment())
-				res += e + "\n\n";
+				res += e + "\n";
 
 			res += "====ABILITIES====\n";
 			for (String a : getAbilities())
-				res += a + "\n\n";
+				res += a + "\n";
 
 			res += "====FEATS====\n";
 			for (String f : getFeats())
-				res += f + "\n\n";
+				res += f + "\n";
 
 			res += "====SPEC.ABILITIES====\n";
 			for (String f : getSpecialAbilities())
-				res += f + "\n\n";
+				res += f + "\n";
 
 			res += "====KNOWN SPELLS====\n";
 			for (String f : getSpells())
-				res += f + "\n\n";
+				res += f + "\n";
 
 			res += "====SPELL SETS====\n";
 			for (String f : getSpellSets())
-				res += "-" + f + "\n\n";
-			res += "\n\n";
+				res += "-" + f + "\n";
 
 			res += "====INVENTORY====\n";
 			for (String f : getInventory())
-				res += f + "\n\n";
+				res += f + "\n";
 
 			res += "====LANGUAGES====\n";
 			for (String f : getLanguages())
-				res += f + "\n\n";
+				res += f + "\n";
 			res += "====END====\n";
 		} catch (Exception e) {
 			res += "CHARACTER NOT READY\n";

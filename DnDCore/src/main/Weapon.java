@@ -1,13 +1,13 @@
 package main;
 
 public class Weapon {
-	public String name;
-	public String damagedices;
+	public String name ="none";
+	public String damagedices="none";
 	public int critminrange;
 	public double critmult;
 	public double range;
-	public String type;
-	public String notes;
+	public String type="none";
+	public String notes="none";
 	public Integer ammo;
 	public boolean ranged;
 	DnDCharacter.STATS stat; 

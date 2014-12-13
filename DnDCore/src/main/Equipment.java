@@ -15,7 +15,7 @@ public class Equipment {
 		}
 	}
 
-	public String name;
+	public String name="none";
 	public TYPE type;
 	public int acbonus;
 	public int maxdex;
@@ -23,7 +23,7 @@ public class Equipment {
 	public int spellfail;
 	public int speed;
 	public double weight;
-	public String specialproperties;
+	public String specialproperties="none";
 	public int deflectionbonus;
 	public int naturalbonus;
 
