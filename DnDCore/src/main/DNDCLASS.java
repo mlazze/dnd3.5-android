@@ -9,7 +9,7 @@ public enum DNDCLASS {
 		this.lifedice = lifedice;
 	}
 	
-	public static int getLifeDice(DNDCLASS c) {
-		return c.lifedice;
+	public int getLifeDice() {
+		return lifedice;
 	}
 }
