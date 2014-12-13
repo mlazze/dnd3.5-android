@@ -120,6 +120,9 @@ public class Test {
 		stranger.levelup(DNDCLASS.BARBARIAN, 11, null,null,0);
 		stranger.levelup(DNDCLASS.BARBARIAN, 8, null,STATS.STR,1);
 		stranger.levelup(DNDCLASS.BARBARIAN, 8, null,null,0);
+		stranger.clearTemp();
+		stranger.clearMisc();
+		String a=stranger.toString();
 		System.out.println("=====LVLUP NO REC=====");
 		System.out.println(stranger.toString());
 		System.out.println("=====================");
@@ -128,6 +131,17 @@ public class Test {
 		System.out.println(stranger.toString());
 		System.out.println("=====================");
 		setIra(stranger);
+		stranger.recalculate();
+		System.out.println("=====IRA REC=====");
+		System.out.println(stranger.toString());
+		System.out.println("=====================");
+		stranger.clearTemp();
+		stranger.clearMisc();
+		String b=stranger.toString();
+		System.out.println("=====NOIRA REC=====");
+		System.out.println(stranger.toString());
+		System.out.println("=====================");
+		System.out.println(a.equals(b));
 	}
 
 	private static void setIra(IDnDCharacterManipulator charac) {
@@ -137,6 +151,9 @@ public class Test {
 		// pino.tempAC += -2;
 		// pino.tempstatuses.add("Ira");
 		charac.setTempStatDelta(STATS.STR, 4);
-		
+		charac.setTempStatDelta(STATS.CON, 4);
+		charac.setTempACDelta(-2);
+		charac.setTempSavingDelta(SAVING.WILL, 2);
+		charac.setTempStatus("Ira", false);
 	}
 }
