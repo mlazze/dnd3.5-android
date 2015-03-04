@@ -3,7 +3,6 @@ package com.skij.dndcharacter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,10 +19,6 @@ import core.IDnDCharacterManipulator;
 
 public class HomeScreen extends ActionBarActivity {
 
-    private ListView characterListView;
-
-    public ArrayList<IDnDCharacterManipulator> characterList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +28,11 @@ public class HomeScreen extends ActionBarActivity {
         ArrayList<String> characterInfoList;
         ArrayAdapter<String> arrayAdapter;
 
-        characterListView = (ListView) findViewById(R.id.characterList);
+//        Utils.loadPrefs(this);
+        Utils.characterList = populateCharList();
+        ListView characterListView = (ListView) findViewById(R.id.characterList);
 
-        characterList = populateCharList();
-        characterInfoList = getInfoFromCharacterList(characterList);
+        characterInfoList = getInfoFromCharacterList(Utils.characterList);
 
         //set adapter for list
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, characterInfoList);
@@ -46,16 +42,15 @@ public class HomeScreen extends ActionBarActivity {
 
     private ArrayList<String> getInfoFromCharacterList(ArrayList<IDnDCharacterManipulator> characterList) {
         String tmp;
-        ArrayList<String> res = new ArrayList<>(characterList.size());
+        ArrayList<String> res = new ArrayList<>(characterList.size() + 1);
 
-        Log.d("DBGLIST", "" + characterList.size());
         for (int i = 0; i < characterList.size(); i++) {
             IDnDCharacterManipulator tmpchar = characterList.get(i);
             tmp = tmpchar.getName() + "\nClass: " + tmpchar.getClasses().iterator().next() + "\nLevel " + tmpchar.getGlobalLevel();
             res.add(tmp);
-            Log.d("ADDING", tmp);
         }
-        Log.d("DBGLIST", res.get(0));
+
+        res.add("Add New");
         return res;
     }
 
@@ -93,9 +88,14 @@ public class HomeScreen extends ActionBarActivity {
     private AdapterView.OnItemClickListener characterListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent i = new Intent(HomeScreen.this,CharacterScreen.class);
-            i.putExtra("Character",position);
-            startActivity(i);
+            Intent i;
+//            if (position == Utils.characterList.size()) //addnew {
+//                i = new Intent(HomeScreen.this, NewCharacterasd.class);
+//            else {
+//                i = new Intent(HomeScreen.this, CharacterScreen.class);
+//                i.putExtra("Character", position);
+//            }
+//            startActivity(i);
         }
     };
 
