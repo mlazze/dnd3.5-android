@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DnD.iml" filepath="$PROJECT_DIR$/DnD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dndcharacter/dndcharacter.iml" filepath="$PROJECT_DIR$/dndcharacter/dndcharacter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dndcore/dndcore.iml" filepath="$PROJECT_DIR$/dndcore/dndcore.iml" />
+    </modules>
+  </component>
+</project>
+
