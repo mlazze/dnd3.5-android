@@ -28,7 +28,7 @@ public class DnDCharacter implements Serializable {
     protected int spellresist;
     protected int damagereduction;
     protected int tempAC;
-    // abilities
+//    // abilities
     protected HashMap<ABILITIES, Integer> abilities;
     protected ArrayList<String> specialabilities;
     protected ArrayList<Feat> feats;
@@ -50,6 +50,7 @@ public class DnDCharacter implements Serializable {
     protected int[] miscsavingthrows;
     protected int[] miscmagicsavingthrows;
     protected int miscattackroll;
+
     // COSTR
     public DnDCharacter(String name, DNDCLASS mainclass, int[] stats,
                         int runspeed, int[] savingthrowsbases) {
@@ -65,6 +66,7 @@ public class DnDCharacter implements Serializable {
         this.savingthrowsbases = savingthrowsbases;
         setupEmptyCharacter();
     }
+
 
     public ArrayList<String> getAbilities() {
         ArrayList<String> res = new ArrayList<String>(0);
@@ -121,6 +123,7 @@ public class DnDCharacter implements Serializable {
     public Set<DNDCLASS> getClasses() {
         return classes.keySet();
     }
+
 
     public int getClassLevel(DNDCLASS s) {
         return classes.get(s);
@@ -338,6 +341,7 @@ public class DnDCharacter implements Serializable {
         }
     }
 
+    //
     private void setupEmptyCharacter() {
         knownlanguages = new ArrayList<String>(1);
         knownlanguages.add("Common");
@@ -360,6 +364,7 @@ public class DnDCharacter implements Serializable {
         miscsavingthrows = new int[3];
         miscmagicsavingthrows = new int[3];
     }
+
 
     protected void variousChecks() {
         boolean raise = false;

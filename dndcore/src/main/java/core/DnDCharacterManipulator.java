@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DnDCharacterManipulator extends DnDCharacter implements
-        IDnDCharacterManipulator, Serializable {
+        Serializable {
 
     public DnDCharacterManipulator(String name, DNDCLASS mainclass,
                                    int[] stats, int runspeed, int[] savingthrowsbases) {

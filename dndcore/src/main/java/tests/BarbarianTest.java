@@ -1,4 +1,4 @@
-package core.tests;
+package tests;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import core.DNDCLASS;
 import core.DnDCharacter.SAVING;
 import core.DnDCharacterManipulator;
 import core.Equipment;
-import core.IDnDCharacterManipulator;
 import core.Weapon;
 import core.DnDCharacter.STATS;
 import core.Equipment.TYPE;
@@ -16,7 +15,7 @@ import core.Equipment.TYPE;
 public class BarbarianTest {
     public static void main(String[] args) {
         BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
-        IDnDCharacterManipulator stranger = null;
+        DnDCharacterManipulator stranger = null;
         try {
             System.out.println("C Cleric\nS Stranger");
             switch (b.readLine().charAt(0)) {
@@ -93,7 +92,7 @@ public class BarbarianTest {
         }
     }
 
-    private static void print(IDnDCharacterManipulator stranger) {
+    private static void print(DnDCharacterManipulator stranger) {
         System.out.println("=========");
         System.out.println(stranger);
 
@@ -121,10 +120,10 @@ public class BarbarianTest {
 
     }
 
-    private static IDnDCharacterManipulator creaStranger() {
+    private static DnDCharacterManipulator creaStranger() {
         int[] stats = new int[]{18, 14, 18, 10, 14, 8};
         int[] sav = new int[]{4, 1, 1};
-        IDnDCharacterManipulator stranger = new DnDCharacterManipulator(
+        DnDCharacterManipulator stranger = new DnDCharacterManipulator(
                 "Stranger", DNDCLASS.BARBARIAN, stats, 12, sav);
         stranger.setAttackBonus(0, 5, false);
         Weapon w = new Weapon("Spadone 2h", false, STATS.STR, 1.5, 1.5, "2d6",
@@ -160,10 +159,10 @@ public class BarbarianTest {
         return stranger;
     }
 
-    private static IDnDCharacterManipulator creaCleric() {
+    private static DnDCharacterManipulator creaCleric() {
         int[] stats = new int[]{14, 12, 16, 10, 18, 12};
         int[] sav = new int[]{4, 1, 4};
-        IDnDCharacterManipulator cleric = new DnDCharacterManipulator("Cleric",
+        DnDCharacterManipulator cleric = new DnDCharacterManipulator("Cleric",
                 DNDCLASS.CLERIC, stats, 6, sav);
         cleric.levelup(DNDCLASS.CLERIC, 3, null, null, 0, null);
         cleric.levelup(DNDCLASS.CLERIC, 6, null, null, 0, null);
@@ -201,7 +200,7 @@ public class BarbarianTest {
         return cleric;
     }
 
-    private static void setIra(IDnDCharacterManipulator charac) {
+    private static void setIra(DnDCharacterManipulator charac) {
         charac.setTempStatDelta(STATS.STR, 4);
         charac.setTempStatDelta(STATS.CON, 4);
         charac.setTempACDelta(-2);

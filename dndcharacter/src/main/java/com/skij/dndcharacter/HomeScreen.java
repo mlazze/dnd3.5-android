@@ -3,7 +3,9 @@ package com.skij.dndcharacter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,13 +14,25 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import core.DNDCLASS;
 import core.DnDCharacterManipulator;
-import core.IDnDCharacterManipulator;
 
 
 public class HomeScreen extends ActionBarActivity {
 
+
+    private AdapterView.OnItemClickListener characterListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent i;
+            if (position == Utils.characterList.size()) //addnew {
+                i = new Intent(HomeScreen.this, NewCharacter.class);
+            else {
+                i = new Intent(HomeScreen.this, CharacterScreen.class);
+                i.putExtra("Character", position);
+            }
+            startActivity(i);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +43,6 @@ public class HomeScreen extends ActionBarActivity {
         ArrayAdapter<String> arrayAdapter;
 
         Utils.loadPrefs(this);
-//        Utils.characterList = populateCharList();
         ListView characterListView = (ListView) findViewById(R.id.characterList);
 
         characterInfoList = getInfoFromCharacterList(Utils.characterList);
@@ -38,6 +51,29 @@ public class HomeScreen extends ActionBarActivity {
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, characterInfoList);
         characterListView.setAdapter(arrayAdapter);
         characterListView.setOnItemClickListener(characterListener);
+        registerForContextMenu(characterListView);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.charlist_context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.delete_entry:
+                Utils.deleteCharacter(info.id, this);
+                finish();
+                startActivity(getIntent());
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     private ArrayList<String> getInfoFromCharacterList(ArrayList<DnDCharacterManipulator> characterList) {
@@ -45,7 +81,7 @@ public class HomeScreen extends ActionBarActivity {
         ArrayList<String> res = new ArrayList<>(characterList.size() + 1);
 
         for (int i = 0; i < characterList.size(); i++) {
-            IDnDCharacterManipulator tmpchar = characterList.get(i);
+            DnDCharacterManipulator tmpchar = characterList.get(i);
             tmp = tmpchar.getName() + "\nClass: " + tmpchar.getClasses().iterator().next() + "\nLevel " + tmpchar.getGlobalLevel();
             res.add(tmp);
         }
@@ -53,15 +89,6 @@ public class HomeScreen extends ActionBarActivity {
         res.add("Add New");
         return res;
     }
-
-    private ArrayList<IDnDCharacterManipulator> populateCharList() {
-        ArrayList<IDnDCharacterManipulator> lst = new ArrayList<>(1);
-        int[] stats = {1, 1, 1, 1, 1, 1};
-        int[] sav = {1, 1, 1};
-        lst.add(new DnDCharacterManipulator("Provanova", DNDCLASS.BARBARIAN, stats, 12, sav));
-        return lst;
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,19 +111,5 @@ public class HomeScreen extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    private AdapterView.OnItemClickListener characterListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent i;
-            if (position == Utils.characterList.size()) //addnew {
-                i = new Intent(HomeScreen.this, NewCharacter.class);
-            else {
-                i = new Intent(HomeScreen.this, CharacterScreen.class);
-                i.putExtra("Character", position);
-            }
-            startActivity(i);
-        }
-    };
 
 }

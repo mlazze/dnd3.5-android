@@ -19,7 +19,7 @@ public class NewCharacter extends ActionBarActivity {
         //prova
         int[] stats = {1, 1, 1, 1, 1, 1};
         int[] sav = {1, 1, 1};
-        Utils.characterList.add(new DnDCharacterManipulator("Provanova", DNDCLASS.BARBARIAN, stats, 12, sav));
+        Utils.addCharacter(new DnDCharacterManipulator("Provanova", DNDCLASS.BARBARIAN, stats, 12, sav), this);
         Utils.savePrefs(this);
     }
 
