@@ -7,57 +7,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class DnDCharacter implements Serializable {
-    public static class InvalidCharacterException extends RuntimeException {
-
-    }
-
-    public static class NotEnoughAmmoException extends RuntimeException {
-    }
-
-    public static enum SAVING {
-        FORTITUDE(2), REFLEX(1), WILL(4);
-        private final int val;
-
-        private SAVING(int v) {
-            val = v;
-        }
-
-        public int getVal() {
-            return val;
-        }
-    }
-
-    public static enum STATS {
-        STR, DEX, CON, INT, WIS, CHA;
-
-        public String toString() {
-            switch (this) {
-                case STR:
-                    return "Strenght";
-                case DEX:
-                    return "Dexterity";
-                case CON:
-                    return "Constitution";
-                case INT:
-                    return "Intelligence";
-                case WIS:
-                    return "Wisdom";
-                case CHA:
-                    return "Charisma";
-                default:
-                    return null;
-            }
-        }
-    }
-
     private static final long serialVersionUID = 1L;
-
     // main stats
     protected int[] stats;
-
     // savingthrows base stats
     protected int[] savingthrowsbases;
-
     // infos
     protected int level;
     protected String name;
@@ -74,25 +28,21 @@ public class DnDCharacter implements Serializable {
     protected int spellresist;
     protected int damagereduction;
     protected int tempAC;
-
     // abilities
     protected HashMap<ABILITIES, Integer> abilities;
     protected ArrayList<String> specialabilities;
     protected ArrayList<Feat> feats;
     protected ArrayList<Spell> knownspells;
     protected ArrayList<HashMap<Spell, Integer>> chosenspells;
-
     // temporaries
     protected ArrayList<Integer> temphitpoints;
     protected int[] tempstats;
     protected int[] tempsavingthrows;
     protected ArrayList<String> tempstatuses;
-
     // equipment & inventory
     protected ArrayList<Equipment> equipment;
     protected ArrayList<Weapon> weapons;
     protected HashMap<String, Integer> inventory;
-
     // other
     protected int mischitpointsmax;
     protected int miscAC;
@@ -100,7 +50,6 @@ public class DnDCharacter implements Serializable {
     protected int[] miscsavingthrows;
     protected int[] miscmagicsavingthrows;
     protected int miscattackroll;
-
     // COSTR
     public DnDCharacter(String name, DNDCLASS mainclass, int[] stats,
                         int runspeed, int[] savingthrowsbases) {
@@ -365,7 +314,7 @@ public class DnDCharacter implements Serializable {
         if (weapons == null)
             throw new InvalidCharacterException();
         ArrayList<String> res = new ArrayList<String>(0);
-        String temp ;
+        String temp;
         for (Weapon w : weapons) {
             temp = "";
             temp += "[ATK ROLLS: ";
@@ -425,6 +374,49 @@ public class DnDCharacter implements Serializable {
 
         if (raise)
             throw new InvalidCharacterException();
+    }
+
+    public static enum SAVING {
+        FORTITUDE(2), REFLEX(1), WILL(4);
+        private final int val;
+
+        private SAVING(int v) {
+            val = v;
+        }
+
+        public int getVal() {
+            return val;
+        }
+    }
+
+    public static enum STATS {
+        STR, DEX, CON, INT, WIS, CHA;
+
+        public String toString() {
+            switch (this) {
+                case STR:
+                    return "Strenght";
+                case DEX:
+                    return "Dexterity";
+                case CON:
+                    return "Constitution";
+                case INT:
+                    return "Intelligence";
+                case WIS:
+                    return "Wisdom";
+                case CHA:
+                    return "Charisma";
+                default:
+                    return null;
+            }
+        }
+    }
+
+    public static class InvalidCharacterException extends RuntimeException {
+
+    }
+
+    public static class NotEnoughAmmoException extends RuntimeException {
     }
 
 }

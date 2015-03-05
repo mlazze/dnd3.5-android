@@ -28,8 +28,8 @@ public class HomeScreen extends ActionBarActivity {
         ArrayList<String> characterInfoList;
         ArrayAdapter<String> arrayAdapter;
 
-//        Utils.loadPrefs(this);
-        Utils.characterList = populateCharList();
+        Utils.loadPrefs(this);
+//        Utils.characterList = populateCharList();
         ListView characterListView = (ListView) findViewById(R.id.characterList);
 
         characterInfoList = getInfoFromCharacterList(Utils.characterList);
@@ -40,7 +40,7 @@ public class HomeScreen extends ActionBarActivity {
         characterListView.setOnItemClickListener(characterListener);
     }
 
-    private ArrayList<String> getInfoFromCharacterList(ArrayList<IDnDCharacterManipulator> characterList) {
+    private ArrayList<String> getInfoFromCharacterList(ArrayList<DnDCharacterManipulator> characterList) {
         String tmp;
         ArrayList<String> res = new ArrayList<>(characterList.size() + 1);
 
@@ -89,13 +89,13 @@ public class HomeScreen extends ActionBarActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent i;
-//            if (position == Utils.characterList.size()) //addnew {
-//                i = new Intent(HomeScreen.this, NewCharacterasd.class);
-//            else {
-//                i = new Intent(HomeScreen.this, CharacterScreen.class);
-//                i.putExtra("Character", position);
-//            }
-//            startActivity(i);
+            if (position == Utils.characterList.size()) //addnew {
+                i = new Intent(HomeScreen.this, NewCharacter.class);
+            else {
+                i = new Intent(HomeScreen.this, CharacterScreen.class);
+                i.putExtra("Character", position);
+            }
+            startActivity(i);
         }
     };
 
