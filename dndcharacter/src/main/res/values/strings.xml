@@ -19,5 +19,19 @@
     <string name="reflex">REF</string>
     <string name="will">WIL</string>
     <string name="create">Create!</string>
-    <string name="char_screen_stats">Create!</string>
+    <string name="char_screen_levelup">TODOlevelup</string>
+    <string name="char_screen_abilities">TODOAbilities</string>
+    <string name="char_screen_spells">TODOSpells</string>
+    <string name="char_screen_dmgred">TODODamage Reduction</string>
+    <string name="char_screen_equipment">TODOEquipment</string>
+    <string name="char_screen_feat">TODOFeat</string>
+    <string name="char_screen_Inventory">TODOInventory</string>
+    <string name="char_screen_Langauges">TODOLanguages</string>
+    <string name="char_screen_misc">TODOMisc</string>
+    <string name="char_screen_saving">TODOSaving</string>
+    <string name="char_screen_spabilities">TODOSpecial Abilities</string>
+    <string name="char_screen_spellresist">TODOSpell Resist</string>
+    <string name="char_screen_stats">TODOStats</string>
+    <string name="char_screen_temp">TODOTemp</string>
+    <string name="char_screen_Weapon">TODOWeapon</string>
 </resources>
