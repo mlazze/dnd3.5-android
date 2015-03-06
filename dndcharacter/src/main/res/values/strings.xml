@@ -20,7 +20,7 @@
     <string name="reflex">REF</string>
     <string name="will">WIL</string>
     <string name="create">Create!</string>
-    <string name="char_screen_levelup">TODOlevelup</string>
+    <string name="char_screen_levelup">Level Up</string>
     <string name="char_screen_abilities">TODOAbilities</string>
     <string name="char_screen_spells">TODOSpells</string>
     <string name="char_screen_dmgred">TODODamage Reduction</string>
@@ -35,4 +35,5 @@
     <string name="char_screen_stats">TODOStats</string>
     <string name="char_screen_temp">TODOTemp</string>
     <string name="char_screen_Weapon">TODOWeapon</string>
+    <string name="title_activity_level_up">LevelUp</string>
 </resources>

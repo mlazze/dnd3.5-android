@@ -32,6 +32,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.HomeScreen" />
         </activity>
+        <activity
+            android:name=".LevelUp"
+            android:label="@string/title_activity_level_up"
+            android:parentActivityName=".CharacterScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.skij.dndcharacter.CharacterScreen" />
+        </activity>
     </application>
 
 </manifest>

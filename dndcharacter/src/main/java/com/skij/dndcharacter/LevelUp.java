@@ -1,26 +1,22 @@
 package com.skij.dndcharacter;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.method.ScrollingMovementMethod;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import core.DnDCharacterManipulator;
 
 
-public class CharacterScreen extends ActionBarActivity {
-
+public class LevelUp extends ActionBarActivity {
     DnDCharacterManipulator character;
     int posInArray;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_character_screen);
+        setContentView(R.layout.activity_level_up);
 
         Intent i = getIntent();
         posInArray = i.getIntExtra("Character", -1);
@@ -30,19 +26,13 @@ public class CharacterScreen extends ActionBarActivity {
         }
 
         character = Utils.characterList.get(posInArray);
-
-        //TODO
-
-        TextView infos = ((TextView) findViewById(R.id.char_screen_infos));
-        infos.setText(character.toString());
-        infos.setMovementMethod(new ScrollingMovementMethod());
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_character_screen, menu);
+        getMenuInflater().inflate(R.menu.menu_level_up, menu);
         return true;
     }
 
@@ -52,11 +42,10 @@ public class CharacterScreen extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        Intent i;
+
         //noinspection SimplifiableIfStatement
-        if (id == R.id.char_screen_levelup) {
-            i = new Intent(this, LevelUp.class);
-            i.putExtra("Character", posInArray);
+        if (id == R.id.action_settings) {
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
