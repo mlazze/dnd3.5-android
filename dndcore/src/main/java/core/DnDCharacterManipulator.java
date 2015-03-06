@@ -7,9 +7,16 @@ import java.util.HashMap;
 public class DnDCharacterManipulator extends DnDCharacter implements
         Serializable {
 
-    public DnDCharacterManipulator(String name, DNDCLASS mainclass,
+    public DnDCharacterManipulator(String name, String race, DNDCLASS mainclass,
                                    int[] stats, int runspeed, int[] savingthrowsbases) {
-        super(name, mainclass, stats, runspeed, savingthrowsbases);
+        super(name,race, mainclass, stats, runspeed, savingthrowsbases);
+        recalculate();
+    }
+
+    public DnDCharacterManipulator(String name, String race, DNDCLASS mainclass, int[] stats,
+                        int runspeed, int[] savingthrowsbases, String classname) {
+        super(name,race,mainclass,stats,runspeed,savingthrowsbases);
+        classToNames.put(mainclass,classname);
         recalculate();
     }
 

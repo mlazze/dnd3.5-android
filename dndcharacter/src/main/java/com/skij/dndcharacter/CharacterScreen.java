@@ -1,9 +1,15 @@
 package com.skij.dndcharacter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import core.DnDCharacterManipulator;
 
 
 public class CharacterScreen extends ActionBarActivity {
@@ -12,6 +18,20 @@ public class CharacterScreen extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_screen);
+
+
+        //TODO
+        Intent i = getIntent();
+        int pos = i.getIntExtra("Character", -1);
+        if (pos == -1 || pos >= Utils.characterList.size()) {
+            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        DnDCharacterManipulator character = Utils.characterList.get(pos);
+        TextView infos = ((TextView) findViewById(R.id.char_screen_infos));
+        infos.setText(character.toString());
+        infos.setMovementMethod(new ScrollingMovementMethod());
     }
 
 

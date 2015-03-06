@@ -2,7 +2,7 @@ package core;
 
 public enum DNDCLASS {
     BARBARIAN(12), MAGE(4), WARLOCK(4), BARD(6), ROGUE(6), CLERIC(8), DRUID(8), MONK(
-            8), RANGER(8), WARRIOR(10), PALADIN(10), FBERSERKER(12);
+            8), RANGER(8), WARRIOR(10), PALADIN(10), FBERSERKER(12), DICE4(4), DICE6(6), DICE8(8), DICE10(10), DICE12(12);
 
     private int lifedice;
 
@@ -12,6 +12,10 @@ public enum DNDCLASS {
 
     public int getLifeDice() {
         return lifedice;
+    }
+
+    public String toString() {
+        return this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
     }
 
     public String getLevelUpInfos() {

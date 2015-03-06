@@ -15,9 +15,11 @@ public class DnDCharacter implements Serializable {
     // infos
     protected int level;
     protected String name;
+    protected String race;
     protected int runspeed;
     protected int exp;
     protected HashMap<DNDCLASS, Integer> classes;
+    protected HashMap<DNDCLASS, String> classToNames;
     protected ArrayList<Integer> liferolls;
     protected ArrayList<String> knownlanguages;
     protected ArrayList<Integer> basicattackbonus;
@@ -52,24 +54,31 @@ public class DnDCharacter implements Serializable {
     protected int miscattackroll;
 
     // COSTR
-    public DnDCharacter(String name, DNDCLASS mainclass, int[] stats,
+    public DnDCharacter(String name, String race, DNDCLASS mainclass, int[] stats,
                         int runspeed, int[] savingthrowsbases) {
         this.name = name;
         this.level = 1;
-        liferolls = new ArrayList<Integer>(1);
-        // implement classes api
+        liferolls = new ArrayList<>(1);
         liferolls.add(mainclass.getLifeDice());
         this.runspeed = runspeed;
-        classes = new HashMap<DNDCLASS, Integer>();
+        classes = new HashMap<>();
         classes.put(mainclass, 1);
+        classToNames = new HashMap<>();
+        classToNames.put(mainclass,mainclass.toString());
         this.stats = stats;
         this.savingthrowsbases = savingthrowsbases;
         setupEmptyCharacter();
     }
 
+    public DnDCharacter(String name, String race, DNDCLASS mainclass, int[] stats,
+                        int runspeed, int[] savingthrowsbases, String classname) {
+       this(name,race,mainclass,stats,runspeed,savingthrowsbases);
+       classToNames.put(mainclass,classname);
+    }
+
 
     public ArrayList<String> getAbilities() {
-        ArrayList<String> res = new ArrayList<String>(0);
+        ArrayList<String> res = new ArrayList<>(0);
         for (ABILITIES a : abilities.keySet())
             res.add(a.toString() + " mod" + getAbilityMod(a));
         Collections.sort(res);
@@ -110,7 +119,7 @@ public class DnDCharacter implements Serializable {
     }
 
     public ArrayList<Integer> getAttackBonuses(Weapon w, int mods) {
-        ArrayList<Integer> res = new ArrayList<Integer>(0);
+        ArrayList<Integer> res = new ArrayList<>(0);
         for (int i = 0; i < basicattackbonus.size(); i++)
             res.add(getAttackBonus(w, i, mods));
         return res;
@@ -164,7 +173,7 @@ public class DnDCharacter implements Serializable {
     public ArrayList<String> getEquipment() {
         if (equipment == null)
             throw new InvalidCharacterException();
-        ArrayList<String> res = new ArrayList<String>(0);
+        ArrayList<String> res = new ArrayList<>(0);
         for (Equipment a : equipment)
             res.add(a.toString());
         return res;
@@ -177,7 +186,7 @@ public class DnDCharacter implements Serializable {
     public ArrayList<String> getFeats() {
         if (feats == null)
             throw new InvalidCharacterException();
-        ArrayList<String> res = new ArrayList<String>(0);
+        ArrayList<String> res = new ArrayList<>(0);
         for (Feat a : feats)
             res.add(a.toString());
         return res;
@@ -194,7 +203,7 @@ public class DnDCharacter implements Serializable {
     public ArrayList<String> getInventory() {
         if (inventory == null)
             throw new InvalidCharacterException();
-        ArrayList<String> res = new ArrayList<String>(0);
+        ArrayList<String> res = new ArrayList<>(0);
         for (String a : inventory.keySet())
             res.add(a + " mod" + inventory.get(a));
         return res;
@@ -243,7 +252,7 @@ public class DnDCharacter implements Serializable {
     public ArrayList<String> getSpells() {
         if (knownspells == null)
             throw new InvalidCharacterException();
-        ArrayList<String> res = new ArrayList<String>(0);
+        ArrayList<String> res = new ArrayList<>(0);
         for (Spell a : knownspells)
             res.add(a.toString());
         return res;
@@ -252,7 +261,7 @@ public class DnDCharacter implements Serializable {
     public ArrayList<String> getSpellSets() {
         if (chosenspells == null)
             throw new InvalidCharacterException();
-        ArrayList<String> res = new ArrayList<String>(0);
+        ArrayList<String> res = new ArrayList<>(0);
         String temp;
         for (HashMap<Spell, Integer> h : chosenspells) {
             temp = "";
@@ -316,7 +325,7 @@ public class DnDCharacter implements Serializable {
     public ArrayList<String> getWeapons() {
         if (weapons == null)
             throw new InvalidCharacterException();
-        ArrayList<String> res = new ArrayList<String>(0);
+        ArrayList<String> res = new ArrayList<>(0);
         String temp;
         for (Weapon w : weapons) {
             temp = "";
@@ -343,24 +352,24 @@ public class DnDCharacter implements Serializable {
 
     //
     private void setupEmptyCharacter() {
-        knownlanguages = new ArrayList<String>(1);
+        knownlanguages = new ArrayList<>(1);
         knownlanguages.add("Common");
-        basicattackbonus = new ArrayList<Integer>(1);
+        basicattackbonus = new ArrayList<>(1);
         basicattackbonus.add(1);
-        abilities = new HashMap<ABILITIES, Integer>(0);
+        abilities = new HashMap<>(0);
         setDefaultAbilities();
-        specialabilities = new ArrayList<String>(0);
-        feats = new ArrayList<Feat>(0);
-        knownspells = new ArrayList<Spell>(0);
-        chosenspells = new ArrayList<HashMap<Spell, Integer>>(1);
+        specialabilities = new ArrayList<>(0);
+        feats = new ArrayList<>(0);
+        knownspells = new ArrayList<>(0);
+        chosenspells = new ArrayList<>(1);
         chosenspells.add(new HashMap<Spell, Integer>(0));
-        temphitpoints = new ArrayList<Integer>(0);
+        temphitpoints = new ArrayList<>(0);
         tempstats = new int[6];
         tempsavingthrows = new int[3];
-        tempstatuses = new ArrayList<String>(0);
-        equipment = new ArrayList<Equipment>(0);
-        weapons = new ArrayList<Weapon>(0);
-        inventory = new HashMap<String, Integer>(0);
+        tempstatuses = new ArrayList<>(0);
+        equipment = new ArrayList<>(0);
+        weapons = new ArrayList<>(0);
+        inventory = new HashMap<>(0);
         miscsavingthrows = new int[3];
         miscmagicsavingthrows = new int[3];
     }

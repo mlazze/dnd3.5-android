@@ -39,15 +39,17 @@ public class HomeScreen extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
+        Utils.loadCharList(this);
+        setListViewtoCharList();
+    }
+
+    private void setListViewtoCharList() {
         ArrayList<String> characterInfoList;
         ArrayAdapter<String> arrayAdapter;
-
-        Utils.loadPrefs(this);
         ListView characterListView = (ListView) findViewById(R.id.characterList);
 
         characterInfoList = getInfoFromCharacterList(Utils.characterList);
 
-        //set adapter for list
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, characterInfoList);
         characterListView.setAdapter(arrayAdapter);
         characterListView.setOnItemClickListener(characterListener);

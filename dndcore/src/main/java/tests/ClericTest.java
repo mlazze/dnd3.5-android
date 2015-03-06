@@ -5,7 +5,6 @@ import core.DnDCharacter.STATS;
 import core.DnDCharacterManipulator;
 import core.Equipment;
 import core.Equipment.TYPE;
-import core.IDnDCharacterManipulator;
 import core.Weapon;
 
 public class ClericTest {
@@ -16,7 +15,7 @@ public class ClericTest {
 	private static void creaCleric() {
 		int[] stats = new int[] { 14, 12, 16, 10, 18, 12 };
 		int[] sav = new int[] { 4, 1, 4 };
-		DnDCharacterManipulator cleric = new DnDCharacterManipulator("Cleric",
+		DnDCharacterManipulator cleric = new DnDCharacterManipulator("Cleric","Umano",
 				DNDCLASS.CLERIC, stats, 6, sav);
 		cleric.levelup(DNDCLASS.CLERIC, 3, null, null, 0, null);
 		cleric.levelup(DNDCLASS.CLERIC, 6, null, null, 0, null);

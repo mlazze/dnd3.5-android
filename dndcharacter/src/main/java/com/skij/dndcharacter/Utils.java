@@ -19,7 +19,7 @@ public class Utils {
 
 
     @SuppressLint("CommitPrefEdits")
-    public static void savePrefs(Context c) {
+    private static void savePrefs(Context c) {
         SharedPreferences mPrefs = c.getSharedPreferences(c.getApplicationInfo().name, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = mPrefs.edit();
         String tmp = arrListToJSONString(characterList);
@@ -35,7 +35,7 @@ public class Utils {
         ed.commit();
     }
 
-    public static void loadPrefs(Context c) {
+    private static void loadPrefs(Context c) {
         SharedPreferences mPrefs = c.getSharedPreferences(c.getApplicationInfo().name, Context.MODE_PRIVATE);
         //blackmagic
         String tmp = mPrefs.getString("CharacterList", null);
@@ -45,6 +45,10 @@ public class Utils {
         } else {
             characterList = new ArrayList<>(0);
         }
+    }
+
+    public static void loadCharList(Context c) {
+        loadPrefs(c);
     }
 
     private static String arrListToJSONString(ArrayList<DnDCharacterManipulator> arr) {
