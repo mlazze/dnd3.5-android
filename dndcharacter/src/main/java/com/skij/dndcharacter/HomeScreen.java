@@ -35,6 +35,13 @@ public class HomeScreen extends ActionBarActivity {
     };
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Utils.loadCharList(this);
+        setListViewtoCharList();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
@@ -84,7 +91,7 @@ public class HomeScreen extends ActionBarActivity {
 
         for (int i = 0; i < characterList.size(); i++) {
             DnDCharacterManipulator tmpchar = characterList.get(i);
-            tmp = tmpchar.getName() + "\nClass: " + tmpchar.getClasses().iterator().next() + "\nLevel " + tmpchar.getGlobalLevel();
+            tmp = tmpchar.getName() + "\nClass: " + tmpchar.getClassesNames().get(0) + "\nLevel " + tmpchar.getGlobalLevel();
             res.add(tmp);
         }
 

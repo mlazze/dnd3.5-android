@@ -9,6 +9,7 @@
     <string name="new_char_race_label">Race:</string>
     <string name="new_char_class_label">Class:</string>
     <string name="new_char_runspeed_label">Runspeed:</string>
+    <string name="new_char_customclass_label">Class Name:</string>
     <string name="strength">STR</string>
     <string name="dexterity">DEX</string>
     <string name="constitution">CON</string>

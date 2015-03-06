@@ -133,6 +133,13 @@ public class DnDCharacter implements Serializable {
         return classes.keySet();
     }
 
+    public ArrayList<String> getClassesNames() {
+        ArrayList<String> res = new ArrayList<>();
+        for (DNDCLASS c : classes.keySet()) {
+            res.add(classToNames.get(c));
+        }
+        return res;
+    }
 
     public int getClassLevel(DNDCLASS s) {
         return classes.get(s);
