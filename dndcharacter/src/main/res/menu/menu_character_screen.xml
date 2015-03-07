@@ -1,6 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.skij.dndcharacter.CharacterScreen">
+    <item android:id="@+id/action_clear_temp"
+        android:title="@string/action_clear_temp"
+        app:showAsAction="always"/>
+    <item android:id="@+id/action_clear_misc"
+        android:title="@string/action_clear_misc"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/char_screen_levelup"
         android:orderInCategory="100"

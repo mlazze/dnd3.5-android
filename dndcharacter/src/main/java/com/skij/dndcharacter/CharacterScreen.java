@@ -66,6 +66,20 @@ public class CharacterScreen extends ActionBarActivity {
         int id = item.getItemId();
         Intent i;
         //noinspection SimplifiableIfStatement
+        //buttons
+        if (id == R.id.action_clear_misc) {
+           character.clearMisc();
+            Toast.makeText(this,"Miscellaneous stats cleared",Toast.LENGTH_SHORT).show();
+           finish();
+            startActivity(getIntent());
+        }
+        if (id == R.id.action_clear_temp) {
+            character.clearTemp();
+            Toast.makeText(this,"Temporary stats cleared",Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(getIntent());
+        }
+        //otehrs
         if (id == R.id.char_screen_levelup) {
             i = new Intent(this, LevelUp.class);
             i.putExtra("Character", posInArray);

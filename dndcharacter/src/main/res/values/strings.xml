@@ -28,7 +28,7 @@
     <string name="char_screen_feat">TODOFeat</string>
     <string name="char_screen_Inventory">TODOInventory</string>
     <string name="char_screen_Langauges">TODOLanguages</string>
-    <string name="char_screen_misc">TODOMisc</string>
+    <string name="char_screen_misc">Misc</string>
     <string name="char_screen_spabilities">TODOSpecial Abilities</string>
     <string name="char_screen_spellresist">TODOSpell Resist</string>
     <string name="char_screen_stats">Stats</string>
@@ -45,4 +45,7 @@
     <string name="apply">Apply</string>
     <string name="title_activity_abilities">Abilities</string>
     <string name="title_activity_stats">Stats</string>
+    <string name="action_clear_misc">ClearMisc</string>
+    <string name="action_clear_temp">ClearTemp</string>
+    <string name="title_activity_misc">Misc</string>
 </resources>
