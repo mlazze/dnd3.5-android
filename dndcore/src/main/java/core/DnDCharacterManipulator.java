@@ -20,6 +20,29 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         recalculate();
     }
 
+    public void setTempHPMax(int value) {
+        temphitpointsmax = value;
+    }
+
+    public void setTempHPMaxDelta(int value) {
+        temphitpointsmax += value;
+    }
+
+    public void setTempAttackRollDelta(int value) {
+        tempattackroll += value;
+    }
+    public void setTempAttackRoll(int value) {
+        tempattackroll = value;
+    }
+
+    public void setMiscStatDelta(STATS s, int value) {
+        miscstats[s.ordinal()] += value;
+    }
+
+    public void setMiscStat(STATS s, int value) {
+        miscstats[s.ordinal()] = value;
+    }
+
     private void calculateAC() {
         int temp = 0;
         for (Equipment e : equipment) {
@@ -58,6 +81,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         miscinitiative = 0;
         miscmagicsavingthrows = new int[]{0, 0, 0};
         miscsavingthrows = new int[]{0, 0, 0};
+        miscstats = new int[]{0, 0, 0, 0, 0, 0};
         recalculate();
     }
 
@@ -234,8 +258,19 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         recalculate();
     }
 
+    public void setMiscAC(int value) {
+        miscAC = value;
+        recalculate();
+    }
+
     public void setMiscAttackRollDelta(int value) {
         miscattackroll += value;
+        recalculate();
+
+    }
+
+    public void setMiscAttackRoll(int value) {
+        miscattackroll = value;
         recalculate();
 
     }
@@ -245,16 +280,34 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         recalculate();
     }
 
+    public void setMiscHPMAX(int value) {
+        mischitpointsmax = value;
+        recalculate();
+    }
+
     public void setMiscInitiativeDelta(int value) {
         miscinitiative += value;
         recalculate();
     }
 
-    public void setSavingThrowsDelta(SAVING s, int value, boolean magic) {
+    public void setMiscInitiative(int value) {
+        miscinitiative = value;
+        recalculate();
+    }
+
+    public void setMiscSavingThrowsDelta(SAVING s, int value, boolean magic) {
         if (!magic)
             miscsavingthrows[s.ordinal()] += value;
         else
             miscmagicsavingthrows[s.ordinal()] += value;
+        recalculate();
+    }
+
+    public void setMiscSavingThrows(SAVING s, int value, boolean magic) {
+        if (!magic)
+            miscsavingthrows[s.ordinal()] = value;
+        else
+            miscmagicsavingthrows[s.ordinal()] = value;
         recalculate();
     }
 
@@ -285,6 +338,10 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         tempAC += value;
         recalculate();
     }
+    public void setTempAC(int value) {
+        tempAC = value;
+        recalculate();
+    }
 
     public void setTempHPDelta(int value) {
         temphitpoints.add(value);
@@ -295,9 +352,17 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         tempsavingthrows[saving.ordinal()] += value;
         recalculate();
     }
+    public void setTempSaving(SAVING saving, int value) {
+        tempsavingthrows[saving.ordinal()] = value;
+        recalculate();
+    }
 
     public void setTempStatDelta(STATS stat, int value) {
         tempstats[stat.ordinal()] += value;
+        recalculate();
+    }
+    public void setTempStat(STATS stat, int value) {
+        tempstats[stat.ordinal()] = value;
         recalculate();
     }
 

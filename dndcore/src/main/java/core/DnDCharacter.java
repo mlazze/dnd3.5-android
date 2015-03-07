@@ -29,28 +29,31 @@ public class DnDCharacter implements Serializable {
     protected int deflectionarmor;
     protected int spellresist;
     protected int damagereduction;
-    protected int tempAC;
     //    // abilities
     protected HashMap<ABILITIES, Integer> abilities;
     protected ArrayList<String> specialabilities;
     protected ArrayList<Feat> feats;
     protected ArrayList<Spell> knownspells;
     protected ArrayList<HashMap<Spell, Integer>> chosenspells;
-    // temporaries
-    protected ArrayList<Integer> temphitpoints;
-    protected int[] tempstats;
-    protected int[] tempsavingthrows;
-    protected ArrayList<String> tempstatuses;
     // equipment & inventory
     protected ArrayList<Equipment> equipment;
     protected ArrayList<Weapon> weapons;
     protected HashMap<String, Integer> inventory;
+    // temporaries
+    protected ArrayList<Integer> temphitpoints;
+    protected int temphitpointsmax;
+    protected int[] tempstats;
+    protected int[] tempsavingthrows;
+    protected ArrayList<String> tempstatuses;
+    protected int tempAC;
+    protected int tempattackroll;
     // other
     protected int mischitpointsmax;
     protected int miscAC;
     protected int miscinitiative;
     protected int[] miscsavingthrows;
     protected int[] miscmagicsavingthrows;
+    protected int[] miscstats;
     protected int miscattackroll;
 
     // COSTR
@@ -122,7 +125,8 @@ public class DnDCharacter implements Serializable {
         int baseattack = basicattackbonus.get(index);
         int mod = getMod(w.stat);
         int miscmod = miscattackroll;
-        return baseattack + mod + miscmod + mods;
+        int tempmod = tempattackroll;
+        return baseattack + mod + miscmod + tempmod + mods;
     }
 
     public ArrayList<Integer> getAttackBonuses(Weapon w, int mods) {
@@ -294,7 +298,7 @@ public class DnDCharacter implements Serializable {
     public int getStat(STATS stat) {
         if (stats[stat.ordinal()] <= 0)
             throw new InvalidCharacterException();
-        return stats[stat.ordinal()] + tempstats[stat.ordinal()];
+        return stats[stat.ordinal()] + tempstats[stat.ordinal()] + miscstats[stat.ordinal()];
     }
 
     public ArrayList<String> getStatuses() {
@@ -305,6 +309,10 @@ public class DnDCharacter implements Serializable {
 
     public ArrayList<Integer> getTempHP() {
         return temphitpoints;
+    }
+
+    public int getTempHPMax() {
+        return temphitpointsmax;
     }
 
     public int getThrow(SAVING s) {
@@ -328,7 +336,7 @@ public class DnDCharacter implements Serializable {
             res += i + getMod(STATS.CON) < 1 ? 1 : i + getMod(STATS.CON);
         }
 
-        return res + mischitpointsmax;
+        return res + mischitpointsmax + temphitpointsmax;
     }
 
     public int getTouch() {
@@ -386,6 +394,7 @@ public class DnDCharacter implements Serializable {
         inventory = new HashMap<>(0);
         miscsavingthrows = new int[3];
         miscmagicsavingthrows = new int[3];
+        miscstats = new int[6];
     }
 
 
