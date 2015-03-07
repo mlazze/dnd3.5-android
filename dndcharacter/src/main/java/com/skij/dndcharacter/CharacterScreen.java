@@ -76,6 +76,11 @@ public class CharacterScreen extends ActionBarActivity {
             i.putExtra("Character", posInArray);
             startActivity(i);
         }
+        if (id == R.id.char_screen_stats) {
+            i = new Intent(this, Stats.class);
+            i.putExtra("Character", posInArray);
+            startActivity(i);
+        }
 
         return super.onOptionsItemSelected(item);
     }

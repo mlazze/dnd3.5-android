@@ -301,6 +301,12 @@ public class DnDCharacter implements Serializable {
         return stats[stat.ordinal()] + tempstats[stat.ordinal()] + miscstats[stat.ordinal()];
     }
 
+    public int getUnmodifiedStat(STATS stat) {
+        if (stats[stat.ordinal()] <= 0)
+            throw new InvalidCharacterException();
+        return stats[stat.ordinal()];
+    }
+
     public ArrayList<String> getStatuses() {
         if (tempstatuses == null)
             throw new InvalidCharacterException();

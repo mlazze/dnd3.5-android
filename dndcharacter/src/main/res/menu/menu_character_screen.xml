@@ -38,10 +38,6 @@
         android:orderInCategory="100"
         android:title="@string/char_screen_misc" />
     <item
-        android:id="@+id/char_screen_saving"
-        android:orderInCategory="100"
-        android:title="@string/char_screen_saving" />
-    <item
         android:id="@+id/char_screen_spabilities"
         android:orderInCategory="100"
         android:title="@string/char_screen_spabilities" />

@@ -98,7 +98,7 @@ public class NewCharacter extends ActionBarActivity {
             Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
-        int[] stats = {str, dex, con, inte, wis, cha, fort, ref, wil};
+        int[] stats = {str, dex, con, inte, wis, cha};
         int[] sav = {fort, ref, wil};
 
         String name, race;
