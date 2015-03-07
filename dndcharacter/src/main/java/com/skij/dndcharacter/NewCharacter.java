@@ -22,29 +22,8 @@ public class NewCharacter extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_character);
-        setClassSpinner(R.id.new_char_class_spinner,R.id.new_char_customclassname);
+        setClassSpinner(R.id.new_char_class_spinner, R.id.new_char_customclassname);
 
-        final Spinner s = (Spinner) findViewById(R.id.new_char_class_spinner);
-        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-                                       long arg3) {
-                int x = s.getSelectedItemPosition();
-                if (x > 10) { //is not default class
-                    LinearLayout l = (LinearLayout) findViewById(R.id.new_char_customclassname);
-                    l.setVisibility(View.VISIBLE);
-                } else {
-                    LinearLayout l = (LinearLayout) findViewById(R.id.new_char_customclassname);
-                    l.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                LinearLayout l = (LinearLayout) findViewById(R.id.new_char_customclassname);
-                l.setVisibility(View.GONE);
-            }
-        });
     }
 
     private <T> void setSpinner(T[] array, int resourceId) {

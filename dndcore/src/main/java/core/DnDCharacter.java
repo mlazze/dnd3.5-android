@@ -80,7 +80,11 @@ public class DnDCharacter implements Serializable {
         return liferolls;
     }
 
-    public ArrayList<String> getAbilities() {
+    public HashMap<ABILITIES, Integer> getAbilities() {
+        return abilities;
+    }
+
+    public ArrayList<String> getAbilitiesAsStrings() {
         ArrayList<String> res = new ArrayList<>(0);
         for (ABILITIES a : abilities.keySet())
             res.add(a.toString() + " mod" + getAbilityMod(a));

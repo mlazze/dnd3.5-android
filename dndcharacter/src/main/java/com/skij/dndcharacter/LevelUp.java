@@ -31,21 +31,15 @@ public class LevelUp extends ActionBarActivity {
 
         Intent i = getIntent();
         posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.characterList.size()) {
+        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
             Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
             return;
         }
 
-        character = Utils.characterList.get(posInArray);
+        character = Utils.getCharacter(posInArray, this);
 
         setClassSpinner(R.id.level_up_class_spinner, R.id.level_up_customclasslay);
         setSpinner(DnDCharacter.STATS.values(), R.id.level_up_new_stat_spinner);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Utils.loadCharList(this);
     }
 
     private <T> void setSpinner(T[] array, int resourceId) {
@@ -98,7 +92,10 @@ public class LevelUp extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -153,23 +150,24 @@ public class LevelUp extends ActionBarActivity {
 
         //applychanges
         try {
-        if (pos <= 10)
-            character.levelup(dndclass,liferoll,atkbonus,s,newstatdelta,saving);
-        else {//customclass
-            String customclassname;
-            customclassname = ((EditText) findViewById(R.id.level_up_customclass)).getText().toString();
+            if (pos <= 10)
+                character.levelup(dndclass, liferoll, atkbonus, s, newstatdelta, saving);
+            else {//customclass
+                String customclassname;
+                customclassname = ((EditText) findViewById(R.id.level_up_customclass)).getText().toString();
 
-            if (customclassname.equals("")) {
-                Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
-                return;
+                if (customclassname.equals("")) {
+                    Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                character.levelup(dndclass, customclassname, liferoll, atkbonus, s, newstatdelta, saving);
             }
-            character.levelup(dndclass,customclassname,liferoll,atkbonus,s,newstatdelta,saving);
-        } } catch (DnDCharacter.InvalidCharacterException e) {
+        } catch (DnDCharacter.InvalidCharacterException e) {
             Toast.makeText(this, "Invalid Values", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Utils.editCharacter(character,posInArray,this);
+        Utils.editCharacter(character, posInArray, this);
         finish();
     }
 

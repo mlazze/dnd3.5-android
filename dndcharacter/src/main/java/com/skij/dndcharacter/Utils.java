@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import core.DnDCharacterManipulator;
 
 public class Utils {
-    public static ArrayList<DnDCharacterManipulator> characterList;
+    private static ArrayList<DnDCharacterManipulator> characterList;
 
 
     @SuppressLint("CommitPrefEdits")
@@ -27,7 +27,7 @@ public class Utils {
     }
 
     @SuppressLint("CommitPrefEdits")
-    public static void resetPrefs(Context c) {
+    private static void resetPrefs(Context c) {
         SharedPreferences mPrefs = c.getSharedPreferences(c.getApplicationInfo().name, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = mPrefs.edit();
         ed.clear();
@@ -44,10 +44,6 @@ public class Utils {
         } else {
             characterList = new ArrayList<>(0);
         }
-    }
-
-    public static void loadCharList(Context c) {
-        loadPrefs(c);
     }
 
     private static String arrListToJSONString(ArrayList<DnDCharacterManipulator> arr) {
@@ -77,7 +73,18 @@ public class Utils {
     }
 
     public static void editCharacter(DnDCharacterManipulator charac, int index, Context c) {
-        characterList.set(index,charac);
+        characterList.set(index, charac);
         savePrefs(c);
     }
+
+    public static DnDCharacterManipulator getCharacter(long id, Context c) {
+        loadPrefs(c);
+        return characterList.get((int) id);
+    }
+
+    public static ArrayList<DnDCharacterManipulator> getCharacterList(Context c) {
+        loadPrefs(c);
+        return characterList;
+    }
+
 }

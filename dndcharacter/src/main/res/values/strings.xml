@@ -21,7 +21,7 @@
     <string name="will">WIL</string>
     <string name="create">Create!</string>
     <string name="char_screen_levelup">Level Up</string>
-    <string name="char_screen_abilities">TODOAbilities</string>
+    <string name="char_screen_abilities">Abilities</string>
     <string name="char_screen_spells">TODOSpells</string>
     <string name="char_screen_dmgred">TODODamage Reduction</string>
     <string name="char_screen_equipment">TODOEquipment</string>
@@ -41,5 +41,8 @@
     <string name="level_up_attack_bonus_label">AtkBonus</string>
     <string name="level_up_new_stat_label">Improved Stat</string>
     <string name="level_up_customclass_label">Custom Class Name</string>
+    <string name="abilities_ability_label">Ability</string>
+    <string name="abilities_value_label">New Value</string>
     <string name="apply">Apply</string>
+    <string name="title_activity_abilities">Abilities</string>
 </resources>

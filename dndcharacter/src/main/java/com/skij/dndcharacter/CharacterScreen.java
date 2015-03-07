@@ -3,7 +3,7 @@ package com.skij.dndcharacter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -28,26 +28,28 @@ public class CharacterScreen extends ActionBarActivity {
 
         TextView infos = ((TextView) findViewById(R.id.char_screen_infos));
         infos.setText(character.toString());
-        infos.setMovementMethod(new ScrollingMovementMethod());
     }
 
     private boolean loadChar() {
-        Utils.loadCharList(this);
         Intent i = getIntent();
         posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.characterList.size()) {
+        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
             Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
             return true;
         }
-
-        character = Utils.characterList.get(posInArray);
+        Log.e("", "loading");
+        character = Utils.getCharacter(posInArray, this);
         return false;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (loadChar()) return;
+        loadChar();
+
+        //TODO
+        TextView infos = ((TextView) findViewById(R.id.char_screen_infos));
+        infos.setText(character.toString());
     }
 
 
@@ -68,6 +70,11 @@ public class CharacterScreen extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.char_screen_levelup) {
             i = new Intent(this, LevelUp.class);
+            i.putExtra("Character", posInArray);
+            startActivity(i);
+        }
+        if (id == R.id.char_screen_abilities) {
+            i = new Intent(this, Abilities.class);
             i.putExtra("Character", posInArray);
             startActivity(i);
         }

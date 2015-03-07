@@ -24,7 +24,7 @@ public class HomeScreen extends ActionBarActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent i;
-            if (position == Utils.characterList.size()) //addnew {
+            if (position == Utils.getCharacterList(HomeScreen.this).size()) //addnew {
                 i = new Intent(HomeScreen.this, NewCharacter.class);
             else {
                 i = new Intent(HomeScreen.this, CharacterScreen.class);
@@ -37,7 +37,6 @@ public class HomeScreen extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Utils.loadCharList(this);
         setListViewtoCharList();
     }
 
@@ -45,8 +44,6 @@ public class HomeScreen extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
-        Utils.loadCharList(this);
         setListViewtoCharList();
     }
 
@@ -55,7 +52,7 @@ public class HomeScreen extends ActionBarActivity {
         ArrayAdapter<String> arrayAdapter;
         ListView characterListView = (ListView) findViewById(R.id.characterList);
 
-        characterInfoList = getInfoFromCharacterList(Utils.characterList);
+        characterInfoList = getInfoFromCharacterList(Utils.getCharacterList(this));
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, characterInfoList);
         characterListView.setAdapter(arrayAdapter);

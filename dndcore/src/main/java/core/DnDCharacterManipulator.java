@@ -111,7 +111,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 
         try {
             getcurrentHP(); // just to check
-            getAbilities();
+            getAbilitiesAsStrings();
             for (Weapon w : weapons) {
                 getAttackBonuses(w, 0);
                 getDamageCrit(w, null);
@@ -388,7 +388,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
                 res += e + "\n";
 
             res += "====ABILITIES====\n";
-            for (String a : getAbilities())
+            for (String a : getAbilitiesAsStrings())
                 res += a + "\n";
 
             res += "====FEATS====\n";
