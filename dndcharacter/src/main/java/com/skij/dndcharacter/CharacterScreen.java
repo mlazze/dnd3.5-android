@@ -3,7 +3,6 @@ package com.skij.dndcharacter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -37,7 +36,6 @@ public class CharacterScreen extends ActionBarActivity {
             Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
             return true;
         }
-        Log.e("", "loading");
         character = Utils.getCharacter(posInArray, this);
         return false;
     }

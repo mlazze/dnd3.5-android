@@ -15,6 +15,7 @@ import core.DnDCharacterManipulator;
 
 public class Utils {
     private static ArrayList<DnDCharacterManipulator> characterList;
+    private static boolean isReloadNecessary = true;
 
 
     @SuppressLint("CommitPrefEdits")
@@ -24,6 +25,7 @@ public class Utils {
         String tmp = arrListToJSONString(characterList);
         ed.putString("CharacterList", tmp);
         ed.commit();
+        isReloadNecessary = true;
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -35,14 +37,18 @@ public class Utils {
     }
 
     private static void loadPrefs(Context c) {
-        SharedPreferences mPrefs = c.getSharedPreferences(c.getApplicationInfo().name, Context.MODE_PRIVATE);
-        //blackmagic
-        String tmp = mPrefs.getString("CharacterList", null);
-        if (tmp != null) {
-            characterList = jsonStringtoArrList(tmp);
+        if (isReloadNecessary) {
+//            Log.e("", "loading");
+            SharedPreferences mPrefs = c.getSharedPreferences(c.getApplicationInfo().name, Context.MODE_PRIVATE);
+            //blackmagic
+            String tmp = mPrefs.getString("CharacterList", null);
+            if (tmp != null) {
+                characterList = jsonStringtoArrList(tmp);
 //            Log.d("PREFS", "CurrentJson:" + tmp);
-        } else {
-            characterList = new ArrayList<>(0);
+            } else {
+                characterList = new ArrayList<>(0);
+            }
+            isReloadNecessary = false;
         }
     }
 
