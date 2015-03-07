@@ -22,25 +22,32 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 
     public void setTempHPMax(int value) {
         temphitpointsmax = value;
+        recalculate();
     }
 
     public void setTempHPMaxDelta(int value) {
         temphitpointsmax += value;
+        recalculate();
     }
 
     public void setTempAttackRollDelta(int value) {
         tempattackroll += value;
+        recalculate();
     }
+
     public void setTempAttackRoll(int value) {
         tempattackroll = value;
+        recalculate();
     }
 
     public void setMiscStatDelta(STATS s, int value) {
         miscstats[s.ordinal()] += value;
+        recalculate();
     }
 
     public void setMiscStat(STATS s, int value) {
         miscstats[s.ordinal()] = value;
+        recalculate();
     }
 
     private void calculateAC() {
@@ -119,6 +126,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         }
         clearMisc();
         clearTemp();
+        recalculate();
 
         return improvedclass.getLevelUpInfos();
     }
@@ -218,6 +226,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 
     public void setExpDelta(int value) {
         exp += value;
+        recalculate();
     }
 
     public void setFeat(Feat feat, boolean clear) {
@@ -338,6 +347,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         tempAC += value;
         recalculate();
     }
+
     public void setTempAC(int value) {
         tempAC = value;
         recalculate();
@@ -352,6 +362,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         tempsavingthrows[saving.ordinal()] += value;
         recalculate();
     }
+
     public void setTempSaving(SAVING saving, int value) {
         tempsavingthrows[saving.ordinal()] = value;
         recalculate();
@@ -361,6 +372,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         tempstats[stat.ordinal()] += value;
         recalculate();
     }
+
     public void setTempStat(STATS stat, int value) {
         tempstats[stat.ordinal()] = value;
         recalculate();
