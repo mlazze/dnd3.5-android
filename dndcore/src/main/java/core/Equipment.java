@@ -14,6 +14,7 @@ public class Equipment implements Serializable {
     public String specialproperties = "none";
     public int deflectionbonus;
     public int naturalbonus;
+
     public Equipment(String name) {
         this.name = name;
         type = TYPE.ARMOR;

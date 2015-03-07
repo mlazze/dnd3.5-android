@@ -1,5 +1,7 @@
 package tests;
 
+import java.util.ArrayList;
+
 import core.DNDCLASS;
 import core.DnDCharacter.STATS;
 import core.DnDCharacterManipulator;
@@ -21,7 +23,8 @@ public class ClericTest {
 		cleric.levelup(DNDCLASS.CLERIC, 6, null, null, 0, null);
 		cleric.levelup(DNDCLASS.CLERIC, 4, null, null, 0, null);
 		cleric.levelup(DNDCLASS.CLERIC, 5, null, null, 0, null);
-		int[] atkrolls = new int[] { 4 };
+        ArrayList<Integer> atkrolls = new ArrayList<>();
+        atkrolls.add(4);
 		sav = new int[] { 5, 2, 5 };
 		String s = cleric.levelup(DNDCLASS.CLERIC, 4, atkrolls, STATS.WIS, 1,
 				sav);

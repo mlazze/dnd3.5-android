@@ -30,7 +30,7 @@ public class DnDCharacter implements Serializable {
     protected int spellresist;
     protected int damagereduction;
     protected int tempAC;
-//    // abilities
+    //    // abilities
     protected HashMap<ABILITIES, Integer> abilities;
     protected ArrayList<String> specialabilities;
     protected ArrayList<Feat> feats;
@@ -64,7 +64,7 @@ public class DnDCharacter implements Serializable {
         classes = new HashMap<>();
         classes.put(mainclass, 1);
         classToNames = new HashMap<>();
-        classToNames.put(mainclass,mainclass.toString());
+        classToNames.put(mainclass, mainclass.toString());
         this.stats = stats;
         this.savingthrowsbases = savingthrowsbases;
         setupEmptyCharacter();
@@ -72,10 +72,13 @@ public class DnDCharacter implements Serializable {
 
     public DnDCharacter(String name, String race, DNDCLASS mainclass, int[] stats,
                         int runspeed, int[] savingthrowsbases, String classname) {
-       this(name,race,mainclass,stats,runspeed,savingthrowsbases);
-       classToNames.put(mainclass,classname);
+        this(name, race, mainclass, stats, runspeed, savingthrowsbases);
+        classToNames.put(mainclass, classname);
     }
 
+    public ArrayList<Integer> getliferolls() {
+        return liferolls;
+    }
 
     public ArrayList<String> getAbilities() {
         ArrayList<String> res = new ArrayList<>(0);
@@ -305,7 +308,7 @@ public class DnDCharacter implements Serializable {
         if (savingthrowsbases[index] < 0)
             throw new InvalidCharacterException();
 
-        return savingthrowsbases[index] + getMod(STATS.values()[s.getVal()])
+        return savingthrowsbases[index] + getMod(STATS.values()[s.getRelatedStat()])
                 + miscmagicsavingthrows[index] + miscsavingthrows[index]
                 + tempsavingthrows[index];
     }
@@ -318,10 +321,10 @@ public class DnDCharacter implements Serializable {
 
         int res = 0;
         for (int i : liferolls) {
-            res += i;
+            res += i + getMod(STATS.CON) < 1 ? 1 : i + getMod(STATS.CON);
         }
 
-        return res + getMod(STATS.CON) * level + mischitpointsmax;
+        return res + mischitpointsmax;
     }
 
     public int getTouch() {
@@ -405,7 +408,7 @@ public class DnDCharacter implements Serializable {
             val = v;
         }
 
-        public int getVal() {
+        public int getRelatedStat() {
             return val;
         }
     }

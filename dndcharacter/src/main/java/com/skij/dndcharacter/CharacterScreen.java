@@ -22,20 +22,32 @@ public class CharacterScreen extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_screen);
 
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.characterList.size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.characterList.get(posInArray);
+        if (loadChar()) return;
 
         //TODO
 
         TextView infos = ((TextView) findViewById(R.id.char_screen_infos));
         infos.setText(character.toString());
         infos.setMovementMethod(new ScrollingMovementMethod());
+    }
+
+    private boolean loadChar() {
+        Utils.loadCharList(this);
+        Intent i = getIntent();
+        posInArray = i.getIntExtra("Character", -1);
+        if (posInArray == -1 || posInArray >= Utils.characterList.size()) {
+            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        character = Utils.characterList.get(posInArray);
+        return false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (loadChar()) return;
     }
 
 
@@ -57,6 +69,7 @@ public class CharacterScreen extends ActionBarActivity {
         if (id == R.id.char_screen_levelup) {
             i = new Intent(this, LevelUp.class);
             i.putExtra("Character", posInArray);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);

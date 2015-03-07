@@ -9,14 +9,14 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 
     public DnDCharacterManipulator(String name, String race, DNDCLASS mainclass,
                                    int[] stats, int runspeed, int[] savingthrowsbases) {
-        super(name,race, mainclass, stats, runspeed, savingthrowsbases);
+        super(name, race, mainclass, stats, runspeed, savingthrowsbases);
         recalculate();
     }
 
     public DnDCharacterManipulator(String name, String race, DNDCLASS mainclass, int[] stats,
-                        int runspeed, int[] savingthrowsbases, String classname) {
-        super(name,race,mainclass,stats,runspeed,savingthrowsbases);
-        classToNames.put(mainclass,classname);
+                                   int runspeed, int[] savingthrowsbases, String classname) {
+        super(name, race, mainclass, stats, runspeed, savingthrowsbases);
+        classToNames.put(mainclass, classname);
         recalculate();
     }
 
@@ -70,12 +70,9 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         recalculate();
     }
 
-    public ArrayList<Integer> getliferolls() {
-        return liferolls;
-    }
 
     public String levelup(DNDCLASS improvedclass, int liferoll,
-                          int[] newattackrolls, STATS newstat, int newstatdelta, int[] newsavingthrows) {
+                          ArrayList<Integer> newattackrolls, STATS newstat, int newstatdelta, int[] newsavingthrows) {
         clearMisc();
         clearTemp();
         if (liferoll > improvedclass.getLifeDice())
@@ -83,7 +80,8 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 
         liferolls.add(liferoll);
         level++;
-        classes.put(improvedclass, classes.get(improvedclass) + 1);
+        int oldclasslevel = classes.get(improvedclass) == null ? 0 : classes.get(improvedclass);
+        classes.put(improvedclass, oldclasslevel + 1);
         if (newattackrolls != null) {
             basicattackbonus = new ArrayList<Integer>(0);
             for (int i : newattackrolls)
@@ -99,6 +97,13 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         clearTemp();
 
         return improvedclass.getLevelUpInfos();
+    }
+
+    public String levelup(DNDCLASS improvedclass, String customclass, int liferoll,
+                          ArrayList<Integer> newattackrolls, STATS newstat, int newstatdelta, int[] newsavingthrows) {
+        String ret = levelup(improvedclass, liferoll, newattackrolls, newstat, newstatdelta, newsavingthrows);
+        classToNames.put(improvedclass, customclass);
+        return ret;
     }
 
     public void recalculate() {
@@ -333,7 +338,11 @@ public class DnDCharacterManipulator extends DnDCharacter implements
             // hp
             res += "====HP====\n";
 
-            res += "-MAX Hp: " + getTotalHP() + "\n";
+            res += "-MAX Hp: " + getTotalHP() + " | liferolls: (";
+            for (int i : liferolls) {
+                res += " " + i;
+            }
+            res += " )" + "\n";
             res += "-Curr Hp: " + getcurrentHP() + "\n";
             res += "===HP LOG===\n";
             for (int i : getTempHP()) {

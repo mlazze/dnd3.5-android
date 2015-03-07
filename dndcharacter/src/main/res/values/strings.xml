@@ -36,4 +36,10 @@
     <string name="char_screen_temp">TODOTemp</string>
     <string name="char_screen_Weapon">TODOWeapon</string>
     <string name="title_activity_level_up">LevelUp</string>
+    <string name="level_up_class_label">Class</string>
+    <string name="level_up_liferoll_label">Liferoll</string>
+    <string name="level_up_attack_bonus_label">AtkBonus</string>
+    <string name="level_up_new_stat_label">Improved Stat</string>
+    <string name="level_up_customclass_label">Custom Class Name</string>
+    <string name="apply">Apply</string>
 </resources>

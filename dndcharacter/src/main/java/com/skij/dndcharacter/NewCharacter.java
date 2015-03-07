@@ -22,7 +22,7 @@ public class NewCharacter extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_character);
-        setClassSpinner();
+        setClassSpinner(R.id.new_char_class_spinner,R.id.new_char_customclassname);
 
         final Spinner s = (Spinner) findViewById(R.id.new_char_class_spinner);
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -47,9 +47,36 @@ public class NewCharacter extends ActionBarActivity {
         });
     }
 
-    private void setClassSpinner() {
-        Spinner s = (Spinner) findViewById(R.id.new_char_class_spinner);
-        s.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, DNDCLASS.values()));
+    private <T> void setSpinner(T[] array, int resourceId) {
+        Spinner s = (Spinner) findViewById(resourceId);
+        s.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, array));
+    }
+
+    private void setClassSpinner(int resourceId, final int layoutToShow) {
+        setSpinner(DNDCLASS.values(), resourceId);
+
+        //showcustomclassname
+        final Spinner s = (Spinner) findViewById(resourceId);
+        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+                                       long arg3) {
+                int x = s.getSelectedItemPosition();
+                if (x > 10) { //is not default class
+                    LinearLayout l = (LinearLayout) findViewById(layoutToShow);
+                    l.setVisibility(View.VISIBLE);
+                } else {
+                    LinearLayout l = (LinearLayout) findViewById(layoutToShow);
+                    l.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                LinearLayout l = (LinearLayout) findViewById(layoutToShow);
+                l.setVisibility(View.GONE);
+            }
+        });
     }
 
 

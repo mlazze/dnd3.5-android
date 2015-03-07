@@ -3,7 +3,6 @@ package com.skij.dndcharacter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -67,13 +66,18 @@ public class Utils {
     }
 
     public static void deleteCharacter(long id, Context c) {
-        Log.d("Removing", "Removing " + id);
+//        Log.d("Removing", "Removing " + id);
         characterList.remove((int) id);
         savePrefs(c);
     }
 
     public static void addCharacter(DnDCharacterManipulator charac, Context c) {
         characterList.add(charac);
+        savePrefs(c);
+    }
+
+    public static void editCharacter(DnDCharacterManipulator charac, int index, Context c) {
+        characterList.set(index,charac);
         savePrefs(c);
     }
 }
