@@ -33,7 +33,7 @@
     <string name="char_screen_spabilities">TODOSpecial Abilities</string>
     <string name="char_screen_spellresist">TODOSpell Resist</string>
     <string name="char_screen_stats">Stats</string>
-    <string name="char_screen_temp">TODOTemp</string>
+    <string name="char_screen_temp">Temp</string>
     <string name="char_screen_Weapon">TODOWeapon</string>
     <string name="title_activity_level_up">LevelUp</string>
     <string name="level_up_class_label">Class</string>
@@ -65,4 +65,5 @@
     <string name="title_activity_hit_points">HitPoints</string>
     <string name="hitpoints_damage_label">Damage</string>
     <string name="hitpoints_heal_label">Heal</string>
+    <string name="title_activity_weapons">Weapons</string>
 </resources>

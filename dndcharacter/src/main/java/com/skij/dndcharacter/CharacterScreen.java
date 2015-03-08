@@ -106,6 +106,11 @@ public class CharacterScreen extends ActionBarActivity {
             i.putExtra("Character", posInArray);
             startActivity(i);
         }
+        if (id == R.id.char_screen_Weapon) {
+            i = new Intent(this, Weapons.class);
+            i.putExtra("Character", posInArray);
+            startActivity(i);
+        }
 
         return super.onOptionsItemSelected(item);
     }
