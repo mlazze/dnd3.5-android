@@ -94,6 +94,8 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 
     public void clearTemp() {
         temphitpoints = new ArrayList<Integer>(0);
+        temphitpointsmax=0;
+        tempattackroll=0;
         tempstats = new int[6];
         tempsavingthrows = new int[3];
         tempstatuses = new ArrayList<String>(0);
@@ -354,6 +356,11 @@ public class DnDCharacterManipulator extends DnDCharacter implements
     }
 
     public void setTempHPDelta(int value) {
+        if (getcurrentHP() + value > getTotalHP())
+            value = getTotalHP() - getcurrentHP();
+        if (value==0){
+            return;
+        }
         temphitpoints.add(value);
         recalculate();
     }

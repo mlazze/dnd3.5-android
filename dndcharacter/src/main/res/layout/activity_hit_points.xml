@@ -21,6 +21,14 @@
             android:orientation="vertical"
             tools:ignore="UselessParent">
 
+            <TextView
+                android:id="@+id/hitpoints_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -62,7 +70,9 @@
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:id="@+id/hitpoints_death_layout"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/hitpoints_mindeath"
@@ -97,18 +107,18 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/temp_ac_label"
+                    android:id="@+id/hitpoints_damage_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/temp_ac_label"
+                    android:text="@string/hitpoints_damage_label"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
-                    android:id="@+id/temp_ac"
+                    android:id="@+id/hitpoints_damage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="numberSigned" />
+                    android:inputType="numberDecimal" />
             </LinearLayout>
 
             <LinearLayout
@@ -117,23 +127,30 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/temp_attack_roll_label"
+                    android:id="@+id/hitpoints_heal_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/temp_attack_roll_label"
+                    android:text="@string/hitpoints_heal_label"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
-                    android:id="@+id/temp_attack_roll"
+                    android:id="@+id/hitpoints_heal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="numberSigned" />
+                    android:inputType="numberDecimal" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/hitpoints_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
             <Button
-                android:id="@+id/temp_apply"
+                android:id="@+id/hitpoints_apply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

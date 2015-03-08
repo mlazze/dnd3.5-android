@@ -13,6 +13,19 @@
         </shape>
     </item>
 
+    <item android:id="@android:id/secondaryProgress">
+        <shape>
+            <corners android:radius="5dip" />
+            <gradient
+                android:startColor="#f60"
+                android:centerColor="#420"
+                android:centerY="0.75"
+                android:endColor="#F5A9F2"
+                android:angle="270"
+                />
+        </shape>
+    </item>
+
     <item
         android:id="@android:id/progress"
         >

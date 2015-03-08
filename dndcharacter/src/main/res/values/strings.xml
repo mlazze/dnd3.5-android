@@ -63,4 +63,6 @@
     <string name="magic">Magic</string>
     <string name="title_activity_temp">Temp</string>
     <string name="title_activity_hit_points">HitPoints</string>
+    <string name="hitpoints_damage_label">Damage</string>
+    <string name="hitpoints_heal_label">Heal</string>
 </resources>

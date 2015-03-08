@@ -7,10 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import core.DnDCharacter;
 import core.DnDCharacterManipulator;
 
 
@@ -37,25 +41,50 @@ public class HitPoints extends ActionBarActivity {
     }
 
     private void setOriginalValues() {
-        ProgressBar healthbar = (ProgressBar) findViewById(R.id.hitpoints_health_bar);
-        int hmax = character.getTotalHP(), hmin=0;
-        healthbar.setMax(hmax);
-        ((TextView) findViewById(R.id.hitpoints_minhealth)).setText(hmin+"");
-        ((TextView) findViewById(R.id.hitpoints_maxhealth)).setText(hmax+"");
-        healthbar.setProgress(10);
-//        setEditTextContent(R.id.hit_points_ac, character.getHit_pointsAC() + "");
-//        setEditTextContent(R.id.hit_points_attack_roll, character.getHit_pointsattackroll() + "");
-//        setEditTextContent(R.id.hit_points_max_hp, character.getHit_pointsHPMax() + "");
-//        setEditTextContent(R.id.hit_points_str, character.getHit_pointsstats(DnDCharacter.STATS.STR) + "");
-//        setEditTextContent(R.id.hit_points_dex, character.getHit_pointsstats(DnDCharacter.STATS.DEX) + "");
-//        setEditTextContent(R.id.hit_points_con, character.getHit_pointsstats(DnDCharacter.STATS.CON) + "");
-//        setEditTextContent(R.id.hit_points_int, character.getHit_pointsstats(DnDCharacter.STATS.INT) + "");
-//        setEditTextContent(R.id.hit_points_wis, character.getHit_pointsstats(DnDCharacter.STATS.WIS) + "");
-//        setEditTextContent(R.id.hit_points_cha, character.getHit_pointsstats(DnDCharacter.STATS.CHA) + "");
-//        setEditTextContent(R.id.hit_points_for, character.getHit_pointssavingthrows(DnDCharacter.SAVING.FORTITUDE) + "");
-//        setEditTextContent(R.id.hit_points_ref, character.getHit_pointssavingthrows(DnDCharacter.SAVING.REFLEX) + "");
-//        setEditTextContent(R.id.hit_points_wil, character.getHit_pointssavingthrows(DnDCharacter.SAVING.WILL) + "");
+        //Current/Max
+        ((TextView) findViewById(R.id.hitpoints_text)).setText(formatCurrentHp());
+        //Log
+        ((TextView) findViewById(R.id.hitpoints_log)).setText(formatTempHp());
 
+        //healthbar
+        ProgressBar healthbar = (ProgressBar) findViewById(R.id.hitpoints_health_bar);
+        int hmax = character.getTotalHP(), hmin = 0;
+        healthbar.setMax(hmax);
+        ((TextView) findViewById(R.id.hitpoints_minhealth)).setText(hmin + "");
+        ((TextView) findViewById(R.id.hitpoints_maxhealth)).setText(hmax + "");
+        healthbar.setProgress(character.getcurrentHP() < hmin ? hmin : character.getcurrentHP());
+
+        //deathbar
+        if (character.getcurrentHP()<0) {
+            ((LinearLayout) findViewById(R.id.hitpoints_death_layout)).setVisibility(View.VISIBLE);
+        }
+        int dmax = 100, dmin = 0;
+        ProgressBar deathbar = (ProgressBar) findViewById(R.id.hitpoints_death_bar);
+        deathbar.setMax(dmax);
+        ((TextView) findViewById(R.id.hitpoints_mindeath)).setText("-100");
+        ((TextView) findViewById(R.id.hitpoints_maxdeath)).setText("0");
+        deathbar.setProgress(character.getcurrentHP() > dmin ? dmax : dmax + character.getcurrentHP());
+        deathbar.setSecondaryProgress(dmax-10);
+
+    }
+
+    private String formatCurrentHp() {
+        String res="Current HP: ";
+        res+=character.getcurrentHP()+"/"+character.getTotalHP();
+        return res;
+    }
+
+    private String formatTempHp() {
+        ArrayList<Integer> log = character.getTempHP();
+        String res = "Log:";
+        for (Integer i : log) {
+            if (i < 0) {
+                res += " -" + (-i);
+            } else {
+                res += " +" + i;
+            }
+        }
+        return res;
     }
 
     private void setEditTextContent(int identifier, String originalValue) {
@@ -91,58 +120,29 @@ public class HitPoints extends ActionBarActivity {
     public void apply(View view) {
         Integer tmp;
 
-//        try {
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_ac)) != null) {
-//                character.setHit_pointsAC(tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_attack_roll)) != null) {
-//                character.setHit_pointsAttackRoll(tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_max_hp)) != null) {
-//                character.setHit_pointsHPMax(tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_str)) != null) {
-//                character.setHit_pointsStat(DnDCharacter.STATS.STR, tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_dex)) != null) {
-//                character.setHit_pointsStat(DnDCharacter.STATS.DEX, tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_con)) != null) {
-//                character.setHit_pointsStat(DnDCharacter.STATS.CON, tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_int)) != null) {
-//                character.setHit_pointsStat(DnDCharacter.STATS.INT, tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_wis)) != null) {
-//                character.setHit_pointsStat(DnDCharacter.STATS.WIS, tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_cha)) != null) {
-//                character.setHit_pointsStat(DnDCharacter.STATS.CHA, tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_for)) != null) {
-//                character.setHit_pointsSaving(DnDCharacter.SAVING.FORTITUDE, tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_ref)) != null) {
-//                character.setHit_pointsSaving(DnDCharacter.SAVING.REFLEX, tmp);
-//            }
-//            if ((tmp = getEditTextContentAsInteger(R.id.hit_points_wil)) != null) {
-//                character.setHit_pointsSaving(DnDCharacter.SAVING.WILL, tmp);
-//            }
-//        } catch (DnDCharacter.InvalidCharacterException e) {
-//            Toast.makeText(this, "Invalid Parameters", Toast.LENGTH_LONG).show();
-//            return;
-//        }
-//
-//        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
-//        Utils.editCharacter(character, posInArray, this);
-//        finish();
+        try {
+            if ((tmp = getEditTextContentAsInteger(R.id.hitpoints_damage)) != null) {
+                character.setTempHPDelta(-tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.hitpoints_heal)) != null) {
+                character.setTempHPDelta(tmp);
+            }
+        } catch (DnDCharacter.InvalidCharacterException e) {
+            Toast.makeText(this, "Invalid Parameters", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
+        Utils.editCharacter(character, posInArray, this);
+        finish();
+        startActivity(getIntent());
     }
 
-//    private Integer getEditTextContentAsInteger(int identifier) {
-//        try {
-//            return Integer.parseInt(((EditText) findViewById(identifier)).getText().toString());
-//        } catch (NumberFormatException e) {
-//            return null;
-//        }
-//    }
+    private Integer getEditTextContentAsInteger(int identifier) {
+        try {
+            return Integer.parseInt(((EditText) findViewById(identifier)).getText().toString());
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
 }
