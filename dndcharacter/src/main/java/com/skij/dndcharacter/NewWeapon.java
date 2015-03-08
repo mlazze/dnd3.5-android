@@ -39,7 +39,7 @@ public class NewWeapon extends ActionBarActivity {
 
         character = Utils.getCharacter(posInArray, this);
 
-        ((EditText) findViewById(R.id.new_weapon_damagemod)).getText().insert(0, ""+1);
+        ((EditText) findViewById(R.id.new_weapon_damagemod)).getText().insert(0, "" + 1);
         setSpinner(DnDCharacter.STATS.values(), R.id.new_weapon_stat_spinner);
     }
 
@@ -72,9 +72,6 @@ public class NewWeapon extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
         if (id == android.R.id.home) {
             finish();
             return true;
@@ -125,13 +122,13 @@ public class NewWeapon extends ActionBarActivity {
             return;
         }
 
-        Weapon w = new Weapon(name,ranged,stat,damagemod,range,damagedices,critminrange,critmult);
-        w.notes = notes.equals("")?w.notes:notes;
-        w.type = type.equals("")?w.type:type;
+        Weapon w = new Weapon(name, ranged, stat, damagemod, range, damagedices, critminrange, critmult);
+        w.notes = notes.equals("") ? w.notes : notes;
+        w.type = type.equals("") ? w.type : type;
 
-        character.setWeapon(w,false);
-        Utils.editCharacter(character,posInArray,this);
-        Toast.makeText(this,"Weapon Added",Toast.LENGTH_SHORT).show();
+        character.setWeapon(w, false);
+        Utils.editCharacter(character, posInArray, this);
+        Toast.makeText(this, "Weapon Added", Toast.LENGTH_SHORT).show();
         finish();
     }
 

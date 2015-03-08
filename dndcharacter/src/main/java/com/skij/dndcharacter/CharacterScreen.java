@@ -71,7 +71,7 @@ public class CharacterScreen extends ActionBarActivity {
         if (id == R.id.action_clear_temp) {
             character.clearTemp();
             Toast.makeText(this, "Temporary stats cleared", Toast.LENGTH_SHORT).show();
-            Utils.editCharacter(character,posInArray,this);
+            Utils.editCharacter(character, posInArray, this);
             finish();
             startActivity(getIntent());
         }

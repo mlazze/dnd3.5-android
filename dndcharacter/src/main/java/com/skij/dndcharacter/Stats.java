@@ -63,9 +63,6 @@ public class Stats extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
         if (id == android.R.id.home) {
             finish();
             return true;
@@ -90,7 +87,7 @@ public class Stats extends ActionBarActivity {
         int[] stats = {str, dex, con, inte, wis, cha};
 
         for (DnDCharacter.STATS s : DnDCharacter.STATS.values()) {
-            character.setStat(s,stats[s.ordinal()]);
+            character.setStat(s, stats[s.ordinal()]);
         }
 
         //applychanges

@@ -45,21 +45,20 @@ public class Temp extends ActionBarActivity {
     }
 
     private void setScrollBehaviour() {
-        ScrollView parentScroll=(ScrollView)findViewById(R.id.scrollView);
+        ScrollView parentScroll = (ScrollView) findViewById(R.id.scrollView);
         ListView childScroll = (ListView) findViewById(R.id.temp_status_list);
         parentScroll.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
-                Log.e("","PARENT TOUCH");
+                Log.e("", "PARENT TOUCH");
                 findViewById(R.id.temp_status_list).getParent().requestDisallowInterceptTouchEvent(false);
                 return false;
             }
         });
         childScroll.setOnTouchListener(new View.OnTouchListener() {
 
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                Log.e("","PARENT TOUCH");
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.e("", "PARENT TOUCH");
                 // Disallow the touch request for parent scroll on touch of child view
                 v.getParent().requestDisallowInterceptTouchEvent(true);
                 return false;
@@ -105,7 +104,7 @@ public class Temp extends ActionBarActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete_entry:
-                character.setTempStatus(character.getTempstatuses().get((int)info.id),true);
+                character.setTempStatus(character.getTempstatuses().get((int) info.id), true);
                 updateTempStatuses();
                 return true;
             default:
@@ -131,11 +130,14 @@ public class Temp extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_clear_temp) {
+            character.clearTemp();
+            Toast.makeText(this, "Temporary stats cleared", Toast.LENGTH_SHORT).show();
+            Utils.editCharacter(character, posInArray, this);
+            finish();
+            startActivity(getIntent());
         }
+        //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
             finish();
             return true;

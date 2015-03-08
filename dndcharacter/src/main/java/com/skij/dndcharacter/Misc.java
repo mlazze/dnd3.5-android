@@ -35,22 +35,22 @@ public class Misc extends ActionBarActivity {
     }
 
     private void setOriginalValues() {
-        setEditTextContent(R.id.misc_ac, character.getMiscAC()+"");
-        setEditTextContent(R.id.misc_attack_roll, character.getMiscattackroll()+"");
-        setEditTextContent(R.id.misc_max_hp, character.getMischitpointsmax()+"");
-        setEditTextContent(R.id.misc_initiative, character.getMiscinitiative()+"");
-        setEditTextContent(R.id.misc_str, character.getMiscstats(DnDCharacter.STATS.STR)+"");
-        setEditTextContent(R.id.misc_dex, character.getMiscstats(DnDCharacter.STATS.DEX)+"");
-        setEditTextContent(R.id.misc_con, character.getMiscstats(DnDCharacter.STATS.CON)+"");
-        setEditTextContent(R.id.misc_int, character.getMiscstats(DnDCharacter.STATS.INT)+"");
-        setEditTextContent(R.id.misc_wis, character.getMiscstats(DnDCharacter.STATS.WIS)+"");
-        setEditTextContent(R.id.misc_cha, character.getMiscstats(DnDCharacter.STATS.CHA)+"");
-        setEditTextContent(R.id.misc_for, character.getMiscsavingthrows(DnDCharacter.SAVING.FORTITUDE)+"");
-        setEditTextContent(R.id.misc_ref, character.getMiscsavingthrows(DnDCharacter.SAVING.REFLEX)+"");
-        setEditTextContent(R.id.misc_wil, character.getMiscsavingthrows(DnDCharacter.SAVING.WILL)+"");
-        setEditTextContent(R.id.misc_magic_for, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.FORTITUDE)+"");
-        setEditTextContent(R.id.misc_magic_ref, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.REFLEX)+"");
-        setEditTextContent(R.id.misc_magic_wil, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.WILL)+"");
+        setEditTextContent(R.id.misc_ac, character.getMiscAC() + "");
+        setEditTextContent(R.id.misc_attack_roll, character.getMiscattackroll() + "");
+        setEditTextContent(R.id.misc_max_hp, character.getMischitpointsmax() + "");
+        setEditTextContent(R.id.misc_initiative, character.getMiscinitiative() + "");
+        setEditTextContent(R.id.misc_str, character.getMiscstats(DnDCharacter.STATS.STR) + "");
+        setEditTextContent(R.id.misc_dex, character.getMiscstats(DnDCharacter.STATS.DEX) + "");
+        setEditTextContent(R.id.misc_con, character.getMiscstats(DnDCharacter.STATS.CON) + "");
+        setEditTextContent(R.id.misc_int, character.getMiscstats(DnDCharacter.STATS.INT) + "");
+        setEditTextContent(R.id.misc_wis, character.getMiscstats(DnDCharacter.STATS.WIS) + "");
+        setEditTextContent(R.id.misc_cha, character.getMiscstats(DnDCharacter.STATS.CHA) + "");
+        setEditTextContent(R.id.misc_for, character.getMiscsavingthrows(DnDCharacter.SAVING.FORTITUDE) + "");
+        setEditTextContent(R.id.misc_ref, character.getMiscsavingthrows(DnDCharacter.SAVING.REFLEX) + "");
+        setEditTextContent(R.id.misc_wil, character.getMiscsavingthrows(DnDCharacter.SAVING.WILL) + "");
+        setEditTextContent(R.id.misc_magic_for, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.FORTITUDE) + "");
+        setEditTextContent(R.id.misc_magic_ref, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.REFLEX) + "");
+        setEditTextContent(R.id.misc_magic_wil, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.WILL) + "");
 
 
     }
@@ -76,14 +76,11 @@ public class Misc extends ActionBarActivity {
         if (id == R.id.action_clear_misc) {
             character.clearMisc();
             Toast.makeText(this, "Miscellaneous stats cleared", Toast.LENGTH_SHORT).show();
-            Utils.editCharacter(character,posInArray,this);
+            Utils.editCharacter(character, posInArray, this);
             finish();
             startActivity(getIntent());
         }
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
         if (id == android.R.id.home) {
             finish();
             return true;

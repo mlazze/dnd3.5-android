@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,8 +54,8 @@ public class HitPoints extends ActionBarActivity {
         healthbar.setProgress(character.getcurrentHP() < hmin ? hmin : character.getcurrentHP());
 
         //deathbar
-        if (character.getcurrentHP()<0) {
-            ((LinearLayout) findViewById(R.id.hitpoints_death_layout)).setVisibility(View.VISIBLE);
+        if (character.getcurrentHP() < 0) {
+            (findViewById(R.id.hitpoints_death_layout)).setVisibility(View.VISIBLE);
         }
         int dmax = 100, dmin = 0;
         ProgressBar deathbar = (ProgressBar) findViewById(R.id.hitpoints_death_bar);
@@ -64,13 +63,13 @@ public class HitPoints extends ActionBarActivity {
         ((TextView) findViewById(R.id.hitpoints_mindeath)).setText("-100");
         ((TextView) findViewById(R.id.hitpoints_maxdeath)).setText("0");
         deathbar.setProgress(character.getcurrentHP() > dmin ? dmax : dmax + character.getcurrentHP());
-        deathbar.setSecondaryProgress(dmax-10);
+        deathbar.setSecondaryProgress(dmax - 10);
 
     }
 
     private String formatCurrentHp() {
-        String res="Current HP: ";
-        res+=character.getcurrentHP()+"/"+character.getTotalHP();
+        String res = "Current HP: ";
+        res += character.getcurrentHP() + "/" + character.getTotalHP();
         return res;
     }
 
@@ -87,15 +86,10 @@ public class HitPoints extends ActionBarActivity {
         return res;
     }
 
-    private void setEditTextContent(int identifier, String originalValue) {
-        ((EditText) findViewById(identifier)).getText().clear();
-        ((EditText) findViewById(identifier)).getText().insert(0, originalValue);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_level_up, menu);
+        getMenuInflater().inflate(R.menu.menu_hit_points, menu);
         return true;
     }
 
@@ -107,8 +101,13 @@ public class HitPoints extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+        if (id == R.id.action_clear_temp_hp) {
+            character.clearTempHp();
+            Toast.makeText(this, "Hp Log cleared", Toast.LENGTH_SHORT).show();
+            Utils.editCharacter(character, posInArray, this);
+            finish();
+            startActivity(getIntent());
         }
         if (id == android.R.id.home) {
             finish();

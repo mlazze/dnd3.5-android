@@ -70,9 +70,6 @@ public class NewEquipment extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
         if (id == android.R.id.home) {
             finish();
             return true;
@@ -143,7 +140,7 @@ public class NewEquipment extends ActionBarActivity {
             e.acbonus = acbonus;
         if (deflectionbonus != null)
             e.deflectionbonus = deflectionbonus;
-        if (naturalbonus!= null)
+        if (naturalbonus != null)
             e.naturalbonus = naturalbonus;
         if (savepenalty != null)
             e.savepenalty = savepenalty;
@@ -154,8 +151,8 @@ public class NewEquipment extends ActionBarActivity {
         if (weight != null)
             e.weight = weight;
 
-        if (specialproperties!=null)
-            e.specialproperties=specialproperties;
+        if (specialproperties != null)
+            e.specialproperties = specialproperties;
 
         character.setEquipment(e, false);
         Utils.editCharacter(character, posInArray, this);

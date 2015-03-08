@@ -49,6 +49,7 @@
     <string name="title_activity_stats">Stats</string>
     <string name="action_clear_misc">ClearMisc</string>
     <string name="action_clear_temp">ClearTemp</string>
+    <string name="action_clear_temp_hp">ClearTempHP</string>
     <string name="title_activity_misc">Misc</string>
     <string name="misc_ac_label">Armor Class</string>
     <string name="misc_attack_roll_label">Attack Roll</string>
