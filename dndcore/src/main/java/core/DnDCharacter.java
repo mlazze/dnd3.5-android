@@ -79,13 +79,7 @@ public class DnDCharacter implements Serializable {
         classToNames.put(mainclass, classname);
     }
 
-    public ArrayList<Integer> getTemphitpoints() {
-        return temphitpoints;
-    }
 
-    public int getTemphitpointsmax() {
-        return temphitpointsmax;
-    }
 
     public int getTempstats(STATS s) {
         return tempstats[s.ordinal()];

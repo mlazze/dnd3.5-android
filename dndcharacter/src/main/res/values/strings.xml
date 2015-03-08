@@ -43,6 +43,7 @@
     <string name="abilities_ability_label">Ability</string>
     <string name="abilities_value_label">New Value</string>
     <string name="apply">Apply</string>
+    <string name="add">Add</string>
     <string name="title_activity_abilities">Abilities</string>
     <string name="title_activity_stats">Stats</string>
     <string name="action_clear_misc">ClearMisc</string>
@@ -52,5 +53,12 @@
     <string name="misc_attack_roll_label">Attack Roll</string>
     <string name="misc_max_hp_label">Max Hp</string>
     <string name="misc_initiative_label">Initiative</string>
+    <string name="temp_ac_label">Armor Class</string>
+    <string name="temp_attack_roll_label">Attack Roll</string>
+    <string name="temp_max_hp_label">Max Hp</string>
+    <string name="temp_initiative_label">Initiative</string>
+    <string name="temp_status_label">Statuses</string>
+    <string name="temp_new_status_label">New Status</string>
     <string name="magic">Magic</string>
+    <string name="title_activity_temp">Temp</string>
 </resources>

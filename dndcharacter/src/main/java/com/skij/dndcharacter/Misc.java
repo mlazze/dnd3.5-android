@@ -6,8 +6,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import core.DnDCharacter;
 import core.DnDCharacterManipulator;
@@ -51,6 +55,8 @@ public class Misc extends ActionBarActivity {
         setEditTextContent(R.id.misc_magic_for, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.FORTITUDE)+"");
         setEditTextContent(R.id.misc_magic_ref, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.REFLEX)+"");
         setEditTextContent(R.id.misc_magic_wil, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.WILL)+"");
+
+
     }
 
     private void setEditTextContent(int identifier, String originalValue) {
