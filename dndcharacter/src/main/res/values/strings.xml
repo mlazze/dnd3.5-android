@@ -26,6 +26,7 @@
     <string name="char_screen_dmgred">TODODamage Reduction</string>
     <string name="char_screen_equipment">TODOEquipment</string>
     <string name="char_screen_feat">TODOFeat</string>
+    <string name="char_screen_hp">Hit Points</string>
     <string name="char_screen_Inventory">TODOInventory</string>
     <string name="char_screen_Langauges">TODOLanguages</string>
     <string name="char_screen_misc">Misc</string>
@@ -61,4 +62,5 @@
     <string name="temp_new_status_label">New Status</string>
     <string name="magic">Magic</string>
     <string name="title_activity_temp">Temp</string>
+    <string name="title_activity_hit_points">HitPoints</string>
 </resources>

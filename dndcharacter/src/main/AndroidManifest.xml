@@ -72,6 +72,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
         </activity>
+        <activity
+            android:name=".HitPoints"
+            android:label="@string/title_activity_hit_points"
+            android:parentActivityName=".CharacterScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.skij.dndcharacter.CharacterScreen" />
+        </activity>
     </application>
 
 </manifest>
