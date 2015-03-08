@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import core.DnDCharacterManipulator;
 
 
-public class Weapons extends ActionBarActivity {
+public class EquipmentActivity extends ActionBarActivity {
 
 
     DnDCharacterManipulator character;
@@ -26,8 +26,8 @@ public class Weapons extends ActionBarActivity {
     private AdapterView.OnItemClickListener characterListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if (position == character.getWeapons().size()) {
-                Intent i = new Intent(Weapons.this, NewWeapon.class);
+            if (position == character.getEquipment().size()) {
+                Intent i = new Intent(EquipmentActivity.this, NewEquipment.class);
                 i.putExtra("Character", posInArray);
                 startActivity(i);
             }
@@ -37,13 +37,13 @@ public class Weapons extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        updateWeaponList();
+        updateEquipmentList();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weapons);
+        setContentView(R.layout.activity_equipment);
 
         Intent i = getIntent();
         posInArray = i.getIntExtra("Character", -1);
@@ -53,20 +53,20 @@ public class Weapons extends ActionBarActivity {
         }
 
         character = Utils.getCharacter(posInArray, this);
-        updateWeaponList();
+        updateEquipmentList();
     }
 
-    private void updateWeaponList() {
-        ArrayList<String> weaponList;
+    private void updateEquipmentList() {
+        ArrayList<String> equipmentList;
         ArrayAdapter<String> arrayAdapter;
-        ListView weaponListView = (ListView) findViewById(R.id.weapons_list);
-        weaponList = character.getWeapons();
-        weaponList.add("Add New");
+        ListView equipmentListView = (ListView) findViewById(R.id.equipment_list);
+        equipmentList = character.getEquipment();
+        equipmentList.add("Add New");
 
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, weaponList);
-        weaponListView.setAdapter(arrayAdapter);
-        weaponListView.setOnItemClickListener(characterListener);
-        registerForContextMenu(weaponListView);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, equipmentList);
+        equipmentListView.setAdapter(arrayAdapter);
+        equipmentListView.setOnItemClickListener(characterListener);
+        registerForContextMenu(equipmentListView);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Weapons extends ActionBarActivity {
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.weapon_context_menu, menu);
+        inflater.inflate(R.menu.equipment_context_menu, menu);
     }
 
     @Override
@@ -82,8 +82,8 @@ public class Weapons extends ActionBarActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete_entry:
-                if ((int) info.id < character.getWeapons().size()) {
-                    character.deleteWeapon((int) info.id);
+                if ((int) info.id < character.getEquipment().size()) {
+                    character.deleteEquipment((int) info.id);
                     Utils.editCharacter(character, posInArray, this);
                     finish();
                     startActivity(getIntent());

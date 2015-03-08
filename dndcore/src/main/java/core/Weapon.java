@@ -18,6 +18,9 @@ public class Weapon implements Serializable {
     public Weapon(String name, boolean ranged, DnDCharacter.STATS stat, double damagemod, double range, String damagedices, int critminrange, double critmult) {
         this.name = name;
         this.ranged = ranged;
+        if (ranged) {
+            ammo=1;
+        }
         this.stat = stat;
         this.damagemod = damagemod;
         this.range = range;

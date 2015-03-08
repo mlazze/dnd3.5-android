@@ -73,10 +73,12 @@ public class HomeScreen extends ActionBarActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete_entry:
-                Utils.deleteCharacter(info.id, this);
-                finish();
-                startActivity(getIntent());
-                return true;
+                if ((int) info.id < Utils.getCharacterList(HomeScreen.this).size()) {
+                    Utils.deleteCharacter(info.id, this);
+                    finish();
+                    startActivity(getIntent());
+                    return true;
+                }
             default:
                 return super.onContextItemSelected(item);
         }

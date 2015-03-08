@@ -190,6 +190,11 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         weapons.remove(index);
     }
 
+    public void deleteEquipment(int index) {
+        equipment.remove(index);
+    }
+
+
     public void setAbilitySkill(ABILITIES ability, int value) {
         abilities.put(ability, value);
         recalculate();

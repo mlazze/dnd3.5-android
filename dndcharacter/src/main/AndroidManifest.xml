@@ -88,6 +88,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
         </activity>
+        <activity
+            android:name=".NewWeapon"
+            android:label="@string/title_activity_new_weapon"
+            android:parentActivityName=".Weapons" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.skij.dndcharacter.Weapons" />
+        </activity>
+        <activity
+            android:name=".EquipmentActivity"
+            android:label="@string/title_activity_equipment"
+            android:parentActivityName=".CharacterScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.skij.dndcharacter.CharacterScreen" />
+        </activity>
+        <activity
+            android:name=".NewEquipment"
+            android:label="@string/title_activity_new_equipment"
+            android:parentActivityName=".EquipmentActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.skij.dndcharacter.EquipmentActivity" />
+        </activity>
     </application>
 
 </manifest>

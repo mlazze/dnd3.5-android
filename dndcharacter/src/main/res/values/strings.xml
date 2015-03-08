@@ -24,7 +24,7 @@
     <string name="char_screen_abilities">Abilities</string>
     <string name="char_screen_spells">TODOSpells</string>
     <string name="char_screen_dmgred">TODODamage Reduction</string>
-    <string name="char_screen_equipment">TODOEquipment</string>
+    <string name="char_screen_equipment">Equipment</string>
     <string name="char_screen_feat">TODOFeat</string>
     <string name="char_screen_hp">Hit Points</string>
     <string name="char_screen_Inventory">TODOInventory</string>
@@ -34,7 +34,7 @@
     <string name="char_screen_spellresist">TODOSpell Resist</string>
     <string name="char_screen_stats">Stats</string>
     <string name="char_screen_temp">Temp</string>
-    <string name="char_screen_Weapon">TODOWeapon</string>
+    <string name="char_screen_Weapon">Weapon</string>
     <string name="title_activity_level_up">LevelUp</string>
     <string name="level_up_class_label">Class</string>
     <string name="level_up_liferoll_label">Liferoll</string>
@@ -66,4 +66,29 @@
     <string name="hitpoints_damage_label">Damage</string>
     <string name="hitpoints_heal_label">Heal</string>
     <string name="title_activity_weapons">Weapons</string>
+    <string name="title_activity_new_weapon">NewWeapon</string>
+    <string name="new_weapon_critminrange_label">Critical range: x-20</string>
+    <string name="new_weapon_critmult_label">Critical Multiplier</string>
+    <string name="new_weapon_damagedices_label">Damage dices</string>
+    <string name="new_weapon_damagemod_label">Damage Modifier</string>
+    <string name="new_weapon_name_label">Name</string>
+    <string name="new_weapon_notes_label">Note</string>
+    <string name="new_weapon_range_label">Range</string>
+    <string name="new_weapon_ranged_label">Ranged</string>
+    <string name="new_weapon_stat_label">Weapon stat</string>
+    <string name="new_weapon_type_label">Type</string>
+    <string name="title_activity_equipment">EquipmentActivity</string>
+    <string name="title_activity_new_equipment">NewEquipment</string>
+    <string name="new_equipment_acbonus_label">AC Bonus</string>
+    <string name="new_equipment_deflectionbonus_label">Deflection Bonus</string>
+    <string name="new_equipment_maxdex_label">Max Dex</string>
+    <string name="new_equipment_naturalbonus_label">Natural Bonus</string>
+    <string name="new_equipment_savepenalty_label">Save Penalty</string>
+    <string name="new_equipment_speed_label">Speed</string>
+    <string name="new_equipment_spellfail_label">Spell Fail</string>
+    <string name="new_equipment_weight_label">Weight</string>
+    <string name="new_equipment_type_label">Type</string>
+    <string name="new_equipment_name_label">Name</string>
+    <string name="new_equipment_special_label">Special Properties</string>
+
 </resources>
