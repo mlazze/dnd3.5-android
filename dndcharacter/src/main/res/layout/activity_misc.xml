@@ -27,41 +27,18 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/misc_class_label"
+                    android:id="@+id/misc_ac_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/misc_class_label"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                <Spinner
-                    android:id="@+id/misc_class_spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/misc_customclasslay"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/misc_customclass_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/misc_customclass_label"
+                    android:text="@string/misc_ac_label"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
-                    android:id="@+id/misc_customclass"
+                    android:id="@+id/misc_ac"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="textNoSuggestions" />
+                    android:inputType="numberSigned" />
             </LinearLayout>
 
             <LinearLayout
@@ -70,18 +47,18 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/misc_liferoll_label"
+                    android:id="@+id/misc_attack_roll_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/misc_liferoll_label"
+                    android:text="@string/misc_attack_roll_label"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
-                    android:id="@+id/misc_liferoll"
+                    android:id="@+id/misc_attack_roll"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberSigned" />
             </LinearLayout>
 
             <LinearLayout
@@ -90,47 +67,18 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/misc_attack_bonus_label"
+                    android:id="@+id/misc_max_hp_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/misc_attack_bonus_label"
+                    android:text="@string/misc_max_hp_label"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
-                    android:id="@+id/misc_atk1"
+                    android:id="@+id/misc_max_hp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="numberDecimal" />
-
-                <EditText
-                    android:id="@+id/misc_atk2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="numberDecimal" />
-
-                <EditText
-                    android:id="@+id/misc_atk3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="numberDecimal" />
-
-                <EditText
-                    android:id="@+id/misc_atk4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="numberDecimal" />
-
-                <EditText
-                    android:id="@+id/misc_atk5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="numberDecimal" />
-
+                    android:inputType="numberSigned" />
             </LinearLayout>
 
             <LinearLayout
@@ -139,25 +87,153 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/misc_new_stat_label"
+                    android:id="@+id/misc_initiative_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/misc_new_stat_label"
+                    android:text="@string/misc_initiative_label"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <Spinner
-                    android:id="@+id/misc_new_stat_spinner"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="30dp" />
-
                 <EditText
-                    android:id="@+id/misc_new_stat_delta"
+                    android:id="@+id/misc_initiative"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberSigned" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/misc_str_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/strength"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <EditText
+                            android:id="@+id/misc_str"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberSigned" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/misc_dex_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dexterity"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <EditText
+                            android:id="@+id/misc_dex"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberSigned" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/misc_con_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/constitution"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <EditText
+                            android:id="@+id/misc_con"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberSigned" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/misc_int_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/intellect"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <EditText
+                            android:id="@+id/misc_int"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberSigned" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/misc_wis_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wisdom"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <EditText
+                            android:id="@+id/misc_wis"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberSigned" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/misc_cha_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/charisma"
+                            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                        <EditText
+                            android:id="@+id/misc_cha"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberSigned" />
+                    </LinearLayout>
+                </LinearLayout>
 
 
             </LinearLayout>
@@ -184,7 +260,7 @@
                         android:id="@+id/misc_for"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberSigned" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -203,7 +279,7 @@
                         android:id="@+id/misc_ref"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberSigned" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -222,9 +298,83 @@
                         android:id="@+id/misc_wil"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
+                        android:inputType="numberSigned" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/magic"
+                    android:gravity="center"
+                    android:layout_margin="20dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/misc_magic_for_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fortitude"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <EditText
+                        android:id="@+id/misc_magic_for"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/misc_magic_ref_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reflex"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <EditText
+                        android:id="@+id/misc_magic_ref"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/misc_magic_wil_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/will"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <EditText
+                        android:id="@+id/misc_magic_wil"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
                         android:inputType="numberDecimal" />
                 </LinearLayout>
             </LinearLayout>
+
 
             <Button
                 android:id="@+id/misc_apply"

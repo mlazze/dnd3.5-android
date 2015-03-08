@@ -79,6 +79,62 @@ public class DnDCharacter implements Serializable {
         classToNames.put(mainclass, classname);
     }
 
+    public ArrayList<Integer> getTemphitpoints() {
+        return temphitpoints;
+    }
+
+    public int getTemphitpointsmax() {
+        return temphitpointsmax;
+    }
+
+    public int getTempstats(STATS s) {
+        return tempstats[s.ordinal()];
+    }
+
+    public int getTempsavingthrows(SAVING s) {
+        return tempsavingthrows[s.ordinal()];
+    }
+
+    public ArrayList<String> getTempstatuses() {
+        return tempstatuses;
+    }
+
+    public int getTempAC() {
+        return tempAC;
+    }
+
+    public int getTempattackroll() {
+        return tempattackroll;
+    }
+
+    public int getMischitpointsmax() {
+        return mischitpointsmax;
+    }
+
+    public int getMiscAC() {
+        return miscAC;
+    }
+
+    public int getMiscinitiative() {
+        return miscinitiative;
+    }
+
+    public int getMiscsavingthrows(SAVING saving) {
+        return miscsavingthrows[saving.ordinal()];
+    }
+
+    public int getMiscmagicsavingthrows(SAVING saving) {
+        return miscmagicsavingthrows[saving.ordinal()];
+    }
+
+    public int getMiscstats(STATS s) {
+        return miscstats[s.ordinal()];
+    }
+
+    public int getMiscattackroll() {
+        return miscattackroll;
+    }
+
     public ArrayList<Integer> getliferolls() {
         return liferolls;
     }

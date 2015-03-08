@@ -68,14 +68,16 @@ public class CharacterScreen extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         //buttons
         if (id == R.id.action_clear_misc) {
-           character.clearMisc();
-            Toast.makeText(this,"Miscellaneous stats cleared",Toast.LENGTH_SHORT).show();
-           finish();
+            character.clearMisc();
+            Toast.makeText(this, "Miscellaneous stats cleared", Toast.LENGTH_SHORT).show();
+            Utils.editCharacter(character,posInArray,this);
+            finish();
             startActivity(getIntent());
         }
         if (id == R.id.action_clear_temp) {
             character.clearTemp();
-            Toast.makeText(this,"Temporary stats cleared",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Temporary stats cleared", Toast.LENGTH_SHORT).show();
+            Utils.editCharacter(character,posInArray,this);
             finish();
             startActivity(getIntent());
         }
@@ -92,6 +94,11 @@ public class CharacterScreen extends ActionBarActivity {
         }
         if (id == R.id.char_screen_stats) {
             i = new Intent(this, Stats.class);
+            i.putExtra("Character", posInArray);
+            startActivity(i);
+        }
+        if (id == R.id.char_screen_misc) {
+            i = new Intent(this, Misc.class);
             i.putExtra("Character", posInArray);
             startActivity(i);
         }

@@ -6,16 +6,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import core.DNDCLASS;
 import core.DnDCharacter;
 import core.DnDCharacterManipulator;
 
@@ -38,40 +31,31 @@ public class Misc extends ActionBarActivity {
 
         character = Utils.getCharacter(posInArray, this);
 
-        setClassSpinner(R.id.level_up_class_spinner, R.id.level_up_customclasslay);
-        setSpinner(DnDCharacter.STATS.values(), R.id.level_up_new_stat_spinner);
+        setOriginalValues();
     }
 
-    private <T> void setSpinner(T[] array, int resourceId) {
-        Spinner s = (Spinner) findViewById(resourceId);
-        s.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, array));
+    private void setOriginalValues() {
+        setEditTextContent(R.id.misc_ac, character.getMiscAC()+"");
+        setEditTextContent(R.id.misc_attack_roll, character.getMiscattackroll()+"");
+        setEditTextContent(R.id.misc_max_hp, character.getMischitpointsmax()+"");
+        setEditTextContent(R.id.misc_initiative, character.getMiscinitiative()+"");
+        setEditTextContent(R.id.misc_str, character.getMiscstats(DnDCharacter.STATS.STR)+"");
+        setEditTextContent(R.id.misc_dex, character.getMiscstats(DnDCharacter.STATS.DEX)+"");
+        setEditTextContent(R.id.misc_con, character.getMiscstats(DnDCharacter.STATS.CON)+"");
+        setEditTextContent(R.id.misc_int, character.getMiscstats(DnDCharacter.STATS.INT)+"");
+        setEditTextContent(R.id.misc_wis, character.getMiscstats(DnDCharacter.STATS.WIS)+"");
+        setEditTextContent(R.id.misc_cha, character.getMiscstats(DnDCharacter.STATS.CHA)+"");
+        setEditTextContent(R.id.misc_for, character.getMiscsavingthrows(DnDCharacter.SAVING.FORTITUDE)+"");
+        setEditTextContent(R.id.misc_ref, character.getMiscsavingthrows(DnDCharacter.SAVING.REFLEX)+"");
+        setEditTextContent(R.id.misc_wil, character.getMiscsavingthrows(DnDCharacter.SAVING.WILL)+"");
+        setEditTextContent(R.id.misc_magic_for, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.FORTITUDE)+"");
+        setEditTextContent(R.id.misc_magic_ref, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.REFLEX)+"");
+        setEditTextContent(R.id.misc_magic_wil, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.WILL)+"");
     }
 
-    private void setClassSpinner(int resourceId, final int layoutToShow) {
-        setSpinner(DNDCLASS.values(), resourceId);
-
-        //showcustomclassname
-        final Spinner s = (Spinner) findViewById(resourceId);
-        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-                                       long arg3) {
-                int x = s.getSelectedItemPosition();
-                if (x > 10) { //is not default class
-                    LinearLayout l = (LinearLayout) findViewById(layoutToShow);
-                    l.setVisibility(View.VISIBLE);
-                } else {
-                    LinearLayout l = (LinearLayout) findViewById(layoutToShow);
-                    l.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                LinearLayout l = (LinearLayout) findViewById(layoutToShow);
-                l.setVisibility(View.GONE);
-            }
-        });
+    private void setEditTextContent(int identifier, String originalValue) {
+        ((EditText) findViewById(identifier)).getText().clear();
+        ((EditText) findViewById(identifier)).getText().insert(0, originalValue);
     }
 
     @Override
@@ -100,112 +84,72 @@ public class Misc extends ActionBarActivity {
     }
 
     public void apply(View view) {
-        int liferoll;
-        try {
-            liferoll = Integer.parseInt(((EditText) findViewById(R.id.level_up_liferoll)).getText().toString());
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
-            return;
-        }
+        Integer tmp;
 
-        int[] saving = new int[3];
         try {
-            saving[DnDCharacter.SAVING.FORTITUDE.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_for)).getText().toString());
-            saving[DnDCharacter.SAVING.REFLEX.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_ref)).getText().toString());
-            saving[DnDCharacter.SAVING.WILL.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_wil)).getText().toString());
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        ArrayList<Integer> atkbonus = getAtkBonus();
-        if (atkbonus == null) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        DNDCLASS dndclass;
-        int pos = (((Spinner) findViewById(R.id.level_up_class_spinner)).getSelectedItemPosition());
-        try {
-            dndclass = DNDCLASS.values()[pos];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
-            return;
-        }
-        DnDCharacter.STATS s;
-        int x = (((Spinner) findViewById(R.id.level_up_new_stat_spinner)).getSelectedItemPosition());
-        try {
-            s = DnDCharacter.STATS.values()[x];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        int newstatdelta;
-        try {
-            newstatdelta = Integer.parseInt(((EditText) findViewById(R.id.level_up_new_stat_delta)).getText().toString());
-        } catch (NumberFormatException e) {
-            newstatdelta = 0;
-        }
-
-        //applychanges
-        try {
-            if (pos <= 10)
-                character.levelup(dndclass, liferoll, atkbonus, s, newstatdelta, saving);
-            else {//customclass
-                String customclassname;
-                customclassname = ((EditText) findViewById(R.id.level_up_customclass)).getText().toString();
-
-                if (customclassname.equals("")) {
-                    Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                character.levelup(dndclass, customclassname, liferoll, atkbonus, s, newstatdelta, saving);
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_ac)) != null) {
+                character.setMiscAC(tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_attack_roll)) != null) {
+                character.setMiscAttackRoll(tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_max_hp)) != null) {
+                character.setMiscHPMAX(tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_initiative)) != null) {
+                character.setMiscInitiative(tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_str)) != null) {
+                character.setMiscStat(DnDCharacter.STATS.STR, tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_dex)) != null) {
+                character.setMiscStat(DnDCharacter.STATS.DEX, tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_con)) != null) {
+                character.setMiscStat(DnDCharacter.STATS.CON, tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_int)) != null) {
+                character.setMiscStat(DnDCharacter.STATS.INT, tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_wis)) != null) {
+                character.setMiscStat(DnDCharacter.STATS.WIS, tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_cha)) != null) {
+                character.setMiscStat(DnDCharacter.STATS.CHA, tmp);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_for)) != null) {
+                character.setMiscSavingThrows(DnDCharacter.SAVING.FORTITUDE, tmp, false);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_ref)) != null) {
+                character.setMiscSavingThrows(DnDCharacter.SAVING.REFLEX, tmp, false);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_wil)) != null) {
+                character.setMiscSavingThrows(DnDCharacter.SAVING.WILL, tmp, false);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_magic_for)) != null) {
+                character.setMiscSavingThrows(DnDCharacter.SAVING.FORTITUDE, tmp, true);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_magic_ref)) != null) {
+                character.setMiscSavingThrows(DnDCharacter.SAVING.REFLEX, tmp, true);
+            }
+            if ((tmp = getEditTextContentAsInteger(R.id.misc_magic_wil)) != null) {
+                character.setMiscSavingThrows(DnDCharacter.SAVING.WILL, tmp, true);
             }
         } catch (DnDCharacter.InvalidCharacterException e) {
-            Toast.makeText(this, "Invalid Values", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Invalid Parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
+        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
     }
 
-    private ArrayList<Integer> getAtkBonus() {
-
-        int atkbonus;
-        ArrayList<Integer> res = new ArrayList<>();
+    private Integer getEditTextContentAsInteger(int identifier) {
         try {
-            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.level_up_atk1)).getText().toString());
+            return Integer.parseInt(((EditText) findViewById(identifier)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
             return null;
         }
-        res.add(atkbonus);
-        try {
-            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.level_up_atk2)).getText().toString());
-            res.add(atkbonus);
-        } catch (NumberFormatException e) {
-            return res;
-        }
-        try {
-            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.level_up_atk3)).getText().toString());
-            res.add(atkbonus);
-        } catch (NumberFormatException e) {
-            return res;
-        }
-        try {
-            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.level_up_atk4)).getText().toString());
-            res.add(atkbonus);
-        } catch (NumberFormatException e) {
-            return res;
-        }
-        try {
-            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.level_up_atk5)).getText().toString());
-            res.add(atkbonus);
-        } catch (NumberFormatException e) {
-            return res;
-        }
-        return res;
     }
 }
