@@ -6,12 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import core.DnDCharacter;
 import core.DnDCharacterManipulator;
@@ -67,7 +63,7 @@ public class Misc extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_level_up, menu);
+        getMenuInflater().inflate(R.menu.menu_misc, menu);
         return true;
     }
 
@@ -77,7 +73,13 @@ public class Misc extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        if (id == R.id.action_clear_misc) {
+            character.clearMisc();
+            Toast.makeText(this, "Miscellaneous stats cleared", Toast.LENGTH_SHORT).show();
+            Utils.editCharacter(character,posInArray,this);
+            finish();
+            startActivity(getIntent());
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
