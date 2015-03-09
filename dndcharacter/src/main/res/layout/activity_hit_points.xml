@@ -25,8 +25,8 @@
                 android:id="@+id/hitpoints_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:gravity="center_horizontal"
+                android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <LinearLayout
@@ -40,46 +40,46 @@
                 <TextView
                     android:id="@+id/hitpoints_minhealth"
                     android:layout_width="0dp"
-                    android:layout_weight=".10"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:layout_weight=".10"
                     android:gravity="center_horizontal"
+                    android:text=""
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <ProgressBar
                     android:id="@+id/hitpoints_health_bar"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="0dp"
-                    android:layout_weight=".80"
                     android:layout_height="wrap_content"
-                    android:progressDrawable="@drawable/progressbar_health"></ProgressBar>
+                    android:layout_weight=".80"
+                    android:progressDrawable="@drawable/progressbar_health" />
 
                 <TextView
                     android:id="@+id/hitpoints_maxhealth"
                     android:layout_width="0dp"
-                    android:layout_weight=".10"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:layout_weight=".10"
                     android:gravity="center_horizontal"
+                    android:text=""
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/hitpoints_death_layout"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:id="@+id/hitpoints_death_layout"
                 android:visibility="gone">
 
                 <TextView
                     android:id="@+id/hitpoints_mindeath"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".10"
                     android:gravity="center_horizontal"
-                    android:layout_height="wrap_content"
                     android:text=""
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -87,15 +87,15 @@
                     android:id="@+id/hitpoints_death_bar"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="0dp"
-                    android:layout_weight=".80"
                     android:layout_height="wrap_content"
-                    android:progressDrawable="@drawable/progressbar_death"></ProgressBar>
+                    android:layout_weight=".80"
+                    android:progressDrawable="@drawable/progressbar_death" />
 
                 <TextView
                     android:id="@+id/hitpoints_maxdeath"
                     android:layout_width="0dp"
-                    android:layout_weight=".10"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".10"
                     android:gravity="center_horizontal"
                     android:text=""
                     android:textAppearance="?android:attr/textAppearanceSmall" />

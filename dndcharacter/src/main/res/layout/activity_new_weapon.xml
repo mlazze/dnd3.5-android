@@ -135,6 +135,7 @@
 
                 <Spinner
                     android:id="@+id/new_weapon_stat_spinner"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -223,11 +224,11 @@
             </LinearLayout>
 
             <CheckBox
+                android:id="@+id/new_weapon_ranged_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/new_weapon_ranged_label"
-                android:id="@+id/new_weapon_ranged_checkbox"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:text="@string/new_weapon_ranged_label" />
 
             <Button
                 android:id="@+id/new_weapon_apply"
