@@ -80,7 +80,7 @@
     <string name="new_weapon_critminrange_label">Critical range: x-20*</string>
     <string name="new_weapon_critmult_label">Critical Multiplier*</string>
     <string name="new_weapon_damagedices_label">Damage dices*</string>
-    <string name="new_weapon_damagemod_label">Damage Modifier*</string>
+    <string name="new_weapon_damagemod_label">mod*</string>
     <string name="new_weapon_name_label">Name*</string>
     <string name="new_weapon_notes_label">Note</string>
     <string name="new_weapon_range_label">Range*</string>
