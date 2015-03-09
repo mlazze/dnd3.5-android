@@ -101,7 +101,8 @@ public class NewEquipment extends ActionBarActivity {
             return;
         }
 
-        Integer acbonus = null, deflectionbonus = null, naturalbonus = null, savepenalty = null, speed = null, spellfail = null, weight = null;
+        Integer acbonus = null, deflectionbonus = null, naturalbonus = null, savepenalty = null, speed = null, spellfail = null;
+        Double weight = null;
         try {
             acbonus = Integer.parseInt(getValueFromEditText(R.id.new_equipment_acbonus));
         } catch (NumberFormatException e) {
@@ -127,7 +128,7 @@ public class NewEquipment extends ActionBarActivity {
         } catch (NumberFormatException e) {
         }
         try {
-            weight = Integer.parseInt(getValueFromEditText(R.id.new_equipment_weight));
+            weight = Double.parseDouble(getValueFromEditText(R.id.new_equipment_weight));
         } catch (NumberFormatException e) {
         }
 

@@ -80,7 +80,6 @@ public class DnDCharacter implements Serializable {
     }
 
 
-
     public int getTempstats(STATS s) {
         return tempstats[s.ordinal()];
     }
@@ -216,11 +215,11 @@ public class DnDCharacter implements Serializable {
     public String getDamageCrit(Weapon w, String misc) {
         if (w.ammo == null)
             return "Not enough ammo";
-        String res = "(";
+        String res = "";
         res += w.damagedices + " + ";
         if (misc != null)
             res += misc + " + ";
-        res += (getMod(w.stat) * w.damagemod) + ")";
+        res += (Math.floor(getMod(w.stat)) * w.damagemod + w.additionaldamage) + "";
         return res + "x" + w.critmult + " (" + w.notes + ")";
     }
 
@@ -231,7 +230,10 @@ public class DnDCharacter implements Serializable {
         res += w.damagedices + " + ";
         if (misc != null)
             res += misc + " + ";
-        return res + (getMod(w.stat) * w.damagemod) + " (" + w.notes + ")";
+        res += (Math.floor((getMod(w.stat) * w.damagemod + w.additionaldamage)));
+        if (w.notes.equals("none"))
+            return res;
+        return res + " (" + w.notes + ")";
     }
 
     public int getDamageReduction() {

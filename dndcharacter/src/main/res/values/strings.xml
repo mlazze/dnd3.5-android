@@ -78,13 +78,14 @@
     <string name="new_weapon_ranged_label">Ranged</string>
     <string name="new_weapon_stat_label">Weapon stat</string>
     <string name="new_weapon_type_label">Type</string>
+    <string name="new_weapon_additionaldamage_label">Add.Damage</string>
     <string name="title_activity_equipment">EquipmentActivity</string>
     <string name="title_activity_new_equipment">NewEquipment</string>
     <string name="new_equipment_acbonus_label">AC Bonus</string>
     <string name="new_equipment_deflectionbonus_label">Deflection Bonus</string>
     <string name="new_equipment_maxdex_label">Max Dex</string>
     <string name="new_equipment_naturalbonus_label">Natural Bonus</string>
-    <string name="new_equipment_savepenalty_label">Save Penalty</string>
+    <string name="new_equipment_savepenalty_label">AC Penalty</string>
     <string name="new_equipment_speed_label">Speed</string>
     <string name="new_equipment_spellfail_label">Spell Fail</string>
     <string name="new_equipment_weight_label">Weight</string>

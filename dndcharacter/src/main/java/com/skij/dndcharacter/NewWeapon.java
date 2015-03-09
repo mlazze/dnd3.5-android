@@ -81,20 +81,28 @@ public class NewWeapon extends ActionBarActivity {
     }
 
     public void apply(View view) {
-        int critminrange, critmult, range;
+        int critminrange;
+        double critmult, range;
         try {
             critminrange = Integer.parseInt(getValueFromEditText(R.id.new_weapon_critminrange));
-            critmult = Integer.parseInt(getValueFromEditText(R.id.new_weapon_critmult));
-            range = Integer.parseInt(getValueFromEditText(R.id.new_weapon_range));
+            critmult = Double.parseDouble(getValueFromEditText(R.id.new_weapon_critmult));
+            range = Double.parseDouble(getValueFromEditText(R.id.new_weapon_range));
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
-        int damagemod;
+        double damagemod;
         try {
-            damagemod = Integer.parseInt(getValueFromEditText(R.id.new_weapon_damagemod));
+            damagemod = Double.parseDouble(getValueFromEditText(R.id.new_weapon_damagemod));
         } catch (NumberFormatException e) {
-            damagemod = -1;
+            damagemod = 1;
+        }
+
+        int additionaldamage;
+        try {
+            additionaldamage = Integer.parseInt(getValueFromEditText(R.id.new_weapon_additionaldamage));
+        } catch (NumberFormatException e) {
+            additionaldamage=0;
         }
 
         String damagedices = getValueFromEditText(R.id.new_weapon_damagedices);
@@ -125,7 +133,7 @@ public class NewWeapon extends ActionBarActivity {
         Weapon w = new Weapon(name, ranged, stat, damagemod, range, damagedices, critminrange, critmult);
         w.notes = notes.equals("") ? w.notes : notes;
         w.type = type.equals("") ? w.type : type;
-
+        w.additionaldamage=additionaldamage;
         character.setWeapon(w, false);
         Utils.editCharacter(character, posInArray, this);
         Toast.makeText(this, "Weapon Added", Toast.LENGTH_SHORT).show();
