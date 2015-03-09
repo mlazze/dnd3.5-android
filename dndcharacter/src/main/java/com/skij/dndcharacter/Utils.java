@@ -16,6 +16,20 @@ import core.DnDCharacterManipulator;
 public class Utils {
     private static ArrayList<DnDCharacterManipulator> characterList;
     private static boolean isReloadNecessary = true;
+    private static int turn = 0;
+
+    public static int getTurn() {
+        return turn;
+    }
+
+    public static void incrementTurn() {
+        turn++;
+    }
+
+    public static void decrementTurn() {
+        if (turn>0)
+            turn--;
+    }
 
 
     @SuppressLint("CommitPrefEdits")

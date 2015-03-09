@@ -64,7 +64,7 @@ public class HitPoints extends ActionBarActivity {
         ((TextView) findViewById(R.id.hitpoints_maxdeath)).setText("0");
         deathbar.setProgress(character.getcurrentHP() > dmin ? dmax : dmax + character.getcurrentHP());
         deathbar.setSecondaryProgress(dmax - 10);
-
+        updateTurn();
     }
 
     private String formatCurrentHp() {
@@ -143,5 +143,19 @@ public class HitPoints extends ActionBarActivity {
         } catch (NumberFormatException e) {
             return null;
         }
+    }
+
+    public void plusTurn(View view) {
+        Utils.incrementTurn();
+        updateTurn();
+    }
+
+    private void updateTurn() {
+        ((TextView) findViewById(R.id.hitpoints_turn)).setText("Turn: "+ Utils.getTurn());
+    }
+
+    public void minusTurn(View view) {
+        Utils.decrementTurn();
+        updateTurn();
     }
 }

@@ -101,5 +101,7 @@
     <string name="new_equipment_type_label">Type*</string>
     <string name="new_equipment_name_label">Name*</string>
     <string name="new_equipment_special_label">Special Properties</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
 
 </resources>

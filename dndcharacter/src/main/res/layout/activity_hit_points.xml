@@ -157,6 +157,30 @@
                 android:layout_marginTop="20dp"
                 android:onClick="apply"
                 android:text="@string/apply" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/hitpoints_turn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plus"
+                    android:onClick="plusTurn"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/minus"
+                    android:onClick="minusTurn"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
