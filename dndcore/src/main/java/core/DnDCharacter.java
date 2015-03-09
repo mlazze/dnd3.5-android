@@ -373,6 +373,9 @@ public class DnDCharacter implements Serializable {
         return temphitpointsmax;
     }
 
+    public int[] getSavingthrowsbases() {
+        return savingthrowsbases;
+    }
     public int getThrow(SAVING s) {
         int index = s.ordinal();
         if (savingthrowsbases[index] < 0)
@@ -472,7 +475,7 @@ public class DnDCharacter implements Serializable {
     }
 
     public static enum SAVING {
-        FORTITUDE(2), REFLEX(1), WILL(4);
+        FORTITUDE(STATS.CON.ordinal()), REFLEX(STATS.DEX.ordinal()), WILL(STATS.WIS.ordinal());
         private final int val;
 
         private SAVING(int v) {

@@ -87,7 +87,7 @@ public class NewCharacter extends ActionBarActivity {
             cha = Integer.parseInt(((EditText) findViewById(R.id.new_char_cha)).getText().toString());
             fort = Integer.parseInt(((EditText) findViewById(R.id.new_char_for)).getText().toString());
             ref = Integer.parseInt(((EditText) findViewById(R.id.new_char_ref)).getText().toString());
-            wil = Integer.parseInt(((EditText) findViewById(R.id.new_char_wis)).getText().toString());
+            wil = Integer.parseInt(((EditText) findViewById(R.id.new_char_wil)).getText().toString());
             runspeed = Integer.parseInt(((EditText) findViewById(R.id.new_char_runspeed)).getText().toString());
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();

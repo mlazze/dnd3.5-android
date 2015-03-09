@@ -40,6 +40,20 @@ public class LevelUp extends ActionBarActivity {
 
         setClassSpinner(R.id.level_up_class_spinner, R.id.level_up_customclasslay);
         setSpinner(DnDCharacter.STATS.values(), R.id.level_up_new_stat_spinner);
+        setOriginalValues();
+    }
+
+    private void setOriginalValues() {
+        setEditTextContent(R.id.level_up_atk1,character.getBasicAttackBonuses().get(0)+"");
+        try {
+            setEditTextContent(R.id.level_up_atk2, character.getBasicAttackBonuses().get(1) + "");
+            setEditTextContent(R.id.level_up_atk3, character.getBasicAttackBonuses().get(2) + "");
+            setEditTextContent(R.id.level_up_atk4, character.getBasicAttackBonuses().get(3) + "");
+            setEditTextContent(R.id.level_up_atk5, character.getBasicAttackBonuses().get(4) + "");
+        } catch (IndexOutOfBoundsException e) {}
+        setEditTextContent(R.id.level_up_for,character.getSavingthrowsbases()[DnDCharacter.SAVING.FORTITUDE.ordinal()]+"");
+        setEditTextContent(R.id.level_up_ref,character.getSavingthrowsbases()[DnDCharacter.SAVING.REFLEX.ordinal()]+"");
+        setEditTextContent(R.id.level_up_wil,character.getSavingthrowsbases()[DnDCharacter.SAVING.WILL.ordinal()]+"");
     }
 
     private <T> void setSpinner(T[] array, int resourceId) {
@@ -72,6 +86,11 @@ public class LevelUp extends ActionBarActivity {
                 l.setVisibility(View.GONE);
             }
         });
+    }
+
+    private void setEditTextContent(int identifier, String originalValue) {
+        ((EditText) findViewById(identifier)).getText().clear();
+        ((EditText) findViewById(identifier)).getText().insert(0, originalValue);
     }
 
     @Override
