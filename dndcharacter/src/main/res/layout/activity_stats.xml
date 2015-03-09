@@ -40,7 +40,7 @@
                             android:id="@+id/stats_str_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/strength"
+                            android:text="@string/strength_required"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
@@ -59,7 +59,7 @@
                             android:id="@+id/stats_dex_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/dexterity"
+                            android:text="@string/dexterity_required"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
@@ -78,7 +78,7 @@
                             android:id="@+id/stats_con_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/constitution"
+                            android:text="@string/constitution_required"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
@@ -103,7 +103,7 @@
                             android:id="@+id/stats_int_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/intellect"
+                            android:text="@string/intellect_required"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
@@ -122,7 +122,7 @@
                             android:id="@+id/stats_wis_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/wisdom"
+                            android:text="@string/wisdom_required"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
@@ -141,7 +141,7 @@
                             android:id="@+id/stats_cha_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/charisma"
+                            android:text="@string/charisma_required"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText

@@ -142,7 +142,7 @@
                         android:id="@+id/new_char_str_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/strength"
+                        android:text="@string/strength_required"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <EditText
@@ -161,7 +161,7 @@
                         android:id="@+id/new_char_dex_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/dexterity"
+                        android:text="@string/dexterity_required"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <EditText
@@ -180,7 +180,7 @@
                         android:id="@+id/new_char_con_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/constitution"
+                        android:text="@string/constitution_required"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <EditText
@@ -205,7 +205,7 @@
                         android:id="@+id/new_char_int_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/intellect"
+                        android:text="@string/intellect_required"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <EditText
@@ -224,7 +224,7 @@
                         android:id="@+id/new_char_wis_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/wisdom"
+                        android:text="@string/wisdom_required"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <EditText
@@ -243,7 +243,7 @@
                         android:id="@+id/new_char_cha_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/charisma"
+                        android:text="@string/charisma_required"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <EditText
@@ -272,7 +272,7 @@
                     android:id="@+id/new_char_for_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/fortitude"
+                    android:text="@string/fortitude_required"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
@@ -291,7 +291,7 @@
                     android:id="@+id/new_char_ref_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/reflex"
+                    android:text="@string/reflex_required"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
@@ -310,7 +310,7 @@
                     android:id="@+id/new_char_wil_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/will"
+                    android:text="@string/will_required"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText

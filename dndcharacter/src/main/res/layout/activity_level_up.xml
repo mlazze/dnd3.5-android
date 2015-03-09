@@ -177,7 +177,7 @@
                         android:id="@+id/level_up_for_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/fortitude"
+                        android:text="@string/fortitude_required"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <EditText
@@ -196,7 +196,7 @@
                         android:id="@+id/level_up_ref_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/reflex"
+                        android:text="@string/reflex_required"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <EditText
@@ -215,7 +215,7 @@
                         android:id="@+id/level_up_wil_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/will"
+                        android:text="@string/will_required"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
                     <EditText
