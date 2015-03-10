@@ -57,8 +57,12 @@
     <string name="title_activity_abilities">Abilities</string>
     <string name="title_activity_stats">Stats</string>
     <string name="action_clear_misc">ClearMisc</string>
-    <string name="action_clear_temp">ClearTemp</string>
+    <string name="action_load_data">Load Data</string>
+    <string name="action_save_data">Save Data</string>
+    <string name="action_clear_temp">X</string>
     <string name="action_clear_temp_hp">ClearTempHP</string>
+    <string name="action_hit_points">HP</string>
+    <string name="action_set_temp">Temp</string>
     <string name="title_activity_misc">Misc</string>
     <string name="misc_ac_label">Armor Class</string>
     <string name="misc_attack_roll_label">Attack Roll</string>
@@ -88,6 +92,7 @@
     <string name="new_weapon_stat_label">Weapon stat*</string>
     <string name="new_weapon_type_label">Type</string>
     <string name="new_weapon_additionaldamage_label">Add.Damage</string>
+    <string name="new_weapon_attack_bonus_label">AtkBonus</string>
     <string name="title_activity_equipment">EquipmentActivity</string>
     <string name="title_activity_new_equipment">NewEquipment</string>
     <string name="new_equipment_acbonus_label">AC Bonus</string>

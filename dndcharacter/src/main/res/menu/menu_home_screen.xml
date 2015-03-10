@@ -1,4 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.skij.dndcharacter.Abilities"></menu>
+    tools:context="com.skij.dndcharacter.Abilities">
+    <item android:id="@+id/action_save_data"
+        android:title="@string/action_save_data"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_load_data"
+        android:title="@string/action_load_data"
+        app:showAsAction="never"/>
+    </menu>

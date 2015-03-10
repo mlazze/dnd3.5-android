@@ -1,6 +1,7 @@
 package core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Weapon implements Serializable {
     public String name = "none";
@@ -15,6 +16,7 @@ public class Weapon implements Serializable {
     public double damagemod;
     public int additionaldamage;
     DnDCharacter.STATS stat;
+    public ArrayList<Integer> customattackbonus;
 
     public Weapon(String name, boolean ranged, DnDCharacter.STATS stat, double damagemod, double range, String damagedices, int critminrange, double critmult) {
         this.name = name;

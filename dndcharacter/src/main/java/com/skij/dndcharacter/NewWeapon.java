@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import core.DnDCharacter;
 import core.DnDCharacterManipulator;
 import core.Weapon;
@@ -130,10 +132,14 @@ public class NewWeapon extends ActionBarActivity {
             return;
         }
 
+        ArrayList<Integer> customatkroll = getAtkBonus();
+
         Weapon w = new Weapon(name, ranged, stat, damagemod, range, damagedices, critminrange, critmult);
         w.notes = notes.equals("") ? w.notes : notes;
         w.type = type.equals("") ? w.type : type;
         w.additionaldamage=additionaldamage;
+        w.customattackbonus=customatkroll;
+
         character.setWeapon(w, false);
         Utils.editCharacter(character, posInArray, this);
         Toast.makeText(this, "Weapon Added", Toast.LENGTH_SHORT).show();
@@ -142,5 +148,60 @@ public class NewWeapon extends ActionBarActivity {
 
     private String getValueFromEditText(int id) {
         return ((EditText) findViewById(id)).getText().toString();
+    }
+
+    private ArrayList<Integer> getAtkBonus() {
+
+        int atkbonus;
+        ArrayList<Integer> res = new ArrayList<>();
+        try {
+            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.new_weapon_atk1)).getText().toString());
+        } catch (NumberFormatException e) {
+            return null;
+        }
+        res.add(atkbonus);
+        try {
+            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.new_weapon_atk2)).getText().toString());
+            res.add(atkbonus);
+        } catch (NumberFormatException e) {
+            return res;
+        }
+        try {
+            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.new_weapon_atk3)).getText().toString());
+            res.add(atkbonus);
+        } catch (NumberFormatException e) {
+            return res;
+        }
+        try {
+            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.new_weapon_atk4)).getText().toString());
+            res.add(atkbonus);
+        } catch (NumberFormatException e) {
+            return res;
+        }
+        try {
+            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.new_weapon_atk5)).getText().toString());
+            res.add(atkbonus);
+        } catch (NumberFormatException e) {
+            return res;
+        }
+        try {
+            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.new_weapon_atk6)).getText().toString());
+            res.add(atkbonus);
+        } catch (NumberFormatException e) {
+            return res;
+        }
+        try {
+            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.new_weapon_atk7)).getText().toString());
+            res.add(atkbonus);
+        } catch (NumberFormatException e) {
+            return res;
+        }
+        try {
+            atkbonus = Integer.parseInt(((EditText) findViewById(R.id.new_weapon_atk8)).getText().toString());
+            res.add(atkbonus);
+        } catch (NumberFormatException e) {
+            return res;
+        }
+        return res;
     }
 }

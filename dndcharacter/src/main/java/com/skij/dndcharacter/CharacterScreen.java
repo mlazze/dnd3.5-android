@@ -27,6 +27,7 @@ public class CharacterScreen extends ActionBarActivity {
 
         TextView infos = ((TextView) findViewById(R.id.char_screen_infos));
         infos.setText(character.toString());
+        setTitle(character.getName());
     }
 
     private boolean loadChar() {
@@ -74,6 +75,16 @@ public class CharacterScreen extends ActionBarActivity {
             Utils.editCharacter(character, posInArray, this);
             finish();
             startActivity(getIntent());
+        }
+        if (id == R.id.action_temp) {
+            i = new Intent(this, Temp.class);
+            i.putExtra("Character", posInArray);
+            startActivity(i);
+        }
+        if (id == R.id.action_hit_points) {
+            i = new Intent(this, HitPoints.class);
+            i.putExtra("Character", posInArray);
+            startActivity(i);
         }
         //otehrs
         if (id == R.id.char_screen_levelup) {

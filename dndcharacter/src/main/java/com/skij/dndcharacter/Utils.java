@@ -3,11 +3,18 @@ package com.skij.dndcharacter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -107,4 +114,42 @@ public class Utils {
         return characterList;
     }
 
+    public static String saveData(Context c) {
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS), "dndcharacterlist.json");
+
+        try {
+        FileOutputStream outputStream = new FileOutputStream(file);
+        outputStream.write(arrListToJSONString(characterList).getBytes());
+        outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file.getAbsolutePath()+file.getName();
+    }
+
+    public static void loadData(Context c) {
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS), "dndcharacterlist.json");
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader(inputStream);
+            BufferedReader bf = new BufferedReader(isr);
+            String tmp = "";
+            String t ="";
+            while ((t= bf.readLine())!=null) {
+                tmp+=t;
+            }
+            try {
+                characterList = jsonStringtoArrList(tmp);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(c,"Error reading file"+file.getAbsolutePath(),Toast.LENGTH_LONG);
+            }
+            savePrefs(c);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(c,"Error reading file"+file.getAbsolutePath(),Toast.LENGTH_LONG);
+        }
+    }
 }

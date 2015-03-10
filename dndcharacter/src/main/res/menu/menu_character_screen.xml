@@ -5,6 +5,14 @@
     <item android:id="@+id/action_clear_temp"
         android:title="@string/action_clear_temp"
         app:showAsAction="always"/>
+    <item android:id="@+id/action_hit_points"
+        android:title="@string/action_hit_points"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/action_temp"
+        android:title="@string/action_set_temp"
+        app:showAsAction="always"/>
+
 
     <item
         android:id="@+id/char_screen_levelup"

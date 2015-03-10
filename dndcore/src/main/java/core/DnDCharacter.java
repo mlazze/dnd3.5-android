@@ -178,10 +178,27 @@ public class DnDCharacter implements Serializable {
         return baseattack + mod + miscmod + tempmod + mods;
     }
 
+    public int getAttackBonusWithCustomAttackBonus(Weapon w, int index, int mods, ArrayList<Integer> customattackbonus) {
+        if (customattackbonus.size() <= 0)
+            throw new InvalidCharacterException();
+        int baseattack = customattackbonus.get(index);
+        int mod = getMod(w.stat);
+        int miscmod = miscattackroll;
+        int tempmod = tempattackroll;
+        return baseattack + mod + miscmod + tempmod + mods;
+    }
+
     public ArrayList<Integer> getAttackBonuses(Weapon w, int mods) {
+        if (w.customattackbonus==null) {
+            ArrayList<Integer> res = new ArrayList<>(0);
+            for (int i = 0; i < basicattackbonus.size(); i++)
+                res.add(getAttackBonus(w, i, mods));
+            return res;
+        }
+        //else
         ArrayList<Integer> res = new ArrayList<>(0);
-        for (int i = 0; i < basicattackbonus.size(); i++)
-            res.add(getAttackBonus(w, i, mods));
+        for (int i = 0; i < w.customattackbonus.size(); i++)
+            res.add(getAttackBonusWithCustomAttackBonus(w, i, mods,w.customattackbonus));
         return res;
     }
 
@@ -219,7 +236,10 @@ public class DnDCharacter implements Serializable {
         res += w.damagedices + " + ";
         if (misc != null)
             res += misc + " + ";
-        res += (Math.floor(getMod(w.stat)) * w.damagemod + w.additionaldamage) + "";
+        if (w.stat == STATS.STR)
+            res += (Math.floor(getMod(w.stat)) * w.damagemod + w.additionaldamage) + "";
+        else
+            res += w.additionaldamage;
         return res + "x" + w.critmult + " (" + w.notes + ")";
     }
 
@@ -230,7 +250,10 @@ public class DnDCharacter implements Serializable {
         res += w.damagedices + " + ";
         if (misc != null)
             res += misc + " + ";
-        res += (Math.floor((getMod(w.stat) * w.damagemod + w.additionaldamage)));
+        if (w.stat == STATS.STR)
+            res += (Math.floor((getMod(w.stat) * w.damagemod + w.additionaldamage)));
+        else
+            res += w.additionaldamage;
         if (w.notes.equals("none"))
             return res;
         return res + " (" + w.notes + ")";
@@ -376,6 +399,7 @@ public class DnDCharacter implements Serializable {
     public int[] getSavingthrowsbases() {
         return savingthrowsbases;
     }
+
     public int getThrow(SAVING s) {
         int index = s.ordinal();
         if (savingthrowsbases[index] < 0)
