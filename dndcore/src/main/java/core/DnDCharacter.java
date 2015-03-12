@@ -276,13 +276,26 @@ public class DnDCharacter implements Serializable {
         return exp;
     }
 
-    public ArrayList<String> getFeats() {
+    public ArrayList<String> getFeatsAsStringList() {
         if (feats == null)
             throw new InvalidCharacterException();
         ArrayList<String> res = new ArrayList<>(0);
         for (Feat a : feats)
             res.add(a.toString());
         return res;
+    }
+
+    public ArrayList<String> getFeatsAsStringListWithoutDesc() {
+        if (feats == null)
+            throw new InvalidCharacterException();
+        ArrayList<String> res = new ArrayList<>(0);
+        for (Feat a : feats)
+            res.add(a.name);
+        return res;
+    }
+
+    public Feat getFeat(int index) {
+        return feats.get(index);
     }
 
     public int getGlobalLevel() {
@@ -293,14 +306,16 @@ public class DnDCharacter implements Serializable {
         return getMod(STATS.DEX) + miscinitiative;
     }
 
-    public ArrayList<String> getInventory() {
+    public ArrayList<String> getInventoryAsStringList() {
         if (inventory == null)
             throw new InvalidCharacterException();
         ArrayList<String> res = new ArrayList<>(0);
         for (String a : inventory.keySet())
-            res.add(a + " mod" + inventory.get(a));
+            res.add(a + "| x" + inventory.get(a));
         return res;
     }
+
+    public HashMap<String,Integer> getInventory() {return inventory;}
 
     public ArrayList<String> getLanguages() {
         if (knownlanguages == null)

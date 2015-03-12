@@ -155,9 +155,9 @@ public class DnDCharacterManipulator extends DnDCharacter implements
                 getDamageCrit(w, null);
             }
             getEquipment();
-            getFeats();
+            getFeatsAsStringList();
             getInititative();
-            getInventory();
+            getInventoryAsStringList();
             getSpecialAbilities();
             getSpells();
             getSpellSets();
@@ -237,7 +237,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
     }
 
     public void setSpellResist(int value) {
-        spellresist=value;
+        spellresist = value;
         recalculate();
     }
 
@@ -257,8 +257,17 @@ public class DnDCharacterManipulator extends DnDCharacter implements
     public void setFeat(Feat feat, boolean clear) {
         if (clear)
             feats.remove(feat);
-        else if (!feats.contains(feat))
-            feats.add(feat);
+        else if (!feats.contains(feat)) {
+            boolean insert = true;
+            for (Feat f : feats) {
+                if (f.name.equals(feat.name)) {
+                    insert = false;
+                    break;
+                }
+            }
+            if (insert)
+                feats.add(feat);
+        }
         recalculate();
     }
 
@@ -502,7 +511,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
                 res += a + "\n";
 
             res += "====FEATS====\n";
-            for (String f : getFeats())
+            for (String f : getFeatsAsStringList())
                 res += f + "\n";
 
             res += "====SPEC.ABILITIES====\n";
@@ -518,7 +527,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
                 res += "-" + f + "\n";
 
             res += "====INVENTORY====\n";
-            for (String f : getInventory())
+            for (String f : getInventoryAsStringList())
                 res += f + "\n";
 
             res += "====LANGUAGES====\n";

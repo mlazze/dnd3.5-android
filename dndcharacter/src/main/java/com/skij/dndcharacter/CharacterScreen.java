@@ -132,6 +132,26 @@ public class CharacterScreen extends ActionBarActivity {
             i.putExtra("Character", posInArray);
             startActivity(i);
         }
+        if (id == R.id.char_screen_feat) {
+            i = new Intent(this, Feats.class);
+            i.putExtra("Character", posInArray);
+            startActivity(i);
+        }
+        if (id == R.id.char_screen_Inventory) {
+            i = new Intent(this, Inventory.class);
+            i.putExtra("Character", posInArray);
+            startActivity(i);
+        }
+        if (id == R.id.char_screen_Langauges) {
+            i = new Intent(this, Languages.class);
+            i.putExtra("Character", posInArray);
+            startActivity(i);
+        }
+        if (id == R.id.char_screen_spabilities) {
+            i = new Intent(this, SpecialAbilities.class);
+            i.putExtra("Character", posInArray);
+            startActivity(i);
+        }
         return super.onOptionsItemSelected(item);
     }
 }

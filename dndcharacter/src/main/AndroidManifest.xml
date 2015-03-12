@@ -123,6 +123,38 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
         </activity>
+        <activity
+            android:name=".Feats"
+            android:label="@string/title_activity_feat"
+            android:parentActivityName=".CharacterScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.skij.dndcharacter.CharacterScreen" />
+        </activity>
+        <activity
+            android:name=".Inventory"
+            android:label="@string/title_activity_inventory"
+            android:parentActivityName=".CharacterScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.skij.dndcharacter.CharacterScreen" />
+        </activity>
+        <activity
+            android:name=".Languages"
+            android:label="@string/title_activity_languages"
+            android:parentActivityName=".CharacterScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.skij.dndcharacter.CharacterScreen" />
+        </activity>
+        <activity
+            android:name=".SpecialAbilities"
+            android:label="@string/title_activity_special_abilities"
+            android:parentActivityName=".CharacterScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.skij.dndcharacter.CharacterScreen" />
+        </activity>
     </application>
 
 </manifest>

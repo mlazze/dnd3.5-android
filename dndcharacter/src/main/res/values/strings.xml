@@ -34,12 +34,12 @@
     <string name="char_screen_spells">TODOSpells</string>
     <string name="char_screen_dmgred">Dmg.Red &amp; Sp.Resist</string>
     <string name="char_screen_equipment">Equipment</string>
-    <string name="char_screen_feat">TODOFeat</string>
+    <string name="char_screen_feat">Feat</string>
     <string name="char_screen_hp">Hit Points</string>
-    <string name="char_screen_Inventory">TODOInventory</string>
-    <string name="char_screen_Langauges">TODOLanguages</string>
+    <string name="char_screen_Inventory">Inventory</string>
+    <string name="char_screen_Langauges">Languages</string>
     <string name="char_screen_misc">Misc</string>
-    <string name="char_screen_spabilities">TODOSpecial Abilities</string>
+    <string name="char_screen_spabilities">Special Abilities</string>
     <string name="char_screen_stats">Stats</string>
     <string name="char_screen_temp">Temp</string>
     <string name="char_screen_Weapon">Weapon</string>
@@ -110,5 +110,18 @@
     <string name="title_activity_damage_reduction">DamageReduction</string>
     <string name="damage_reduction_damage_reduction_label">Damage Reduction</string>
     <string name="damage_reduction_spell_resist_label">Spell Resist</string>
-
+    <string name="title_activity_feat">Feat</string>
+    <string name="feats_new_feat_name_label">Name:</string>
+    <string name="feats_new_feat_desc_label">Description:</string>
+    <string name="feats_list_label">Feats:</string>
+    <string name="title_activity_inventory">Inventory</string>
+    <string name="inventory_new_item_name_label">Name:</string>
+    <string name="inventory_new_item_amount_label">Description:</string>
+    <string name="inventory_list_label">Inventory:</string>
+    <string name="languages_new_language_name_label">Language:</string>
+    <string name="languages_list_label">Languages:</string>
+    <string name="title_activity_languages">Languages</string>
+    <string name="title_activity_special_abilities">SpecialAbilities</string>
+    <string name="specialabilities_new_specialability_name_label">Name:</string>
+    <string name="specialabilities_list_label">Special Abilities:</string>
 </resources>
