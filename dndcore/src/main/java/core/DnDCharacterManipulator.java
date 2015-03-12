@@ -231,6 +231,16 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         recalculate();
     }
 
+    public void setDamageReduction(int value) {
+        damagereduction = value;
+        recalculate();
+    }
+
+    public void setSpellResist(int value) {
+        spellresist=value;
+        recalculate();
+    }
+
     public void setEquipment(Equipment pieceofequipment, boolean clear) {
         if (clear)
             equipment.remove(pieceofequipment);

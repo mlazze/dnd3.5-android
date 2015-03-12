@@ -59,10 +59,6 @@
         android:orderInCategory="100"
         android:title="@string/char_screen_spabilities" />
     <item
-        android:id="@+id/char_screen_spellresist"
-        android:orderInCategory="100"
-        android:title="@string/char_screen_spellresist" />
-    <item
         android:id="@+id/char_screen_stats"
         android:orderInCategory="100"
         android:title="@string/char_screen_stats" />

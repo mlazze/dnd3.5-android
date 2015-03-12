@@ -32,7 +32,7 @@
     <string name="char_screen_levelup">Level Up</string>
     <string name="char_screen_abilities">Abilities</string>
     <string name="char_screen_spells">TODOSpells</string>
-    <string name="char_screen_dmgred">TODODamage Reduction</string>
+    <string name="char_screen_dmgred">Dmg.Red &amp; Sp.Resist</string>
     <string name="char_screen_equipment">Equipment</string>
     <string name="char_screen_feat">TODOFeat</string>
     <string name="char_screen_hp">Hit Points</string>
@@ -40,7 +40,6 @@
     <string name="char_screen_Langauges">TODOLanguages</string>
     <string name="char_screen_misc">Misc</string>
     <string name="char_screen_spabilities">TODOSpecial Abilities</string>
-    <string name="char_screen_spellresist">TODOSpell Resist</string>
     <string name="char_screen_stats">Stats</string>
     <string name="char_screen_temp">Temp</string>
     <string name="char_screen_Weapon">Weapon</string>
@@ -108,5 +107,8 @@
     <string name="new_equipment_special_label">Special Properties</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
+    <string name="title_activity_damage_reduction">DamageReduction</string>
+    <string name="damage_reduction_damage_reduction_label">Damage Reduction</string>
+    <string name="damage_reduction_spell_resist_label">Spell Resist</string>
 
 </resources>
