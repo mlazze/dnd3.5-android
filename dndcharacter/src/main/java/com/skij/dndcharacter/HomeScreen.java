@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -117,14 +116,12 @@ public class HomeScreen extends ActionBarActivity {
         //buttons
 
         if (id == R.id.action_save_data) {
-            String s = Utils.saveData(this);
-            Toast.makeText(this,"Data Saved in "+s,Toast.LENGTH_SHORT);
+            Utils.saveData(this);
         }
         if (id == R.id.action_load_data) {
             Utils.loadData(this);
-            Toast.makeText(this,"Data loaded",Toast.LENGTH_SHORT);
-            Utils.loadData(this);
-            setListViewtoCharList();
+            finish();
+            startActivity(getIntent());
         }
         return super.onOptionsItemSelected(item);
     }

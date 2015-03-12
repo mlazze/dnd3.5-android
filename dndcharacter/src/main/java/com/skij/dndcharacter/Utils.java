@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
@@ -34,7 +35,7 @@ public class Utils {
     }
 
     public static void decrementTurn() {
-        if (turn>0)
+        if (turn > 0)
             turn--;
     }
 
@@ -114,18 +115,18 @@ public class Utils {
         return characterList;
     }
 
-    public static String saveData(Context c) {
+    public static void saveData(Context c) {
         File file = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOCUMENTS), "dndcharacterlist.json");
 
         try {
-        FileOutputStream outputStream = new FileOutputStream(file);
-        outputStream.write(arrListToJSONString(characterList).getBytes());
-        outputStream.close();
+            FileOutputStream outputStream = new FileOutputStream(file);
+            outputStream.write(arrListToJSONString(characterList).getBytes());
+            outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return file.getAbsolutePath()+file.getName();
+        Toast.makeText(c,"Data Saved in "+file.getAbsolutePath(),Toast.LENGTH_SHORT).show();
     }
 
     public static void loadData(Context c) {
@@ -136,20 +137,25 @@ public class Utils {
             InputStreamReader isr = new InputStreamReader(inputStream);
             BufferedReader bf = new BufferedReader(isr);
             String tmp = "";
-            String t ="";
-            while ((t= bf.readLine())!=null) {
-                tmp+=t;
+            String t = "";
+            while ((t = bf.readLine()) != null) {
+                tmp += t;
             }
             try {
                 characterList = jsonStringtoArrList(tmp);
+
             } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(c,"Error reading file"+file.getAbsolutePath(),Toast.LENGTH_LONG);
+                Toast.makeText(c, "Error reading file " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                return;
             }
             savePrefs(c);
+            Toast.makeText(c, "Data loaded from " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+
+        } catch (FileNotFoundException e) {
+            Toast.makeText(c, "File not found in " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(c,"Error reading file"+file.getAbsolutePath(),Toast.LENGTH_LONG);
+            Toast.makeText(c, "Error reading file " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
         }
     }
 }
