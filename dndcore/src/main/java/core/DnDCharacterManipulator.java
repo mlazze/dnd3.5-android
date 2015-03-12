@@ -93,9 +93,8 @@ public class DnDCharacterManipulator extends DnDCharacter implements
     }
 
     public void clearTemp() {
-        temphitpoints = new ArrayList<Integer>(0);
-        temphitpointsmax=0;
-        tempattackroll=0;
+        temphitpointsmax = 0;
+        tempattackroll = 0;
         tempstats = new int[6];
         tempsavingthrows = new int[3];
         tempstatuses = new ArrayList<String>(0);
@@ -372,7 +371,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
     public void setTempHPDelta(int value) {
         if (getcurrentHP() + value > getTotalHP())
             value = getTotalHP() - getcurrentHP();
-        if (value==0){
+        if (value == 0) {
             return;
         }
         temphitpoints.add(value);
@@ -430,13 +429,13 @@ public class DnDCharacterManipulator extends DnDCharacter implements
             // stats
             res += "====STATS====\n";
             for (STATS s : STATS.values())
-                res += "-" + s.toString() + ": " + getStat(s) + " ("+miscstats[s.ordinal()] +"M + "+  tempstats[s.ordinal()]+"T)| MOD: "
+                res += "-" + s.toString() + ": " + getStat(s) + " (" + miscstats[s.ordinal()] + "M + " + tempstats[s.ordinal()] + "T)| MOD: "
                         + getMod(s) + "\n";
 
             // hp
             res += "====HP====\n";
 
-            res += "-MAX Hp: " + getTotalHP() + " ("+ mischitpointsmax +"M + "+ temphitpointsmax +"T)| liferolls: (";
+            res += "-MAX Hp: " + getTotalHP() + " (" + mischitpointsmax + "M + " + temphitpointsmax + "T)| liferolls: (";
             for (int i : liferolls) {
                 res += " " + i;
             }
@@ -457,14 +456,14 @@ public class DnDCharacterManipulator extends DnDCharacter implements
             // rolls
             res += "====S.THROWS====\n";
             for (SAVING s : SAVING.values())
-                res += "-" + s + ": " + getThrow(s) + "("+ miscsavingthrows[s.ordinal()] +"M + " + miscmagicsavingthrows[s.ordinal()] +"MM + "
-                    + tempsavingthrows[s.ordinal()]+"T)\n";
+                res += "-" + s + ": " + getThrow(s) + "(" + miscsavingthrows[s.ordinal()] + "M + " + miscmagicsavingthrows[s.ordinal()] + "MM + "
+                        + tempsavingthrows[s.ordinal()] + "T)\n";
             res += "-Initiative: " + getInititative() + "\n";
 
             // AC
             res += "====Armor====\n";
-            res += "-AC: " + getAC() + " ("+ armorbonus+"AB + " + shieldbonus + "SB + " + naturalarmor +
-            "NA + " +  deflectionarmor + "DB + " +  miscAC + "M + " +  tempAC +"T)\n";
+            res += "-AC: " + getAC() + " (" + armorbonus + "AB + " + shieldbonus + "SB + " + naturalarmor +
+                    "NA + " + deflectionarmor + "DB + " + miscAC + "M + " + tempAC + "T)\n";
             res += "-Touch: " + getTouch() + "\n";
             res += "-Sprovvista: " + getSprovvista() + "\n";
             res += "-Damage Reduction: " + getDamageReduction() + "\n";
@@ -477,7 +476,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
                 res += i + "/";
             res = res.substring(0, res.length() - 1);
             res += "\n";
-            res += "("+getMiscattackroll()+"M + " + getTempattackroll() + "T)\n";
+            res += "(" + getMiscattackroll() + "M + " + getTempattackroll() + "T)\n";
 
             res += "====WEAPONS====\n";
             for (String w : getWeapons()) {
