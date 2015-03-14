@@ -215,13 +215,17 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 
     }
 
-    public void setChosenSpellsofIndex(Spell spell, int index, int quantity,
+    public void setChosenSpellsofIndex(String spell, String descr, int level, int index, int quantity,
                                        boolean clear) {
+        Spell a = new Spell(spell, descr, level);
+
         HashMap<Spell, Integer> temp = chosenspells.get(index);
         if (clear)
-            temp.remove(spell);
-        else
-            temp.put(spell, quantity);
+            temp.remove(a);
+        else {
+            setKnownSpell(a, false);
+            temp.put(a, quantity);
+        }
         recalculate();
 
     }
@@ -524,7 +528,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
 
             res += "====SPELL SETS====\n";
             for (String f : getSpellSets())
-                res += "-" + f + "\n";
+                res += f + "====\n";
 
             res += "====INVENTORY====\n";
             for (String f : getInventoryAsStringList())

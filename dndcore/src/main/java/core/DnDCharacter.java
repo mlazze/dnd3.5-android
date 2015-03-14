@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 
 public class DnDCharacter implements Serializable {
@@ -189,7 +190,7 @@ public class DnDCharacter implements Serializable {
     }
 
     public ArrayList<Integer> getAttackBonuses(Weapon w, int mods) {
-        if (w.customattackbonus==null) {
+        if (w.customattackbonus == null) {
             ArrayList<Integer> res = new ArrayList<>(0);
             for (int i = 0; i < basicattackbonus.size(); i++)
                 res.add(getAttackBonus(w, i, mods));
@@ -198,7 +199,7 @@ public class DnDCharacter implements Serializable {
         //else
         ArrayList<Integer> res = new ArrayList<>(0);
         for (int i = 0; i < w.customattackbonus.size(); i++)
-            res.add(getAttackBonusWithCustomAttackBonus(w, i, mods,w.customattackbonus));
+            res.add(getAttackBonusWithCustomAttackBonus(w, i, mods, w.customattackbonus));
         return res;
     }
 
@@ -315,7 +316,9 @@ public class DnDCharacter implements Serializable {
         return res;
     }
 
-    public HashMap<String,Integer> getInventory() {return inventory;}
+    public HashMap<String, Integer> getInventory() {
+        return inventory;
+    }
 
     public ArrayList<String> getLanguages() {
         if (knownlanguages == null)
@@ -366,18 +369,54 @@ public class DnDCharacter implements Serializable {
         return res;
     }
 
+    public String getSpellDesciption(int spellset, String spellname) {
+        Iterator it = chosenspells.get(spellset).keySet().iterator();
+        Spell temp = new Spell(spellname, null, 0);
+        Spell s;
+        while (it.hasNext())
+            if (temp.equals(s = (Spell) it.next())) {
+                return s.descr;
+            }
+        return "Spell not found";
+    }
+
     public ArrayList<String> getSpellSets() {
         if (chosenspells == null)
             throw new InvalidCharacterException();
         ArrayList<String> res = new ArrayList<>(0);
         String temp;
+        ArrayList<Spell> temparr;
         for (HashMap<Spell, Integer> h : chosenspells) {
             temp = "";
-            for (Spell s : h.keySet())
-                temp += s.toString() + " x" + h.get(s);
-            if (!temp.equals(""))
-                res.add(temp);
+            temparr = new ArrayList<>();
+            for (Spell s : h.keySet()) {
+                temparr.add(s);
+            }
+            Collections.sort(temparr);
+            for (Spell s : temparr) {
+                temp += s + " x" + h.get(s) + "\n";
+            }
+            res.add(temp);
+
         }
+        return res;
+    }
+
+    public ArrayList<String> getSpellSet(int index) {
+        if (chosenspells == null)
+            throw new InvalidCharacterException();
+        ArrayList<String> res = new ArrayList<>(0);
+        ArrayList<Spell> temparr;
+        HashMap<Spell, Integer> h = chosenspells.get(index);
+        temparr = new ArrayList<>();
+        for (Spell s : h.keySet()) {
+            temparr.add(s);
+        }
+        Collections.sort(res);
+        for (Spell s : temparr) {
+             res.add(s + " x" + h.get(s));
+        }
+
         return res;
     }
 
