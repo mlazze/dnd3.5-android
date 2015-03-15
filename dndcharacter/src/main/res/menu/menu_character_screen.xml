@@ -70,4 +70,9 @@
         android:id="@+id/char_screen_Weapon"
         android:orderInCategory="100"
         android:title="@string/char_screen_Weapon" />
+
+    <item
+        android:id="@+id/char_screen_CharInfo"
+        android:orderInCategory="100"
+        android:title="@string/char_screen_CharInfo" />
 </menu>
