@@ -171,6 +171,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
         </activity>
+        <activity
+            android:name=".Exp"
+            android:label="@string/title_activity_exp"
+            android:parentActivityName=".CharacterScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.skij.dndcharacter.CharacterScreen" />
+        </activity>
     </application>
 
 </manifest>

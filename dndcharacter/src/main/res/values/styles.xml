@@ -5,4 +5,20 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="graywithroundedbackground">
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textColor">#b3cdcdcd</item>
+        <item name="android:background">@drawable/char_screen_rounded</item>
+        <item name="android:text">ProvaProva</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginBottom">3dp</item>
+    </style>
+    <style name="graywithroundedbackgroundmultiline">
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textColor">#b3cdcdcd</item>
+        <item name="android:background">@drawable/char_screen_rounded</item>
+        <item name="android:text">ProvaProva</item>
+        <item name="android:layout_marginBottom">3dp</item>
+    </style>
+
 </resources>

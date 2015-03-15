@@ -110,6 +110,7 @@
     <string name="minus">-</string>
     <string name="delete">x</string>
     <string name="description">D</string>
+    <string name="set">Set</string>
     <string name="title_activity_damage_reduction">DamageReduction</string>
     <string name="damage_reduction_damage_reduction_label">Damage Reduction</string>
     <string name="damage_reduction_spell_resist_label">Spell Resist</string>
@@ -133,5 +134,6 @@
     <string name="spells_new_spell_descr_label">Description</string>
     <string name="spells_new_spell_lvl_label">Level</string>
     <string name="title_activity_char_info">CharInfo</string>
+    <string name="title_activity_exp">Exp</string>
 
 </resources>

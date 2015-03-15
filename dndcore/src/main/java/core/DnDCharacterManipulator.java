@@ -265,7 +265,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
     }
 
     public void setExpDelta(int value) {
-        exp += value;
+        exp = exp+value<0?0:exp+value;
         recalculate();
     }
 
@@ -455,7 +455,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
             // infos
             res += "-Nome: " + getName() + "\n";
             for (DNDCLASS s : getClasses())
-                res += "-Class: " + s + " level " + getClassLevel(s) + "\n";
+                res += "-Class: " + getClassName(s) + " level " + getClassLevel(s) + "\n";
             res += "-ToTLevel: " + getGlobalLevel() + "\n";
             res += "-Exp: " + getExp() + "\n";
             res += "-Run Speed: " + getRunspeed() + "\n";

@@ -68,6 +68,6 @@ public enum ABILITIES {
     }
 
     public String toString() {
-        return name + "(" + stat + ")";
+        return name + " (" + stat + ")";
     }
 }

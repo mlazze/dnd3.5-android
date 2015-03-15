@@ -1,7 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/char_screen_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backrepeat"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -13,10 +15,295 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <TextView
-            android:id="@+id/char_screen_infos"
-            style="@style/Base.TextAppearance.AppCompat.Medium"
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cs_name"
+                style="@style/graywithroundedbackground"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/cs_classes"
+                style="@style/graywithroundedbackgroundmultiline"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="3dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/hitpoints_minhealth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".10"
+                    android:gravity="center_horizontal"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#b3cdcdcd" />
+
+                <ProgressBar
+                    android:id="@+id/hitpoints_health_bar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".80"
+                    android:progressDrawable="@drawable/progressbar_health" />
+
+                <TextView
+                    android:id="@+id/hitpoints_maxhealth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".10"
+                    android:gravity="center_horizontal"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#b3cdcdcd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/cs_exp"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.52" />
+
+                <TextView
+                    android:id="@+id/cs_runspeed"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/cs_str"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.52" />
+
+                <TextView
+                    android:id="@+id/cs_for"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/cs_dex"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.52" />
+
+                <TextView
+                    android:id="@+id/cs_ref"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/cs_con"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.52" />
+
+                <TextView
+                    android:id="@+id/cs_wil"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/cs_int"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.52" />
+
+                <TextView
+                    android:id="@+id/cs_init"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/cs_wis"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.52" />
+
+                <TextView
+                    android:id="@+id/cs_baseatk"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/cs_cha"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.52" />
+
+                <TextView
+                    android:id="@+id/cs_lotta"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/cs_ac"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.335" />
+
+                <TextView
+                    android:id="@+id/cs_touch"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.335" />
+
+                <TextView
+                    android:id="@+id/cs_sprovvista"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.33" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/cs_dmgred"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.52" />
+
+                <TextView
+                    android:id="@+id/cs_spellres"
+                    style="@style/graywithroundedbackground"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/cs_weap1"
+                style="@style/graywithroundedbackgroundmultiline"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/cs_weap2"
+                style="@style/graywithroundedbackgroundmultiline"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/cs_abilit"
+                style="@style/graywithroundedbackgroundmultiline"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/cs_spells"
+                style="@style/graywithroundedbackgroundmultiline"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/cs_feats"
+                style="@style/graywithroundedbackgroundmultiline"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/cs_special"
+                style="@style/graywithroundedbackgroundmultiline"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/cs_inventory"
+                style="@style/graywithroundedbackgroundmultiline"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/cs_languages"
+                style="@style/graywithroundedbackgroundmultiline"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>

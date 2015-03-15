@@ -219,6 +219,14 @@ public class DnDCharacter implements Serializable {
         return res;
     }
 
+    public String getClassName(DNDCLASS c) {
+        return classToNames.get(c);
+    }
+
+    public int getLotta()  {
+        return basicattackbonus.get(0)+getMod(STATS.STR)+miscattackroll+tempattackroll;
+    }
+
     public int getClassLevel(DNDCLASS s) {
         return classes.get(s);
     }
@@ -501,6 +509,10 @@ public class DnDCharacter implements Serializable {
             res.add(temp);
         }
         return res;
+    }
+
+    public Weapon getWeapon(int index) {
+        return weapons.get(index);
     }
 
     private void setDefaultAbilities() {
