@@ -159,7 +159,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
             getInititative();
             getInventoryAsStringList();
             getSpecialAbilities();
-            getSpells();
+//            getSpells();
             getSpellSets();
             getSprovvista();
             getStatuses();
@@ -223,11 +223,22 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         if (clear)
             temp.remove(a);
         else {
-            setKnownSpell(a, false);
+//            setKnownSpell(a, false);
             temp.put(a, quantity);
         }
         recalculate();
 
+    }
+
+    public void setChosenSpellUsageDelta(String spell, int level, int delta, int index) {
+        Spell a = new Spell(spell, null,level);
+
+        HashMap<Spell, Integer> temp = chosenspells.get(index);
+        int originalvalue = temp.get(a);
+        if (originalvalue+delta>=0) {
+            temp.put(a,originalvalue+delta);
+        }
+        recalculate();
     }
 
     public void setDamageReductionDelta(int value) {
@@ -291,14 +302,14 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         recalculate();
     }
 
-    public void setKnownSpell(Spell spell, boolean clear) {
-        knownspells = new ArrayList<Spell>();
-        if (clear)
-            knownspells.remove(spell);
-        else if (!knownspells.contains(spell))
-            knownspells.add(spell);
-        recalculate();
-    }
+//    public void setKnownSpell(Spell spell, boolean clear) {
+//        knownspells = new ArrayList<Spell>();
+//        if (clear)
+//            knownspells.remove(spell);
+//        else if (!knownspells.contains(spell))
+//            knownspells.add(spell);
+//        recalculate();
+//    }
 
     public void setMiscACDelta(int value) {
         miscAC += value;
@@ -522,9 +533,9 @@ public class DnDCharacterManipulator extends DnDCharacter implements
             for (String f : getSpecialAbilities())
                 res += f + "\n";
 
-            res += "====KNOWN SPELLS====\n";
-            for (String f : getSpells())
-                res += f + "\n";
+//            res += "====KNOWN SPELLS====\n";
+//            for (String f : getSpells())
+//                res += f + "\n";
 
             res += "====SPELL SETS====\n";
             for (String f : getSpellSets())

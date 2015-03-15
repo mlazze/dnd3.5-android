@@ -34,7 +34,7 @@ public class DnDCharacter implements Serializable {
     protected HashMap<ABILITIES, Integer> abilities;
     protected ArrayList<String> specialabilities;
     protected ArrayList<Feat> feats;
-    protected ArrayList<Spell> knownspells;
+//    protected ArrayList<Spell> knownspells;
     protected ArrayList<HashMap<Spell, Integer>> chosenspells;
     // equipment & inventory
     protected ArrayList<Equipment> equipment;
@@ -360,18 +360,18 @@ public class DnDCharacter implements Serializable {
         return spellresist;
     }
 
-    public ArrayList<String> getSpells() {
-        if (knownspells == null)
-            throw new InvalidCharacterException();
-        ArrayList<String> res = new ArrayList<>(0);
-        for (Spell a : knownspells)
-            res.add(a.toString());
-        return res;
-    }
+//    public ArrayList<String> getSpells() {
+//        if (knownspells == null)
+//            throw new InvalidCharacterException();
+//        ArrayList<String> res = new ArrayList<>(0);
+//        for (Spell a : knownspells)
+//            res.add(a.toString());
+//        return res;
+//    }
 
-    public String getSpellDesciption(int spellset, String spellname) {
+    public String getSpellDesciption(int spellset, String spellname, int level) {
         Iterator it = chosenspells.get(spellset).keySet().iterator();
-        Spell temp = new Spell(spellname, null, 0);
+        Spell temp = new Spell(spellname, null, level);
         Spell s;
         while (it.hasNext())
             if (temp.equals(s = (Spell) it.next())) {
@@ -412,7 +412,7 @@ public class DnDCharacter implements Serializable {
         for (Spell s : h.keySet()) {
             temparr.add(s);
         }
-        Collections.sort(res);
+        Collections.sort(temparr);
         for (Spell s : temparr) {
              res.add(s + " x" + h.get(s));
         }
@@ -521,7 +521,7 @@ public class DnDCharacter implements Serializable {
         setDefaultAbilities();
         specialabilities = new ArrayList<>(0);
         feats = new ArrayList<>(0);
-        knownspells = new ArrayList<>(0);
+//        knownspells = new ArrayList<>(0);
         chosenspells = new ArrayList<>(1);
         chosenspells.add(new HashMap<Spell, Integer>(0));
         temphitpoints = new ArrayList<>(0);

@@ -8,6 +8,8 @@ public class Spell implements Serializable, Comparable {
     public int level;
 
     public Spell(String name, String descr, int level) {
+        if (name == null)
+            throw new IllegalArgumentException();
         this.name = name;
         this.descr = descr;
         this.level = level;
@@ -29,10 +31,17 @@ public class Spell implements Serializable, Comparable {
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + level;
+        return result;
+    }
+
     public int compareTo(Spell s) {
         if (this.level<s.level) return -1;
         if (this.level>s.level) return 1;
-        return 0;
+        return this.name.compareTo(s.name);
     }
 
     @Override

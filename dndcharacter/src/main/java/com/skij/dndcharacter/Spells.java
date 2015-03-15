@@ -1,15 +1,23 @@
 package com.skij.dndcharacter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import core.DnDCharacterManipulator;
 
@@ -40,16 +48,11 @@ public class Spells extends ActionBarActivity {
     }
 
     private void updateSpells() {
-        ArrayAdapter<String> arrayAdapter;
-        arrayAdapter = new ArrayAdapter<>(this, R.id.spell_item_layout, character.getSpellSet(0));
+        CustomSpellAdapter arrayAdapter;
+        arrayAdapter = new CustomSpellAdapter(this, character.getSpellSet(0));
         ListView statusListView = (ListView) findViewById(R.id.spells_list);
         statusListView.setAdapter(arrayAdapter);
         registerForContextMenu(statusListView);
-    }
-
-    private void setEditTextContent(int identifier, String originalValue) {
-        ((EditText) findViewById(identifier)).getText().clear();
-        ((EditText) findViewById(identifier)).getText().insert(0, originalValue);
     }
 
     @Override
@@ -93,13 +96,13 @@ public class Spells extends ActionBarActivity {
         try {
             level = Integer.parseInt(((EditText) findViewById(R.id.spells_new_spell_lvl)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this,"Missing required parameters",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_SHORT).show();
             return;
         }
 
         String descr = ((EditText) findViewById(R.id.spells_new_spell_descr)).getText().toString();
         if (!name.equals("")) {
-            character.setChosenSpellsofIndex(name,descr,level,0,0,false);
+            character.setChosenSpellsofIndex(name, descr, level, 0, 0, false);
             updateSpells();
             ((EditText) findViewById(R.id.spells_new_spell_name)).getText().clear();
             ((EditText) findViewById(R.id.spells_new_spell_descr)).getText().clear();
@@ -107,15 +110,102 @@ public class Spells extends ActionBarActivity {
         }
     }
 
-    public void minusUsage(View view) {
-    }
+    public class CustomSpellAdapter extends BaseAdapter {
 
-    public void plusUsage(View view) {
-    }
+        private ListView listView;
+        private Context context;
+        private List<String> list;
+        private View.OnClickListener mOnPlusClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int position = listView.getPositionForView((View) v.getParent());
+                String spell = (listView.getChildAt(listView.getPositionForView((View) v.getParent()))).toString();
+                Log.e("Mario", "Title clicked, row " + spell);
+            }
+        };
+        private View.OnClickListener mOnTextClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int position = listView.getPositionForView((View) v.getParent());
+            }
+        };
 
-    public void spellDescription(View view) {
-    }
+        public CustomSpellAdapter(Context context, List<String> list) {
+            this.list = list;
+            this.context = context;
+        }
 
-    public void deleteSpell(View view) {
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return getItem(position).hashCode();
+        }
+
+        @Override
+        public View getView(int index, View view, final ViewGroup parent) {
+
+            if (view == null) {
+                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+                view = inflater.inflate(R.layout.spell_item, parent, false);
+            }
+
+            final String ai = (String) getItem(index);
+
+            TextView textView = (TextView) view.findViewById(R.id.spell_item_name);
+            textView.setText(ai);
+
+            Button button = (Button) view.findViewById(R.id.spell_item_plus);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String spell = ai.split("\\(lv[0-9]*\\) x")[0];
+                    int level = Integer.parseInt(ai.split("\\(lv")[1].split("\\) x")[0]);
+                    character.setChosenSpellUsageDelta(spell,level,+1,0);
+                    updateSpells();
+                }
+            });
+            button = (Button) view.findViewById(R.id.spell_item_minus);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String spell = ai.split("\\(lv[0-9]*\\) x")[0];
+                    int level = Integer.parseInt(ai.split("\\(lv")[1].split("\\) x")[0]);
+                    character.setChosenSpellUsageDelta(spell,level,-1,0);
+                    updateSpells();
+                }
+            });
+            button = (Button) view.findViewById(R.id.spell_item_description);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String spell = ai.split("\\(lv[0-9]*\\) x")[0];
+                    int level = Integer.parseInt(ai.split("\\(lv")[1].split("\\) x")[0]);
+                    Toast.makeText(parent.getContext(),character.getSpellDesciption(0,spell,level),Toast.LENGTH_LONG).show();
+                    updateSpells();
+                }
+            });
+            button = (Button) view.findViewById(R.id.spell_item_delete);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String spell = ai.split("\\(lv[0-9]*\\) x")[0];
+                    int level = Integer.parseInt(ai.split("\\(lv")[1].split("\\) x")[0]);
+                    character.setChosenSpellsofIndex(spell,null,level,0,0,true);
+                    updateSpells();
+                }
+            });
+
+            return view;
+        }
+
     }
 }

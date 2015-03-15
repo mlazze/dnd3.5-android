@@ -4,7 +4,7 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:padding="6dip"
     android:id="@+id/spell_item_layout"
-    tools:context="com.skij.dndcharacter.Spells">
+    tools:context="com.skij.dndcharacter.Spells.CustomSpellAdapter">
 
 
     <LinearLayout
@@ -19,32 +19,29 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:text="@string/minus"
-            android:textSize="10sp"
-            android:onClick="minusUsage"/>
+            android:textSize="10sp"/>
 
         <Button
             android:id="@+id/spell_item_plus"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:text="@string/plus"
-            android:textSize="10sp"
-            android:onClick="plusUsage"/>
+            android:textSize="10sp"/>
 
         <Button
             android:id="@+id/spell_item_description"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:text="@string/description"
-            android:textSize="10sp"
-            android:onClick="spellDescription" />
+            android:textSize="10sp" />
 
         <Button
+            android:id="@+id/spell_item_delete"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:text="@string/delete"
-            android:textSize="10sp"
-            android:onClick="deleteSpell" />
+            android:textSize="10sp" />
     </LinearLayout>
 
     <TextView
