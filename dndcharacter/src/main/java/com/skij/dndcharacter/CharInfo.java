@@ -11,7 +11,7 @@ import android.widget.Toast;
 import core.DnDCharacterManipulator;
 
 
-public class CharInfo extends ActionBarActivity {
+public class CharInfo extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray;
 

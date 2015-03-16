@@ -16,7 +16,7 @@ import core.ABILITIES;
 import core.DnDCharacterManipulator;
 
 
-public class Abilities extends ActionBarActivity {
+public class Abilities extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray = -1;
 

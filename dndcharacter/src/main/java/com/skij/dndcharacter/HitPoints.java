@@ -17,7 +17,7 @@ import core.DnDCharacter;
 import core.DnDCharacterManipulator;
 
 
-public class HitPoints extends ActionBarActivity {
+public class HitPoints extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray;
 

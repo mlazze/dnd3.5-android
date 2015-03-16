@@ -1,5 +1,5 @@
 <bitmap
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:src="@drawable/papertexture"
+    android:src="@drawable/papertexturesmaller"
     android:tileMode="repeat"
     android:dither="true" />

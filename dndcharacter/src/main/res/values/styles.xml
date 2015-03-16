@@ -7,8 +7,25 @@
         <item name="android:textViewStyle">@style/graywithroundedbackgroundmultiline</item>
         <item name="android:editTextStyle">@style/edittext</item>
         <item name="android:buttonStyle"> @style/button</item>
+        <item name="android:actionBarStyle">@style/actionBar</item>
+        <item name="actionBarStyle">@style/actionBar</item>
+        <item name="android:actionBarTabTextStyle">@style/ActionBarTabText</item>
+        <item name="actionBarTabTextStyle">@style/ActionBarTabText</item>
+        <item name="android:actionMenuTextAppearance">@style/TextAppearance.AppCompat.Widget.ActionBar.Menu</item>
+        <item name="actionMenuTextAppearance">@style/TextAppearance.AppCompat.Widget.ActionBar.Menu</item>
+        <!--monospace is overridden in BaseAdapter-->
+        <item name="android:typeface">monospace</item>
+
     </style>
-    
+
+    <style name="ActionBarTabText" parent="Base.Widget.AppCompat.ActionBar.TabText">
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textColor">#b3cdcdcd</item>
+    </style>
+    <style name="actionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#48a56d3a</item>
+        <item name="background">@color/brown</item>
+    </style>
     <style name="button" parent="Base.TextAppearance.AppCompat.Button">
         <item name="android:background">@drawable/button</item>
         <item name="android:clickable">true</item>

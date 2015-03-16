@@ -21,7 +21,7 @@ import core.DnDCharacterManipulator;
 import core.Weapon;
 
 
-public class NewWeapon extends ActionBarActivity {
+public class NewWeapon extends BaseActivity {
 
 
     DnDCharacterManipulator character;

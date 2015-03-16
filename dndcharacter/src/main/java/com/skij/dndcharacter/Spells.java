@@ -22,7 +22,7 @@ import java.util.List;
 import core.DnDCharacterManipulator;
 
 
-public class Spells extends ActionBarActivity {
+public class Spells extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray;
 

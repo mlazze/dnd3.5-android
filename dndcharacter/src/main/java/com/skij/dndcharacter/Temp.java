@@ -21,7 +21,7 @@ import core.DnDCharacter;
 import core.DnDCharacterManipulator;
 
 
-public class Temp extends ActionBarActivity {
+public class Temp extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray;
 

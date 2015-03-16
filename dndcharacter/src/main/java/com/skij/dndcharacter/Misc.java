@@ -13,7 +13,7 @@ import core.DnDCharacter;
 import core.DnDCharacterManipulator;
 
 
-public class Misc extends ActionBarActivity {
+public class Misc extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray;
 

@@ -21,7 +21,7 @@ import core.DnDCharacterManipulator;
 import core.Feat;
 
 
-public class Feats extends ActionBarActivity {
+public class Feats extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray;
 

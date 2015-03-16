@@ -20,7 +20,7 @@ import android.widget.Toast;
 import core.DnDCharacterManipulator;
 
 
-public class Inventory extends ActionBarActivity {
+public class Inventory extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray;
 

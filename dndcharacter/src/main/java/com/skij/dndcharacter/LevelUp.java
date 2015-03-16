@@ -20,7 +20,7 @@ import core.DnDCharacter;
 import core.DnDCharacterManipulator;
 
 
-public class LevelUp extends ActionBarActivity {
+public class LevelUp extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray;
 

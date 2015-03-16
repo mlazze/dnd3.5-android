@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import core.DnDCharacterManipulator;
 
 
-public class HomeScreen extends ActionBarActivity {
+public class HomeScreen extends BaseActivity {
 
 
     private AdapterView.OnItemClickListener characterListener = new AdapterView.OnItemClickListener() {

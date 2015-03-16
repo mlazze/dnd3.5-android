@@ -20,7 +20,7 @@ import android.widget.Toast;
 import core.DnDCharacterManipulator;
 
 
-public class Languages extends ActionBarActivity {
+public class Languages extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray;
 

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import core.DnDCharacterManipulator;
 
 
-public class Weapons extends ActionBarActivity {
+public class Weapons extends BaseActivity {
 
 
     DnDCharacterManipulator character;

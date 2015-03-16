@@ -17,7 +17,7 @@ import core.DnDCharacterManipulator;
 import core.Equipment;
 
 
-public class NewEquipment extends ActionBarActivity {
+public class NewEquipment extends BaseActivity {
 
 
     DnDCharacterManipulator character;

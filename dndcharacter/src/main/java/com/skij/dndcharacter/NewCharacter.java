@@ -16,7 +16,7 @@ import core.DNDCLASS;
 import core.DnDCharacterManipulator;
 
 
-public class NewCharacter extends ActionBarActivity {
+public class NewCharacter extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -13,7 +13,7 @@ import core.DnDCharacter;
 import core.DnDCharacterManipulator;
 
 
-public class Stats extends ActionBarActivity {
+public class Stats extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray = -1;
 

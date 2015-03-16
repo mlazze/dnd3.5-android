@@ -13,7 +13,7 @@ import android.widget.Toast;
 import core.DnDCharacterManipulator;
 
 
-public class Exp extends ActionBarActivity {
+public class Exp extends BaseActivity {
     DnDCharacterManipulator character;
     int posInArray;
 
