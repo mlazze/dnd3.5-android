@@ -91,7 +91,7 @@ public class Feats extends ActionBarActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete_entry:
-                character.setFeat(character.getFeat((int)info.id), true);
+                character.setFeat(character.getFeat((int) info.id), true);
                 updateFeats();
                 return true;
             default:
@@ -131,7 +131,7 @@ public class Feats extends ActionBarActivity {
         String desc = ((EditText) findViewById(R.id.feats_new_feat_desc)).getText().toString();
         if (!name.equals("")) {
             Log.d("Setting", "Setting new feat " + name);
-            character.setFeat(new Feat(name,desc), false);
+            character.setFeat(new Feat(name, desc), false);
             ((EditText) findViewById(R.id.feats_new_feat_name)).getText().clear();
             ((EditText) findViewById(R.id.feats_new_feat_desc)).getText().clear();
             updateFeats();

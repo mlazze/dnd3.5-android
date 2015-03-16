@@ -44,16 +44,17 @@ public class LevelUp extends ActionBarActivity {
     }
 
     private void setOriginalValues() {
-        setEditTextContent(R.id.level_up_atk1,character.getBasicAttackBonuses().get(0)+"");
+        setEditTextContent(R.id.level_up_atk1, character.getBasicAttackBonuses().get(0) + "");
         try {
             setEditTextContent(R.id.level_up_atk2, character.getBasicAttackBonuses().get(1) + "");
             setEditTextContent(R.id.level_up_atk3, character.getBasicAttackBonuses().get(2) + "");
             setEditTextContent(R.id.level_up_atk4, character.getBasicAttackBonuses().get(3) + "");
             setEditTextContent(R.id.level_up_atk5, character.getBasicAttackBonuses().get(4) + "");
-        } catch (IndexOutOfBoundsException e) {}
-        setEditTextContent(R.id.level_up_for,character.getSavingthrowsbases()[DnDCharacter.SAVING.FORTITUDE.ordinal()]+"");
-        setEditTextContent(R.id.level_up_ref,character.getSavingthrowsbases()[DnDCharacter.SAVING.REFLEX.ordinal()]+"");
-        setEditTextContent(R.id.level_up_wil,character.getSavingthrowsbases()[DnDCharacter.SAVING.WILL.ordinal()]+"");
+        } catch (IndexOutOfBoundsException e) {
+        }
+        setEditTextContent(R.id.level_up_for, character.getSavingthrowsbases()[DnDCharacter.SAVING.FORTITUDE.ordinal()] + "");
+        setEditTextContent(R.id.level_up_ref, character.getSavingthrowsbases()[DnDCharacter.SAVING.REFLEX.ordinal()] + "");
+        setEditTextContent(R.id.level_up_wil, character.getSavingthrowsbases()[DnDCharacter.SAVING.WILL.ordinal()] + "");
     }
 
     private <T> void setSpinner(T[] array, int resourceId) {

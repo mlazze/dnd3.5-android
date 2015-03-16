@@ -1,14 +1,10 @@
 package com.skij.dndcharacter;
 
 import android.content.Intent;
-import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,24 +19,12 @@ import core.DnDCharacterManipulator;
 import core.Weapon;
 
 
-public class CharacterScreen extends ActionBarActivity {
+public class CharacterScreen extends BaseActivity {
 
-    private static Typeface customTypeface;
+
     private DnDCharacterManipulator character;
     private int posInArray;
 
-    private static void setTypeFace(Typeface typeFace, ViewGroup parent) {
-        for (int i = 0; i < parent.getChildCount(); i++) {
-            View v = parent.getChildAt(i);
-            if (v instanceof ViewGroup) {
-                setTypeFace(typeFace, (ViewGroup) v);
-            } else if (v instanceof TextView) {
-                TextView tv = (TextView) v;
-                tv.setPaintFlags(tv.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
-                tv.setTypeface(typeFace);
-            }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +32,7 @@ public class CharacterScreen extends ActionBarActivity {
         setContentView(R.layout.activity_character_screen);
 
         if (loadChar()) return;
-        final Typeface typeface = getCustomTypeface();
-        setTypeFace(typeface, (ViewGroup) findViewById(R.id.char_screen_layout));
+
 
         //TODO
         setOriginalValues();
@@ -320,12 +303,5 @@ public class CharacterScreen extends ActionBarActivity {
         startActivity(i);
     }
 
-    private Typeface getCustomTypeface() {
-        if (customTypeface == null) {
-            //Only do this once for each typeface used
-            //or we will leak unnecessary memory.
-            customTypeface = Typeface.createFromAsset(getAssets(), "fonts/dum1.ttf");
-        }
-        return customTypeface;
-    }
+
 }

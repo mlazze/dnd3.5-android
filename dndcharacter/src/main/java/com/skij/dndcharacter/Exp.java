@@ -35,7 +35,7 @@ public class Exp extends ActionBarActivity {
     }
 
     private void setOriginalValues() {
-        ((TextView) findViewById(R.id.exp_value)).setText( "Current exp:" + character.getExp());
+        ((TextView) findViewById(R.id.exp_value)).setText("Current exp:" + character.getExp());
     }
 
     private void setEditTextContent(int identifier, String originalValue) {
@@ -80,28 +80,28 @@ public class Exp extends ActionBarActivity {
 
     public void plusExp(View view) {
         Integer i = getEditTextContentAsInteger(R.id.exp_new_value);
-        if (i!=null) {
+        if (i != null) {
             character.setExpDelta(i);
         }
-        setEditTextContent(R.id.exp_new_value,"");
+        setEditTextContent(R.id.exp_new_value, "");
         setOriginalValues();
     }
 
     public void minusExp(View view) {
         Integer i = getEditTextContentAsInteger(R.id.exp_new_value);
-        if (i!=null) {
+        if (i != null) {
             character.setExpDelta(-i);
         }
-        setEditTextContent(R.id.exp_new_value,"");
+        setEditTextContent(R.id.exp_new_value, "");
         setOriginalValues();
     }
 
     public void setExp(View view) {
         Integer i = getEditTextContentAsInteger(R.id.exp_new_value);
-        if (i!=null) {
-            character.setExpDelta(i-character.getExp());
+        if (i != null) {
+            character.setExpDelta(i - character.getExp());
         }
-        setEditTextContent(R.id.exp_new_value,"");
+        setEditTextContent(R.id.exp_new_value, "");
         setOriginalValues();
     }
 }

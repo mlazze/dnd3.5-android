@@ -207,6 +207,7 @@ public class Temp extends ActionBarActivity {
         String tmp = ((EditText) findViewById(R.id.temp_new_status)).getText().toString();
         if (!tmp.equals("")) {
             Log.d("Setting", "Setting new status " + tmp);
+            ((EditText) findViewById(R.id.temp_new_status)).getText().clear();
             character.setTempStatus(tmp, false);
             updateTempStatuses();
         }

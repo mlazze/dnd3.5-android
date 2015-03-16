@@ -90,7 +90,7 @@ public class Inventory extends ActionBarActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete_entry:
-                character.setInventory(character.getInventoryAsStringList().get((int)(info.id)).split("\\|")[0],1, true);
+                character.setInventory(character.getInventoryAsStringList().get((int) (info.id)).split("\\|")[0], 1, true);
                 updateInventory();
                 return true;
             default:
@@ -131,12 +131,12 @@ public class Inventory extends ActionBarActivity {
         try {
             amount = Integer.parseInt(((EditText) findViewById(R.id.inventory_new_item_amount)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this,"Missing required parameters",Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_SHORT);
             return;
         }
         if (!name.equals("")) {
             Log.d("Setting", "Setting new item " + name);
-            character.setInventory(name,amount,false);
+            character.setInventory(name, amount, false);
             ((EditText) findViewById(R.id.inventory_new_item_name)).getText().clear();
             ((EditText) findViewById(R.id.inventory_new_item_amount)).getText().clear();
             updateInventory();

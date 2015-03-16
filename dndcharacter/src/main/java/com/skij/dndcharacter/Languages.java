@@ -90,7 +90,7 @@ public class Languages extends ActionBarActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete_entry:
-                character.setKnownLanguage(character.getLanguages().get((int)(info.id)), true);
+                character.setKnownLanguage(character.getLanguages().get((int) (info.id)), true);
                 updateLanguages();
                 return true;
             default:
@@ -129,7 +129,7 @@ public class Languages extends ActionBarActivity {
         String name = ((EditText) findViewById(R.id.languages_new_language_name)).getText().toString();
         if (!name.equals("")) {
             Log.d("Setting", "Setting new language " + name);
-            character.setKnownLanguage(name,false);
+            character.setKnownLanguage(name, false);
             ((EditText) findViewById(R.id.languages_new_language_name)).getText().clear();
             updateLanguages();
         }

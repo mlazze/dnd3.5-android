@@ -151,7 +151,7 @@ public class HitPoints extends ActionBarActivity {
     }
 
     private void updateTurn() {
-        ((TextView) findViewById(R.id.hitpoints_turn)).setText("Turn: "+ Utils.getTurn());
+        ((TextView) findViewById(R.id.hitpoints_turn)).setText("Turn: " + Utils.getTurn());
     }
 
     public void minusTurn(View view) {

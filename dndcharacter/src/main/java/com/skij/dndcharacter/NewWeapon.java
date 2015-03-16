@@ -104,7 +104,7 @@ public class NewWeapon extends ActionBarActivity {
         try {
             additionaldamage = Integer.parseInt(getValueFromEditText(R.id.new_weapon_additionaldamage));
         } catch (NumberFormatException e) {
-            additionaldamage=0;
+            additionaldamage = 0;
         }
 
         String damagedices = getValueFromEditText(R.id.new_weapon_damagedices);
@@ -137,8 +137,8 @@ public class NewWeapon extends ActionBarActivity {
         Weapon w = new Weapon(name, ranged, stat, damagemod, range, damagedices, critminrange, critmult);
         w.notes = notes.equals("") ? w.notes : notes;
         w.type = type.equals("") ? w.type : type;
-        w.additionaldamage=additionaldamage;
-        w.customattackbonus=customatkroll;
+        w.additionaldamage = additionaldamage;
+        w.customattackbonus = customatkroll;
 
         character.setWeapon(w, false);
         Utils.editCharacter(character, posInArray, this);

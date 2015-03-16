@@ -169,7 +169,7 @@ public class Spells extends ActionBarActivity {
                 public void onClick(View view) {
                     String spell = ai.split("\\(lv[0-9]*\\) x")[0];
                     int level = Integer.parseInt(ai.split("\\(lv")[1].split("\\) x")[0]);
-                    character.setChosenSpellUsageDelta(spell,level,+1,0);
+                    character.setChosenSpellUsageDelta(spell, level, +1, 0);
                     updateSpells();
                 }
             });
@@ -179,7 +179,7 @@ public class Spells extends ActionBarActivity {
                 public void onClick(View view) {
                     String spell = ai.split("\\(lv[0-9]*\\) x")[0];
                     int level = Integer.parseInt(ai.split("\\(lv")[1].split("\\) x")[0]);
-                    character.setChosenSpellUsageDelta(spell,level,-1,0);
+                    character.setChosenSpellUsageDelta(spell, level, -1, 0);
                     updateSpells();
                 }
             });
@@ -189,7 +189,7 @@ public class Spells extends ActionBarActivity {
                 public void onClick(View view) {
                     String spell = ai.split("\\(lv[0-9]*\\) x")[0];
                     int level = Integer.parseInt(ai.split("\\(lv")[1].split("\\) x")[0]);
-                    Toast.makeText(parent.getContext(),character.getSpellDesciption(0,spell,level),Toast.LENGTH_LONG).show();
+                    Toast.makeText(parent.getContext(), character.getSpellDesciption(0, spell, level), Toast.LENGTH_LONG).show();
                     updateSpells();
                 }
             });
@@ -199,7 +199,7 @@ public class Spells extends ActionBarActivity {
                 public void onClick(View view) {
                     String spell = ai.split("\\(lv[0-9]*\\) x")[0];
                     int level = Integer.parseInt(ai.split("\\(lv")[1].split("\\) x")[0]);
-                    character.setChosenSpellsofIndex(spell,null,level,0,0,true);
+                    character.setChosenSpellsofIndex(spell, null, level, 0, 0, true);
                     updateSpells();
                 }
             });

@@ -90,7 +90,7 @@ public class SpecialAbilities extends ActionBarActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete_entry:
-                character.setSpecialAbility(character.getSpecialAbilities().get((int)(info.id)), true);
+                character.setSpecialAbility(character.getSpecialAbilities().get((int) (info.id)), true);
                 updateSpecialabilities();
                 return true;
             default:
@@ -129,7 +129,7 @@ public class SpecialAbilities extends ActionBarActivity {
         String name = ((EditText) findViewById(R.id.specialabilities_new_specialability_name)).getText().toString();
         if (!name.equals("")) {
             Log.d("Setting", "Setting new specialability " + name);
-            character.setSpecialAbility(name,false);
+            character.setSpecialAbility(name, false);
             ((EditText) findViewById(R.id.specialabilities_new_specialability_name)).getText().clear();
             updateSpecialabilities();
         }
