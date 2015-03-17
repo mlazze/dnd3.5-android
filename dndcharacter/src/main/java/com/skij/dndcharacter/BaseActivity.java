@@ -1,9 +1,11 @@
 package com.skij.dndcharacter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -13,12 +15,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import core.DnDCharacterManipulator;
 
 public class BaseActivity extends ActionBarActivity {
     protected DnDCharacterManipulator character;
     protected int posInArray = -1;
+    protected String suffix = " - " + getClass().getSimpleName();
     ActionBarDrawerToggle mDrawerToggle;
+    private boolean initializing = true;
 
     @Override
     protected void onCreate(Bundle savedInstancestate) {
@@ -27,8 +33,11 @@ public class BaseActivity extends ActionBarActivity {
         // use the default view if anything goes wrong.
         // Get the font size value from SharedPreferences.
         super.onCreate(savedInstancestate);
+        if (!(this instanceof NewCharacter))
+            setCharSpinner();
         if (!(this instanceof HomeScreen) && !(this instanceof NewCharacter))
-            if (loadChar()) return;
+            loadChar();
+
 
     }
 
@@ -36,26 +45,86 @@ public class BaseActivity extends ActionBarActivity {
     protected void onStart() {
         super.onStart();
         setFonts();
-        setNavBar();
-        setTitle();
+        if (!(this instanceof NewCharacter))
+            setNavBar();
+        if (!(this instanceof NewCharacter))
+            setTitle();
+        if (!(this instanceof NewCharacter))
+            getSupportActionBar().setSelectedNavigationItem(posInArray + 1);
     }
 
-    private void setTitle() {
-        try {
-            CharSequence s;
-            if ((s = getTitle()).equals(""))
-                getSupportActionBar().setTitle(character.getName());
-            else getSupportActionBar().setTitle(character.getName() + " - " + s);
-        } catch (NullPointerException e) {
-            getSupportActionBar().setTitle(getString(R.string.app_name));
+    private void setCharSpinner() {
+
+        final ArrayList<String> characterInfoList = getInfoFromCharacterList(Utils.getCharacterList(this), "", suffix);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getBaseContext(), R.layout.char_spinner_item, characterInfoList);
+        //noinspection deprecation
+        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+
+        final Context c = this;
+        final Class cl = this.getClass();
+
+        ActionBar.OnNavigationListener navigationListener = new ActionBar.OnNavigationListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(int position, long itemId) {
+                if (!initializing) {
+                    Intent i;
+                    if (position == Utils.getCharacterList(BaseActivity.this).size() + 1) {
+                        i = new Intent(c, HomeScreen.class);
+                        finish();
+                        startActivity(i);
+                    } else if (position == 0) {
+                        return true;
+                    } else {
+                        i = new Intent(c, cl);
+                        i.putExtra("Character", position - 1);
+                        finish();
+                        startActivity(i);
+                    }
+                } else
+                    initializing = false;
+                return true;
+            }
+        };
+
+        /** Setting dropdown items and item navigation listener for the actionbar */
+        //noinspection deprecation
+        getSupportActionBar().setListNavigationCallbacks(adapter, navigationListener);
+        //noinspection deprecation
+        getSupportActionBar().setSelectedNavigationItem(posInArray + 1);
+
+    }
+
+    private ArrayList<String> getInfoFromCharacterList
+            (ArrayList<DnDCharacterManipulator> characterList, String prefix, String suffix) {
+        ArrayList<String> res = new ArrayList<>(characterList.size() + 2);
+        res.add("Character List");
+
+        for (int i = 0; i < characterList.size(); i++) {
+            res.add(prefix + characterList.get(i).getName() + suffix);
         }
+
+        res.add("Manage Characters");
+        return res;
+    }
+
+
+    private void setTitle() {
+        getSupportActionBar().setTitle("");
+//        try {
+//            CharSequence s;
+//            if ((s = getTitle()).equals(""))
+//                getSupportActionBar().setTitle(character.getName());
+//            else getSupportActionBar().setTitle(character.getName() + " - " + s);
+//        } catch (NullPointerException e) {
+//            getSupportActionBar().setTitle(getString(R.string.app_name));
+//        }
     }
 
     protected boolean loadChar() {
         Intent i = getIntent();
         posInArray = i.getIntExtra("Character", -1);
         if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
             return true;
         }
         character = Utils.getCharacter(posInArray, this);
@@ -71,10 +140,8 @@ public class BaseActivity extends ActionBarActivity {
 
     private void setNavBar() {
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//        getSupportActionBar().setIcon(R.drawable.ic_drawer);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.ns_menu_open, R.string.ns_menu_close);
@@ -85,13 +152,17 @@ public class BaseActivity extends ActionBarActivity {
         String[] mActionList = getResources().getStringArray(R.array.editcharactions);
         ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+        mDrawerList.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, mActionList));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (posInArray == -1) {
+                    Toast.makeText(BaseActivity.this, "Choose a character first", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (id == 0) {
                     startActivityWithCharacterInfo(HitPoints.class);
                 }
@@ -161,7 +232,8 @@ public class BaseActivity extends ActionBarActivity {
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
-        mDrawerToggle.syncState();
+        if (!(this instanceof NewCharacter))
+            mDrawerToggle.syncState();
         super.onPostCreate(savedInstanceState);
     }
 }

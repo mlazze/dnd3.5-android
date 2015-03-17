@@ -29,6 +29,7 @@ public class HomeScreen extends BaseActivity {
                 i = new Intent(HomeScreen.this, CharacterScreen.class);
                 i.putExtra("Character", position);
             }
+            finish();
             startActivity(i);
         }
     };

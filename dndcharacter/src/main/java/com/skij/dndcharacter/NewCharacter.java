@@ -1,5 +1,6 @@
 package com.skij.dndcharacter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -131,5 +132,8 @@ public class NewCharacter extends BaseActivity {
         Utils.addCharacter(newChar, this);
 
         finish();
+        Intent i;
+        i = new Intent(this, HomeScreen.class);
+        startActivity(i);
     }
 }

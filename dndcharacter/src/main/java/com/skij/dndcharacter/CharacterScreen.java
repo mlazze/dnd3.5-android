@@ -20,15 +20,19 @@ import core.Weapon;
 
 public class CharacterScreen extends BaseActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        suffix = "";
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_character_screen);
+        if (posInArray == -1) {
+            setContentView(R.layout.activity_character_screen_nochar);
+        } else {
+            setContentView(R.layout.activity_character_screen);
 
-        //TODO
-        setOriginalValues();
-        setOnClickListeners();
+            //TODO
+            setOriginalValues();
+            setOnClickListeners();
+        }
     }
 
     private void setOnClickListeners() {
@@ -194,8 +198,10 @@ public class CharacterScreen extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        super.loadChar();
-        setOriginalValues();
+        if (posInArray != -1) {
+            super.loadChar();
+            setOriginalValues();
+        }
     }
 
     @Override
@@ -213,7 +219,10 @@ public class CharacterScreen extends BaseActivity {
         int id = item.getItemId();
         Intent i;
         //buttons
-
+        if (posInArray == -1) {
+            Toast.makeText(CharacterScreen.this, "Choose a character first", Toast.LENGTH_SHORT).show();
+            return super.onOptionsItemSelected(item);
+        }
         if (id == R.id.action_clear_temp) {
             character.clearTemp();
             Toast.makeText(this, "Temporary stats cleared", Toast.LENGTH_SHORT).show();

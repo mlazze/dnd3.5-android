@@ -107,7 +107,11 @@ public class Utils {
 
     public static DnDCharacterManipulator getCharacter(long id, Context c) {
         loadPrefs(c);
-        return characterList.get((int) id);
+        try {
+            return characterList.get((int) id);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
     public static ArrayList<DnDCharacterManipulator> getCharacterList(Context c) {

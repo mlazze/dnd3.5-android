@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DnDCharacter</string>
+    <string name="app_name">DnD 3.5 Character Creator</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -123,7 +123,7 @@
     <string name="feats_list_label">Feats:</string>
     <string name="title_activity_inventory">Inventory</string>
     <string name="inventory_new_item_name_label">Name:</string>
-    <string name="inventory_new_item_amount_label">Description:</string>
+    <string name="inventory_new_item_amount_label">Amount:</string>
     <string name="inventory_list_label">Inventory:</string>
     <string name="languages_new_language_name_label">Language:</string>
     <string name="languages_list_label">Languages:</string>

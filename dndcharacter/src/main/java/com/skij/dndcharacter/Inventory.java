@@ -113,7 +113,7 @@ public class Inventory extends BaseActivity {
         try {
             amount = Integer.parseInt(((EditText) findViewById(R.id.inventory_new_item_amount)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_SHORT).show();
             return;
         }
         if (!name.equals("")) {
