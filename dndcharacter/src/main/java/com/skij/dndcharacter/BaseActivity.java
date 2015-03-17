@@ -21,22 +21,23 @@ public class BaseActivity extends ActionBarActivity {
     ActionBarDrawerToggle mDrawerToggle;
 
     @Override
-    protected void onStart() {
+    protected void onCreate(Bundle savedInstancestate) {
 
         // Enclose everything in a try block so we can just
         // use the default view if anything goes wrong.
         // Get the font size value from SharedPreferences.
+        super.onCreate(savedInstancestate);
+        if (!(this instanceof HomeScreen) && !(this instanceof NewCharacter))
+            if (loadChar()) return;
+
+    }
+
+    @Override
+    protected void onStart() {
         super.onStart();
-        try {
-            if (loadChar()) Toast.makeText(this, "ERROROORORR", Toast.LENGTH_SHORT).show();
-            setFonts();
-            setNavBar();
-            setTitle();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        setFonts();
+        setNavBar();
+        setTitle();
     }
 
     private void setTitle() {
@@ -50,7 +51,7 @@ public class BaseActivity extends ActionBarActivity {
         }
     }
 
-    private boolean loadChar() {
+    protected boolean loadChar() {
         Intent i = getIntent();
         posInArray = i.getIntExtra("Character", -1);
         if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {

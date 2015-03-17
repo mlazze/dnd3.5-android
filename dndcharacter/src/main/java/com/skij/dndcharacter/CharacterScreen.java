@@ -26,9 +26,6 @@ public class CharacterScreen extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_screen);
 
-        if (loadChar()) return;
-
-
         //TODO
         setOriginalValues();
         setOnClickListeners();
@@ -194,21 +191,10 @@ public class CharacterScreen extends BaseActivity {
         ((TextView) findViewById(resource)).setText(value);
     }
 
-    private boolean loadChar() {
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        character = Utils.getCharacter(posInArray, this);
-        return false;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        loadChar();
+        super.loadChar();
         setOriginalValues();
     }
 
@@ -241,53 +227,57 @@ public class CharacterScreen extends BaseActivity {
         if (id == R.id.action_hit_points) {
             startActivityWithCharacterInfo(HitPoints.class);
         }
-        //otehrs
-        if (id == R.id.char_screen_levelup) {
-            startActivityWithCharacterInfo(LevelUp.class);
-        }
-        if (id == R.id.char_screen_abilities) {
-            startActivityWithCharacterInfo(Abilities.class);
-        }
-        if (id == R.id.char_screen_stats) {
-            startActivityWithCharacterInfo(Stats.class);
-        }
-        if (id == R.id.char_screen_misc) {
-            startActivityWithCharacterInfo(Misc.class);
-        }
-        if (id == R.id.char_screen_temp) {
-            startActivityWithCharacterInfo(Temp.class);
-        }
-        if (id == R.id.char_screen_hp) {
-            startActivityWithCharacterInfo(HitPoints.class);
-        }
-        if (id == R.id.char_screen_Weapon) {
-            startActivityWithCharacterInfo(Weapons.class);
-        }
-        if (id == R.id.char_screen_equipment) {
-            startActivityWithCharacterInfo(EquipmentActivity.class);
-        }
-        if (id == R.id.char_screen_dmgred) {
-            startActivityWithCharacterInfo(DamageReduction.class);
-        }
-        if (id == R.id.char_screen_feat) {
-            startActivityWithCharacterInfo(Feats.class);
-        }
-        if (id == R.id.char_screen_Inventory) {
-            startActivityWithCharacterInfo(Inventory.class);
-        }
-        if (id == R.id.char_screen_Langauges) {
-            startActivityWithCharacterInfo(Languages.class);
-        }
-        if (id == R.id.char_screen_spabilities) {
-            startActivityWithCharacterInfo(SpecialAbilities.class);
-        }
-        if (id == R.id.char_screen_spells) {
-            startActivityWithCharacterInfo(Spells.class);
-        }
-        if (id == R.id.char_screen_CharInfo) {
-            startActivityWithCharacterInfo(CharInfo.class);
-        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setActionBarOverflowBehaviours(int id) {
+//        otehrs
+//        if (id == R.id.char_screen_levelup) {
+//            startActivityWithCharacterInfo(LevelUp.class);
+//        }
+//        if (id == R.id.char_screen_abilities) {
+//            startActivityWithCharacterInfo(Abilities.class);
+//        }
+//        if (id == R.id.char_screen_stats) {
+//            startActivityWithCharacterInfo(Stats.class);
+//        }
+//        if (id == R.id.char_screen_misc) {
+//            startActivityWithCharacterInfo(Misc.class);
+//        }
+//        if (id == R.id.char_screen_temp) {
+//            startActivityWithCharacterInfo(Temp.class);
+//        }
+//        if (id == R.id.char_screen_hp) {
+//            startActivityWithCharacterInfo(HitPoints.class);
+//        }
+//        if (id == R.id.char_screen_Weapon) {
+//            startActivityWithCharacterInfo(Weapons.class);
+//        }
+//        if (id == R.id.char_screen_equipment) {
+//            startActivityWithCharacterInfo(EquipmentActivity.class);
+//        }
+//        if (id == R.id.char_screen_dmgred) {
+//            startActivityWithCharacterInfo(DamageReduction.class);
+//        }
+//        if (id == R.id.char_screen_feat) {
+//            startActivityWithCharacterInfo(Feats.class);
+//        }
+//        if (id == R.id.char_screen_Inventory) {
+//            startActivityWithCharacterInfo(Inventory.class);
+//        }
+//        if (id == R.id.char_screen_Langauges) {
+//            startActivityWithCharacterInfo(Languages.class);
+//        }
+//        if (id == R.id.char_screen_spabilities) {
+//            startActivityWithCharacterInfo(SpecialAbilities.class);
+//        }
+//        if (id == R.id.char_screen_spells) {
+//            startActivityWithCharacterInfo(Spells.class);
+//        }
+//        if (id == R.id.char_screen_CharInfo) {
+//            startActivityWithCharacterInfo(CharInfo.class);
+//        }
     }
 
     private void startActivityWithCharacterInfo(Class c) {

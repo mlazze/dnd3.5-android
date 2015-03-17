@@ -1,6 +1,5 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,26 +15,15 @@ import java.util.ArrayList;
 
 import core.DNDCLASS;
 import core.DnDCharacter;
-import core.DnDCharacterManipulator;
 
 
 public class LevelUp extends BaseActivity {
-    DnDCharacterManipulator character;
-    int posInArray;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_up);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         setClassSpinner(R.id.level_up_class_spinner, R.id.level_up_customclasslay);
         setSpinner(DnDCharacter.STATS.values(), R.id.level_up_new_stat_spinner);

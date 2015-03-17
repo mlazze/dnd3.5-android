@@ -10,18 +10,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-
-import core.DnDCharacterManipulator;
 
 
 public class Weapons extends BaseActivity {
 
 
-    DnDCharacterManipulator character;
-    int posInArray;
     private AdapterView.OnItemClickListener characterListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -44,14 +39,6 @@ public class Weapons extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weapons);
 
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
         updateWeaponList();
     }
 

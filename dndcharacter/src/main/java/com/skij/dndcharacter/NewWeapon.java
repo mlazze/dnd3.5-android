@@ -1,6 +1,5 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -16,29 +15,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import core.DnDCharacter;
-import core.DnDCharacterManipulator;
 import core.Weapon;
 
 
 public class NewWeapon extends BaseActivity {
 
 
-    DnDCharacterManipulator character;
-    int posInArray;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_weapon);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         ((EditText) findViewById(R.id.new_weapon_damagemod)).getText().insert(0, "" + 1);
         setSpinner(DnDCharacter.STATS.values(), R.id.new_weapon_stat_spinner);

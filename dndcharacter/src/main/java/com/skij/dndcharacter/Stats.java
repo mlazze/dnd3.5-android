@@ -1,6 +1,5 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,26 +8,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import core.DnDCharacter;
-import core.DnDCharacterManipulator;
 
 
 public class Stats extends BaseActivity {
-    DnDCharacterManipulator character;
-    int posInArray = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         setOriginalValues();
     }
