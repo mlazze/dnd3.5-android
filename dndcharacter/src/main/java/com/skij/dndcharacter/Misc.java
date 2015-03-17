@@ -2,7 +2,6 @@ package com.skij.dndcharacter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,10 +80,6 @@ public class Misc extends BaseActivity {
             startActivity(getIntent());
         }
         //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 

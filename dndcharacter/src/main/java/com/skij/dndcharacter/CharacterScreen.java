@@ -15,15 +15,10 @@ import java.util.List;
 import core.ABILITIES;
 import core.DNDCLASS;
 import core.DnDCharacter;
-import core.DnDCharacterManipulator;
 import core.Weapon;
 
 
 public class CharacterScreen extends BaseActivity {
-
-
-    private DnDCharacterManipulator character;
-    private int posInArray;
 
 
     @Override
@@ -231,7 +226,6 @@ public class CharacterScreen extends BaseActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         Intent i;
-        //noinspection SimplifiableIfStatement
         //buttons
 
         if (id == R.id.action_clear_temp) {

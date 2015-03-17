@@ -3,7 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_character_screen">CharacterScreen</string>
+    <string name="title_activity_character_screen">""</string>
     <string name="title_activity_new_character">NewCharacter</string>
     <string name="new_char_name_label">Name:*</string>
     <string name="new_char_race_label">Race:*</string>
@@ -29,6 +29,23 @@
     <string name="reflex">REF</string>
     <string name="will">WIL</string>
     <string name="create">Create!</string>
+    <string-array name="editcharactions">
+        <item name="char_screen_hp">Hit Points</item>
+        <item name="char_screen_temp">Temp</item>
+        <item name="char_screen_misc">Misc</item>
+        <item name="char_screen_spells">Spells</item>
+        <item name="char_screen_levelup">Level Up</item>
+        <item name="char_screen_Inventory">Inventory</item>
+        <item name="char_screen_abilities">Abilities</item>
+        <item name="char_screen_dmgred">Dmg.Red &amp; Sp.Resist</item>
+        <item name="char_screen_equipment">Equipment</item>
+        <item name="char_screen_feat">Feat</item>
+        <item name="char_screen_Langauges">Languages</item>
+        <item name="char_screen_spabilities">Special Abilities</item>
+        <item name="char_screen_stats">Stats</item>
+        <item name="char_screen_Weapon">Weapon</item>
+        <item name="char_screen_CharInfo">CharInfo</item>
+    </string-array>
     <string name="char_screen_levelup">Level Up</string>
     <string name="char_screen_abilities">Abilities</string>
     <string name="char_screen_spells">Spells</string>
@@ -135,5 +152,7 @@
     <string name="spells_new_spell_lvl_label">Level</string>
     <string name="title_activity_char_info">CharInfo</string>
     <string name="title_activity_exp">Exp</string>
+    <string name="ns_menu_open">Open Drawer</string>
+    <string name="ns_menu_close">Close Drawer</string>
 
 </resources>

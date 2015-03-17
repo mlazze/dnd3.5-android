@@ -2,7 +2,6 @@ package com.skij.dndcharacter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -74,10 +73,6 @@ public class NewWeapon extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
