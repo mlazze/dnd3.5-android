@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="brown">#48a56d3a</color>
+    <color name="navbar">#48a56d3a</color>
 </resources>
