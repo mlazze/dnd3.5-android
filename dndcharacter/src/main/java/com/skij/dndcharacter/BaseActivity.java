@@ -162,48 +162,51 @@ public class BaseActivity extends ActionBarActivity {
                     return;
                 }
                 if (id == 0) {
-                    startActivityWithCharacterInfo(HitPoints.class);
+                    startActivityWithCharacterInfo(CharacterScreen.class);
                 }
                 if (id == 1) {
-                    startActivityWithCharacterInfo(Temp.class);
+                    startActivityWithCharacterInfo(HitPoints.class);
                 }
                 if (id == 2) {
-                    startActivityWithCharacterInfo(Misc.class);
+                    startActivityWithCharacterInfo(Temp.class);
                 }
                 if (id == 3) {
-                    startActivityWithCharacterInfo(Spells.class);
+                    startActivityWithCharacterInfo(Misc.class);
                 }
                 if (id == 4) {
-                    startActivityWithCharacterInfo(LevelUp.class);
+                    startActivityWithCharacterInfo(Spells.class);
                 }
                 if (id == 5) {
-                    startActivityWithCharacterInfo(Inventory.class);
+                    startActivityWithCharacterInfo(LevelUp.class);
                 }
                 if (id == 6) {
-                    startActivityWithCharacterInfo(Abilities.class);
+                    startActivityWithCharacterInfo(Inventory.class);
                 }
                 if (id == 7) {
-                    startActivityWithCharacterInfo(DamageReduction.class);
+                    startActivityWithCharacterInfo(Abilities.class);
                 }
                 if (id == 8) {
-                    startActivityWithCharacterInfo(EquipmentActivity.class);
+                    startActivityWithCharacterInfo(DamageReduction.class);
                 }
                 if (id == 9) {
-                    startActivityWithCharacterInfo(Feats.class);
+                    startActivityWithCharacterInfo(EquipmentActivity.class);
                 }
                 if (id == 10) {
-                    startActivityWithCharacterInfo(Languages.class);
+                    startActivityWithCharacterInfo(Feats.class);
                 }
                 if (id == 11) {
-                    startActivityWithCharacterInfo(SpecialAbilities.class);
+                    startActivityWithCharacterInfo(Languages.class);
                 }
                 if (id == 12) {
-                    startActivityWithCharacterInfo(Stats.class);
+                    startActivityWithCharacterInfo(SpecialAbilities.class);
                 }
                 if (id == 13) {
-                    startActivityWithCharacterInfo(Weapons.class);
+                    startActivityWithCharacterInfo(Stats.class);
                 }
                 if (id == 14) {
+                    startActivityWithCharacterInfo(Weapons.class);
+                }
+                if (id == 15) {
                     startActivityWithCharacterInfo(CharInfo.class);
                 }
             }

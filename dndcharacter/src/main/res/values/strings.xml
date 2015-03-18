@@ -30,6 +30,7 @@
     <string name="will">WIL</string>
     <string name="create">Create!</string>
     <string-array name="editcharactions">
+        <item name="char_screen_summary">Summary</item>
         <item name="char_screen_hp">Hit Points</item>
         <item name="char_screen_temp">Temp</item>
         <item name="char_screen_misc">Misc</item>
