@@ -1,8 +1,6 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,26 +8,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import core.DnDCharacter;
-import core.DnDCharacterManipulator;
 
 
 public class Stats extends BaseActivity {
-    DnDCharacterManipulator character;
-    int posInArray = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         setOriginalValues();
     }
@@ -41,6 +28,9 @@ public class Stats extends BaseActivity {
         setEditTextToValue(R.id.stats_int, "" + character.getUnmodifiedStat(DnDCharacter.STATS.INT));
         setEditTextToValue(R.id.stats_wis, "" + character.getUnmodifiedStat(DnDCharacter.STATS.WIS));
         setEditTextToValue(R.id.stats_cha, "" + character.getUnmodifiedStat(DnDCharacter.STATS.CHA));
+        setEditTextToValue(R.id.level_up_for, character.getSavingthrowsbases()[DnDCharacter.SAVING.FORTITUDE.ordinal()] + "");
+        setEditTextToValue(R.id.level_up_ref, character.getSavingthrowsbases()[DnDCharacter.SAVING.REFLEX.ordinal()] + "");
+        setEditTextToValue(R.id.level_up_wil, character.getSavingthrowsbases()[DnDCharacter.SAVING.WILL.ordinal()] + "");
     }
 
     private void setEditTextToValue(int identifier, String value) {
@@ -63,16 +53,13 @@ public class Stats extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
 
     public void apply(View view) {
         int str, dex, con, inte, wis, cha;
+        int[] saving = new int[3];
         try {
             str = Integer.parseInt(((EditText) findViewById(R.id.stats_str)).getText().toString());
             dex = Integer.parseInt(((EditText) findViewById(R.id.stats_dex)).getText().toString());
@@ -80,8 +67,12 @@ public class Stats extends BaseActivity {
             inte = Integer.parseInt(((EditText) findViewById(R.id.stats_int)).getText().toString());
             wis = Integer.parseInt(((EditText) findViewById(R.id.stats_wis)).getText().toString());
             cha = Integer.parseInt(((EditText) findViewById(R.id.stats_cha)).getText().toString());
+
+            saving[DnDCharacter.SAVING.FORTITUDE.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_for)).getText().toString());
+            saving[DnDCharacter.SAVING.REFLEX.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_ref)).getText().toString());
+            saving[DnDCharacter.SAVING.WILL.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_wil)).getText().toString());
         } catch (NumberFormatException e) {
-            finish();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_SHORT).show();
             return;
         }
         int[] stats = {str, dex, con, inte, wis, cha};
@@ -89,9 +80,12 @@ public class Stats extends BaseActivity {
         for (DnDCharacter.STATS s : DnDCharacter.STATS.values()) {
             character.setStat(s, stats[s.ordinal()]);
         }
+        for (DnDCharacter.SAVING s : DnDCharacter.SAVING.values()) {
+            character.setSavingThrow(s, saving[s.ordinal()]);
+        }
 
         //applychanges
-        Toast.makeText(this, "Setting new stats", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Setting new stats", Toast.LENGTH_SHORT).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
 

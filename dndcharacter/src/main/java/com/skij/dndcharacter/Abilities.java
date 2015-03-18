@@ -1,8 +1,6 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,26 +11,15 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import core.ABILITIES;
-import core.DnDCharacterManipulator;
 
 
 public class Abilities extends BaseActivity {
-    DnDCharacterManipulator character;
-    int posInArray = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abilities);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         setSpinner(ABILITIES.values(), R.id.abilities_abilities_spinner);
         final Spinner s = (Spinner) findViewById(R.id.abilities_abilities_spinner);
@@ -71,11 +58,6 @@ public class Abilities extends BaseActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -85,7 +67,7 @@ public class Abilities extends BaseActivity {
         try {
             value = Integer.parseInt(((EditText) findViewById(R.id.abilities_value)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -94,13 +76,13 @@ public class Abilities extends BaseActivity {
         try {
             a = ABILITIES.values()[pos];
         } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
         //applychanges
         character.setAbilitySkill(a, value);
-        Toast.makeText(this, "Setting " + a + " to " + value, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Setting " + a + " to " + value, Toast.LENGTH_SHORT).show();
         Utils.editCharacter(character, posInArray, this);
 
     }

@@ -1,8 +1,6 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,26 +12,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import core.DnDCharacter;
-import core.DnDCharacterManipulator;
 
 
 public class HitPoints extends BaseActivity {
-    DnDCharacterManipulator character;
-    int posInArray;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hit_points);
 
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         setOriginalValues();
 
@@ -104,14 +92,10 @@ public class HitPoints extends BaseActivity {
 
         if (id == R.id.action_clear_temp_hp) {
             character.clearTempHp();
-            Toast.makeText(this, "Hp Log cleared", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Hp Log cleared", Toast.LENGTH_SHORT).show();
             Utils.editCharacter(character, posInArray, this);
             finish();
             startActivity(getIntent());
-        }
-        if (id == android.R.id.home) {
-            finish();
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -127,11 +111,11 @@ public class HitPoints extends BaseActivity {
                 character.setTempHPDelta(tmp);
             }
         } catch (DnDCharacter.InvalidCharacterException e) {
-            Toast.makeText(this, "Invalid Parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Invalid Parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
         startActivity(getIntent());

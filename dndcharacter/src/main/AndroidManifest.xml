@@ -11,26 +11,26 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".HomeScreen"
+            android:name=".CharacterScreen"
             android:label="@string/app_name" >
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".CharacterScreen"
-            android:label="@string/title_activity_character_screen"
-            android:parentActivityName=".HomeScreen" >
+            android:name=".HomeScreen"
+            android:label="@string/app_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.skij.dndcharacter.HomeScreen" />
+                android:value="com.skij.dndcharacter.CharacterScreen" />
         </activity>
         <activity
             android:name=".NewCharacter"
             android:label="@string/title_activity_new_character"
-            android:parentActivityName=".HomeScreen" >
+            android:parentActivityName=".HomeScreen"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.HomeScreen" />
@@ -38,7 +38,7 @@
         <activity
             android:name=".LevelUp"
             android:label="@string/title_activity_level_up"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -46,23 +46,21 @@
         <activity
             android:name=".Abilities"
             android:label="@string/title_activity_abilities"
-            android:parentActivityName=".CharacterScreen" >
-            <meta-data
+            >            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
         </activity>
         <activity
             android:name=".Stats"
             android:label="@string/title_activity_stats"
-            android:parentActivityName=".CharacterScreen" >
-            <meta-data
+            >            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
         </activity>
         <activity
             android:name=".Misc"
             android:label="@string/title_activity_misc"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -70,7 +68,7 @@
         <activity
             android:name=".Temp"
             android:label="@string/title_activity_temp"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -78,7 +76,7 @@
         <activity
             android:name=".HitPoints"
             android:label="@string/title_activity_hit_points"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -86,7 +84,7 @@
         <activity
             android:name=".Weapons"
             android:label="@string/title_activity_weapons"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -94,15 +92,14 @@
         <activity
             android:name=".NewWeapon"
             android:label="@string/title_activity_new_weapon"
-            android:parentActivityName=".Weapons" >
-            <meta-data
+            >            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.Weapons" />
         </activity>
         <activity
             android:name=".EquipmentActivity"
             android:label="@string/title_activity_equipment"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -110,7 +107,7 @@
         <activity
             android:name=".NewEquipment"
             android:label="@string/title_activity_new_equipment"
-            android:parentActivityName=".EquipmentActivity" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.EquipmentActivity" />
@@ -118,7 +115,7 @@
         <activity
             android:name=".DamageReduction"
             android:label="@string/title_activity_damage_reduction"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -126,7 +123,7 @@
         <activity
             android:name=".Feats"
             android:label="@string/title_activity_feat"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -134,7 +131,7 @@
         <activity
             android:name=".Inventory"
             android:label="@string/title_activity_inventory"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -142,7 +139,7 @@
         <activity
             android:name=".Languages"
             android:label="@string/title_activity_languages"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -150,7 +147,7 @@
         <activity
             android:name=".SpecialAbilities"
             android:label="@string/title_activity_special_abilities"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -158,7 +155,7 @@
         <activity
             android:name=".Spells"
             android:label="@string/title_activity_spells"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -166,7 +163,7 @@
         <activity
             android:name=".CharInfo"
             android:label="@string/title_activity_char_info"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />
@@ -174,7 +171,7 @@
         <activity
             android:name=".Exp"
             android:label="@string/title_activity_exp"
-            android:parentActivityName=".CharacterScreen" >
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.skij.dndcharacter.CharacterScreen" />

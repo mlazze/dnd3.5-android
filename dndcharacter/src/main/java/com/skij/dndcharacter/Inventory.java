@@ -1,8 +1,6 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -17,26 +15,14 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import core.DnDCharacterManipulator;
-
 
 public class Inventory extends BaseActivity {
-    DnDCharacterManipulator character;
-    int posInArray;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         setOriginalValues();
 
@@ -112,15 +98,11 @@ public class Inventory extends BaseActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
     public void apply(View view) {
-        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
     }
@@ -131,7 +113,7 @@ public class Inventory extends BaseActivity {
         try {
             amount = Integer.parseInt(((EditText) findViewById(R.id.inventory_new_item_amount)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_SHORT).show();
             return;
         }
         if (!name.equals("")) {

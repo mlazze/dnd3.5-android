@@ -1,9 +1,7 @@
 package com.skij.dndcharacter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,26 +17,14 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import core.DnDCharacterManipulator;
-
 
 public class Spells extends BaseActivity {
-    DnDCharacterManipulator character;
-    int posInArray;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spells);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         setOriginalValues();
     }
@@ -69,15 +55,11 @@ public class Spells extends BaseActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
     public void apply(View view) {
-        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
     }
@@ -96,7 +78,7 @@ public class Spells extends BaseActivity {
         try {
             level = Integer.parseInt(((EditText) findViewById(R.id.spells_new_spell_lvl)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -189,8 +171,10 @@ public class Spells extends BaseActivity {
                 public void onClick(View view) {
                     String spell = ai.split("\\(lv[0-9]*\\) x")[0];
                     int level = Integer.parseInt(ai.split("\\(lv")[1].split("\\) x")[0]);
-                    Toast.makeText(parent.getContext(), character.getSpellDesciption(0, spell, level), Toast.LENGTH_LONG).show();
-                    updateSpells();
+                    String s = character.getSpellDesciption(0, spell, level);
+                    if (s.equals(""))
+                        s = "No spell description found";
+                    Toast.makeText(getApplicationContext(), s , Toast.LENGTH_LONG).show();
                 }
             });
             button = (Button) view.findViewById(R.id.spell_item_delete);

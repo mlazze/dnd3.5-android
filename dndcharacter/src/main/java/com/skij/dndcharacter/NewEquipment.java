@@ -1,8 +1,6 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,29 +11,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import core.DnDCharacterManipulator;
 import core.Equipment;
 
 
 public class NewEquipment extends BaseActivity {
 
 
-    DnDCharacterManipulator character;
-    int posInArray;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_equipment);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         ((EditText) findViewById(R.id.new_equipment_maxdex)).getText().insert(0, "" + 999);
         setSpinner(Equipment.TYPE.values(), R.id.new_equipment_type_spinner);
@@ -70,10 +55,6 @@ public class NewEquipment extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -83,12 +64,12 @@ public class NewEquipment extends BaseActivity {
         try {
             maxdex = Integer.parseInt(getValueFromEditText(R.id.new_equipment_maxdex));
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
         String name = getValueFromEditText(R.id.new_equipment_name);
         if (name.equals("")) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -97,7 +78,7 @@ public class NewEquipment extends BaseActivity {
         try {
             t = Equipment.TYPE.values()[x];
         } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -157,7 +138,7 @@ public class NewEquipment extends BaseActivity {
 
         character.setEquipment(e, false);
         Utils.editCharacter(character, posInArray, this);
-        Toast.makeText(this, "Equipment Added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Equipment Added", Toast.LENGTH_SHORT).show();
         finish();
     }
 

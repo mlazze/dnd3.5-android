@@ -6,52 +6,75 @@
         <item name="android:windowBackground">@drawable/backrepeat</item>
         <item name="android:textViewStyle">@style/graywithroundedbackgroundmultiline</item>
         <item name="android:editTextStyle">@style/edittext</item>
-        <item name="android:buttonStyle"> @style/button</item>
+        <item name="android:buttonStyle">@style/button</item>
         <item name="android:actionBarStyle">@style/actionBar</item>
         <item name="actionBarStyle">@style/actionBar</item>
         <item name="android:actionBarTabTextStyle">@style/ActionBarTabText</item>
         <item name="actionBarTabTextStyle">@style/ActionBarTabText</item>
-        <item name="android:actionMenuTextAppearance">@style/TextAppearance.AppCompat.Widget.ActionBar.Menu</item>
-        <item name="actionMenuTextAppearance">@style/TextAppearance.AppCompat.Widget.ActionBar.Menu</item>
+        <item name="android:actionMenuTextAppearance">
+            @style/TextAppearance.AppCompat.Widget.ActionBar.Menu
+        </item>
+        <item name="actionMenuTextAppearance">
+            @style/TextAppearance.AppCompat.Widget.ActionBar.Menu
+        </item>
         <!--monospace is overridden in BaseAdapter-->
         <item name="android:typeface">monospace</item>
 
+        <item name="android:spinnerItemStyle">@style/spinnerItem</item>
+
     </style>
 
+    <style name="spinnerItem" parent="Base.Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:background">#8000</item>
+        <item name="android:paddingRight">?android:attr/listPreferredItemPaddingRight</item>
+        <item name="android:paddingTop">?android:attr/listPreferredItemPaddingStart</item>
+        <item name="android:paddingBottom">?android:attr/listPreferredItemPaddingEnd</item>
+        <item name="android:paddingLeft">?android:attr/listPreferredItemPaddingLeft</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
     <style name="ActionBarTabText" parent="Base.Widget.AppCompat.ActionBar.TabText">
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:textColor">#b3cdcdcd</item>
+        <item name="android:textSize">24sp</item>
     </style>
+
     <style name="actionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">#48a56d3a</item>
         <item name="background">@color/brown</item>
     </style>
+
     <style name="button" parent="Base.TextAppearance.AppCompat.Button">
         <item name="android:background">@drawable/button</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:paddingLeft">18dp</item>
         <item name="android:paddingRight">18dp</item>
+        <item name="android:textColor">#b3cdcdcd</item>
     </style>
 
     <style name="graywithroundedbackground">
-        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <!--<item name="android:textAppearance">?android:attr/textAppearanceLarge</item>-->
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">#b3cdcdcd</item>
         <item name="android:background">@drawable/char_screen_rounded</item>
         <item name="android:text">ProvaProva</item>
         <item name="android:singleLine">true</item>
         <item name="android:layout_marginBottom">3dp</item>
     </style>
+
     <style name="graywithroundedbackgroundmultiline">
-        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">#b3cdcdcd</item>
         <item name="android:background">@drawable/char_screen_rounded</item>
         <item name="android:text">ProvaProva</item>
         <item name="android:layout_marginBottom">3dp</item>
     </style>
+
     <style name="edittext" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">#b3cdcdcd</item>
         <item name="android:background">@drawable/char_screen_rounded</item>
         <item name="android:layout_marginBottom">3dp</item>

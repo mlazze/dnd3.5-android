@@ -2,7 +2,6 @@ package com.skij.dndcharacter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,18 +10,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-
-import core.DnDCharacterManipulator;
 
 
 public class Weapons extends BaseActivity {
 
 
-    DnDCharacterManipulator character;
-    int posInArray;
     private AdapterView.OnItemClickListener characterListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -45,14 +39,6 @@ public class Weapons extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weapons);
 
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
         updateWeaponList();
     }
 
@@ -109,10 +95,6 @@ public class Weapons extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

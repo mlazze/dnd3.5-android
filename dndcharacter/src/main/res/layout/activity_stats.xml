@@ -1,172 +1,249 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="com.skij.dndcharacter.Stats">
+    android:layout_height="match_parent">
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scrollbars="none"
-        tools:ignore="UselessParent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        tools:context="com.skij.dndcharacter.Stats">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="fill_parent"
+            android:scrollbars="none"
             tools:ignore="UselessParent">
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
                     <LinearLayout
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/stats_str_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/strength_required"
+                                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                            <EditText
+                                android:id="@+id/stats_str"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/stats_dex_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/dexterity_required"
+                                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                            <EditText
+                                android:id="@+id/stats_dex"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/stats_con_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/constitution_required"
+                                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                            <EditText
+                                android:id="@+id/stats_con"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/stats_int_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/intellect_required"
+                                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                            <EditText
+                                android:id="@+id/stats_int"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/stats_wis_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/wisdom_required"
+                                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                            <EditText
+                                android:id="@+id/stats_wis"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/stats_cha_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/charisma_required"
+                                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                            <EditText
+                                android:id="@+id/stats_cha"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/stats_str_label"
+                            android:id="@+id/level_up_for_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/strength_required"
+                            android:text="@string/fortitude_required"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
-                            android:id="@+id/stats_str"
+                            android:id="@+id/level_up_for"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/stats_dex_label"
+                            android:id="@+id/level_up_ref_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/dexterity_required"
+                            android:text="@string/reflex_required"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
-                            android:id="@+id/stats_dex"
+                            android:id="@+id/level_up_ref"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/stats_con_label"
+                            android:id="@+id/level_up_wil_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/constitution_required"
+                            android:text="@string/will_required"
                             android:textAppearance="?android:attr/textAppearanceLarge" />
 
                         <EditText
-                            android:id="@+id/stats_con"
+                            android:id="@+id/level_up_wil"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/stats_int_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/intellect_required"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                        <EditText
-                            android:id="@+id/stats_int"
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/stats_wis_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/wisdom_required"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                        <EditText
-                            android:id="@+id/stats_wis"
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/stats_cha_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/charisma_required"
-                            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                        <EditText
-                            android:id="@+id/stats_cha"
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </LinearLayout>
-                </LinearLayout>
-
-
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:onClick="apply"
+                    android:text="@string/apply" />
             </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
 
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:onClick="apply"
-                android:text="@string/apply" />
-
-        </LinearLayout>
-    </ScrollView>
-
-
-</RelativeLayout>
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/navbar"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
+</android.support.v4.widget.DrawerLayout>

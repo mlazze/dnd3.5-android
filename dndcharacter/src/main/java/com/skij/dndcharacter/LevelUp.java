@@ -1,8 +1,6 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,26 +15,15 @@ import java.util.ArrayList;
 
 import core.DNDCLASS;
 import core.DnDCharacter;
-import core.DnDCharacterManipulator;
 
 
 public class LevelUp extends BaseActivity {
-    DnDCharacterManipulator character;
-    int posInArray;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_up);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         setClassSpinner(R.id.level_up_class_spinner, R.id.level_up_customclasslay);
         setSpinner(DnDCharacter.STATS.values(), R.id.level_up_new_stat_spinner);
@@ -109,10 +96,6 @@ public class LevelUp extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -121,7 +104,7 @@ public class LevelUp extends BaseActivity {
         try {
             liferoll = Integer.parseInt(((EditText) findViewById(R.id.level_up_liferoll)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -131,13 +114,13 @@ public class LevelUp extends BaseActivity {
             saving[DnDCharacter.SAVING.REFLEX.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_ref)).getText().toString());
             saving[DnDCharacter.SAVING.WILL.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_wil)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
         ArrayList<Integer> atkbonus = getAtkBonus();
         if (atkbonus == null) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -146,7 +129,7 @@ public class LevelUp extends BaseActivity {
         try {
             dndclass = DNDCLASS.values()[pos];
         } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
         DnDCharacter.STATS s;
@@ -154,7 +137,7 @@ public class LevelUp extends BaseActivity {
         try {
             s = DnDCharacter.STATS.values()[x];
         } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -174,13 +157,13 @@ public class LevelUp extends BaseActivity {
                 customclassname = ((EditText) findViewById(R.id.level_up_customclass)).getText().toString();
 
                 if (customclassname.equals("")) {
-                    Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
                     return;
                 }
                 character.levelup(dndclass, customclassname, liferoll, atkbonus, s, newstatdelta, saving);
             }
         } catch (DnDCharacter.InvalidCharacterException e) {
-            Toast.makeText(this, "Invalid Values", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Invalid Values", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -195,7 +178,7 @@ public class LevelUp extends BaseActivity {
         try {
             atkbonus = Integer.parseInt(((EditText) findViewById(R.id.level_up_atk1)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return null;
         }
         res.add(atkbonus);

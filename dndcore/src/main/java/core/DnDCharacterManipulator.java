@@ -25,6 +25,10 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         recalculate();
     }
 
+    public void setSavingThrow(SAVING s, int value) {
+        savingthrowsbases[s.ordinal()]=value;
+    }
+
     public void setTempHPMaxDelta(int value) {
         temphitpointsmax += value;
         recalculate();

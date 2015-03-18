@@ -1,8 +1,6 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,26 +8,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import core.DnDCharacter;
-import core.DnDCharacterManipulator;
 
 
 public class Misc extends BaseActivity {
-    DnDCharacterManipulator character;
-    int posInArray;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_misc);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         setOriginalValues();
     }
@@ -75,16 +62,12 @@ public class Misc extends BaseActivity {
         int id = item.getItemId();
         if (id == R.id.action_clear_misc) {
             character.clearMisc();
-            Toast.makeText(this, "Miscellaneous stats cleared", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Miscellaneous stats cleared", Toast.LENGTH_SHORT).show();
             Utils.editCharacter(character, posInArray, this);
             finish();
             startActivity(getIntent());
         }
         //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -141,11 +124,11 @@ public class Misc extends BaseActivity {
                 character.setMiscSavingThrows(DnDCharacter.SAVING.WILL, tmp, true);
             }
         } catch (DnDCharacter.InvalidCharacterException e) {
-            Toast.makeText(this, "Invalid Parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Invalid Parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
     }

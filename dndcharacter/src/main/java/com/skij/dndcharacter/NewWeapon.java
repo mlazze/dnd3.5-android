@@ -1,8 +1,6 @@
 package com.skij.dndcharacter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,29 +15,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import core.DnDCharacter;
-import core.DnDCharacterManipulator;
 import core.Weapon;
 
 
 public class NewWeapon extends BaseActivity {
 
 
-    DnDCharacterManipulator character;
-    int posInArray;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_weapon);
-
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        character = Utils.getCharacter(posInArray, this);
 
         ((EditText) findViewById(R.id.new_weapon_damagemod)).getText().insert(0, "" + 1);
         setSpinner(DnDCharacter.STATS.values(), R.id.new_weapon_stat_spinner);
@@ -74,10 +59,6 @@ public class NewWeapon extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -90,7 +71,7 @@ public class NewWeapon extends BaseActivity {
             critmult = Double.parseDouble(getValueFromEditText(R.id.new_weapon_critmult));
             range = Double.parseDouble(getValueFromEditText(R.id.new_weapon_range));
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
         double damagemod;
@@ -109,12 +90,12 @@ public class NewWeapon extends BaseActivity {
 
         String damagedices = getValueFromEditText(R.id.new_weapon_damagedices);
         if (damagedices.equals("")) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
         String name = getValueFromEditText(R.id.new_weapon_name);
         if (name.equals("")) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -128,7 +109,7 @@ public class NewWeapon extends BaseActivity {
         try {
             stat = DnDCharacter.STATS.values()[x];
         } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -142,7 +123,7 @@ public class NewWeapon extends BaseActivity {
 
         character.setWeapon(w, false);
         Utils.editCharacter(character, posInArray, this);
-        Toast.makeText(this, "Weapon Added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Weapon Added", Toast.LENGTH_SHORT).show();
         finish();
     }
 

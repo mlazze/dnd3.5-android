@@ -2,7 +2,6 @@ package com.skij.dndcharacter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +29,7 @@ public class HomeScreen extends BaseActivity {
                 i = new Intent(HomeScreen.this, CharacterScreen.class);
                 i.putExtra("Character", position);
             }
+            finish();
             startActivity(i);
         }
     };

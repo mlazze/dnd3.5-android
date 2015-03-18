@@ -15,28 +15,29 @@ import java.util.List;
 import core.ABILITIES;
 import core.DNDCLASS;
 import core.DnDCharacter;
-import core.DnDCharacterManipulator;
 import core.Weapon;
 
 
 public class CharacterScreen extends BaseActivity {
 
-
-    private DnDCharacterManipulator character;
-    private int posInArray;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        suffix = "";
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_character_screen);
+        if (posInArray == -1) {
+            setContentView(R.layout.activity_character_screen_nochar);
+            String s = "";
+            s += "1. Choose or add a character from Character List\n";
+            s += "2. Edit its properties\n";
+            s += "3. Profit!";
+            ((TextView) findViewById(R.id.char_screen_tutorial)).setText(s);
+        } else {
+            setContentView(R.layout.activity_character_screen);
 
-        if (loadChar()) return;
-
-
-        //TODO
-        setOriginalValues();
-        setOnClickListeners();
+            //TODO
+            setOriginalValues();
+            setOnClickListeners();
+        }
     }
 
     private void setOnClickListeners() {
@@ -94,7 +95,7 @@ public class CharacterScreen extends BaseActivity {
         setTextViewTo(R.id.cs_int, formatStat(DnDCharacter.STATS.INT, getResources().getString(R.string.intellect)));
         setTextViewTo(R.id.cs_init, format("Initiative", character.getInititative()));
         setTextViewTo(R.id.cs_wis, formatStat(DnDCharacter.STATS.WIS, getResources().getString(R.string.wisdom)));
-        setTextViewTo(R.id.cs_baseatk, formatAsList("BAB", character.getBasicAttackBonuses(), "/", "", ""));
+        setTextViewTo(R.id.cs_baseatk, formatAsList("BAB", character.getBasicAttackBonuses(), "/", " ", ""));
         setTextViewTo(R.id.cs_cha, formatStat(DnDCharacter.STATS.CHA, getResources().getString(R.string.charisma)));
         setTextViewTo(R.id.cs_lotta, format("Lotta", character.getLotta()));
         setTextViewTo(R.id.cs_ac, format("AC", character.getAC()));
@@ -178,7 +179,7 @@ public class CharacterScreen extends BaseActivity {
     }
 
     private String formatStat(DnDCharacter.STATS s, String label) {
-        return label + ": " + character.getStat(s) + " | M: " + character.getMod(s);
+        return label + ": " + character.getStat(s) + " | " + character.getMod(s);
     }
 
     private String formatSaving(DnDCharacter.SAVING s, String label) {
@@ -199,22 +200,13 @@ public class CharacterScreen extends BaseActivity {
         ((TextView) findViewById(resource)).setText(value);
     }
 
-    private boolean loadChar() {
-        Intent i = getIntent();
-        posInArray = i.getIntExtra("Character", -1);
-        if (posInArray == -1 || posInArray >= Utils.getCharacterList(this).size()) {
-            Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        character = Utils.getCharacter(posInArray, this);
-        return false;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        loadChar();
-        setOriginalValues();
+        if (posInArray != -1) {
+            super.loadChar();
+            setOriginalValues();
+        }
     }
 
     @Override
@@ -231,12 +223,14 @@ public class CharacterScreen extends BaseActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         Intent i;
-        //noinspection SimplifiableIfStatement
         //buttons
-
+        if (posInArray == -1) {
+            Toast.makeText(getApplicationContext(), "Choose a character first", Toast.LENGTH_SHORT).show();
+            return super.onOptionsItemSelected(item);
+        }
         if (id == R.id.action_clear_temp) {
             character.clearTemp();
-            Toast.makeText(this, "Temporary stats cleared", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Temporary stats cleared", Toast.LENGTH_SHORT).show();
             Utils.editCharacter(character, posInArray, this);
             finish();
             startActivity(getIntent());
@@ -247,53 +241,57 @@ public class CharacterScreen extends BaseActivity {
         if (id == R.id.action_hit_points) {
             startActivityWithCharacterInfo(HitPoints.class);
         }
-        //otehrs
-        if (id == R.id.char_screen_levelup) {
-            startActivityWithCharacterInfo(LevelUp.class);
-        }
-        if (id == R.id.char_screen_abilities) {
-            startActivityWithCharacterInfo(Abilities.class);
-        }
-        if (id == R.id.char_screen_stats) {
-            startActivityWithCharacterInfo(Stats.class);
-        }
-        if (id == R.id.char_screen_misc) {
-            startActivityWithCharacterInfo(Misc.class);
-        }
-        if (id == R.id.char_screen_temp) {
-            startActivityWithCharacterInfo(Temp.class);
-        }
-        if (id == R.id.char_screen_hp) {
-            startActivityWithCharacterInfo(HitPoints.class);
-        }
-        if (id == R.id.char_screen_Weapon) {
-            startActivityWithCharacterInfo(Weapons.class);
-        }
-        if (id == R.id.char_screen_equipment) {
-            startActivityWithCharacterInfo(EquipmentActivity.class);
-        }
-        if (id == R.id.char_screen_dmgred) {
-            startActivityWithCharacterInfo(DamageReduction.class);
-        }
-        if (id == R.id.char_screen_feat) {
-            startActivityWithCharacterInfo(Feats.class);
-        }
-        if (id == R.id.char_screen_Inventory) {
-            startActivityWithCharacterInfo(Inventory.class);
-        }
-        if (id == R.id.char_screen_Langauges) {
-            startActivityWithCharacterInfo(Languages.class);
-        }
-        if (id == R.id.char_screen_spabilities) {
-            startActivityWithCharacterInfo(SpecialAbilities.class);
-        }
-        if (id == R.id.char_screen_spells) {
-            startActivityWithCharacterInfo(Spells.class);
-        }
-        if (id == R.id.char_screen_CharInfo) {
-            startActivityWithCharacterInfo(CharInfo.class);
-        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setActionBarOverflowBehaviours(int id) {
+//        otehrs
+//        if (id == R.id.char_screen_levelup) {
+//            startActivityWithCharacterInfo(LevelUp.class);
+//        }
+//        if (id == R.id.char_screen_abilities) {
+//            startActivityWithCharacterInfo(Abilities.class);
+//        }
+//        if (id == R.id.char_screen_stats) {
+//            startActivityWithCharacterInfo(Stats.class);
+//        }
+//        if (id == R.id.char_screen_misc) {
+//            startActivityWithCharacterInfo(Misc.class);
+//        }
+//        if (id == R.id.char_screen_temp) {
+//            startActivityWithCharacterInfo(Temp.class);
+//        }
+//        if (id == R.id.char_screen_hp) {
+//            startActivityWithCharacterInfo(HitPoints.class);
+//        }
+//        if (id == R.id.char_screen_Weapon) {
+//            startActivityWithCharacterInfo(Weapons.class);
+//        }
+//        if (id == R.id.char_screen_equipment) {
+//            startActivityWithCharacterInfo(EquipmentActivity.class);
+//        }
+//        if (id == R.id.char_screen_dmgred) {
+//            startActivityWithCharacterInfo(DamageReduction.class);
+//        }
+//        if (id == R.id.char_screen_feat) {
+//            startActivityWithCharacterInfo(Feats.class);
+//        }
+//        if (id == R.id.char_screen_Inventory) {
+//            startActivityWithCharacterInfo(Inventory.class);
+//        }
+//        if (id == R.id.char_screen_Langauges) {
+//            startActivityWithCharacterInfo(Languages.class);
+//        }
+//        if (id == R.id.char_screen_spabilities) {
+//            startActivityWithCharacterInfo(SpecialAbilities.class);
+//        }
+//        if (id == R.id.char_screen_spells) {
+//            startActivityWithCharacterInfo(Spells.class);
+//        }
+//        if (id == R.id.char_screen_CharInfo) {
+//            startActivityWithCharacterInfo(CharInfo.class);
+//        }
     }
 
     private void startActivityWithCharacterInfo(Class c) {
