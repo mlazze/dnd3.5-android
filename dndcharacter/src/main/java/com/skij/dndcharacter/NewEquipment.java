@@ -64,12 +64,12 @@ public class NewEquipment extends BaseActivity {
         try {
             maxdex = Integer.parseInt(getValueFromEditText(R.id.new_equipment_maxdex));
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
         String name = getValueFromEditText(R.id.new_equipment_name);
         if (name.equals("")) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -78,7 +78,7 @@ public class NewEquipment extends BaseActivity {
         try {
             t = Equipment.TYPE.values()[x];
         } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -138,7 +138,7 @@ public class NewEquipment extends BaseActivity {
 
         character.setEquipment(e, false);
         Utils.editCharacter(character, posInArray, this);
-        Toast.makeText(this, "Equipment Added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Equipment Added", Toast.LENGTH_SHORT).show();
         finish();
     }
 

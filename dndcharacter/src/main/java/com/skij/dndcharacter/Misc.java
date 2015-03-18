@@ -62,7 +62,7 @@ public class Misc extends BaseActivity {
         int id = item.getItemId();
         if (id == R.id.action_clear_misc) {
             character.clearMisc();
-            Toast.makeText(this, "Miscellaneous stats cleared", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Miscellaneous stats cleared", Toast.LENGTH_SHORT).show();
             Utils.editCharacter(character, posInArray, this);
             finish();
             startActivity(getIntent());
@@ -124,11 +124,11 @@ public class Misc extends BaseActivity {
                 character.setMiscSavingThrows(DnDCharacter.SAVING.WILL, tmp, true);
             }
         } catch (DnDCharacter.InvalidCharacterException e) {
-            Toast.makeText(this, "Invalid Parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Invalid Parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
     }

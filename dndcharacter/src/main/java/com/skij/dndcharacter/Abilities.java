@@ -67,7 +67,7 @@ public class Abilities extends BaseActivity {
         try {
             value = Integer.parseInt(((EditText) findViewById(R.id.abilities_value)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -76,13 +76,13 @@ public class Abilities extends BaseActivity {
         try {
             a = ABILITIES.values()[pos];
         } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
         //applychanges
         character.setAbilitySkill(a, value);
-        Toast.makeText(this, "Setting " + a + " to " + value, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Setting " + a + " to " + value, Toast.LENGTH_SHORT).show();
         Utils.editCharacter(character, posInArray, this);
 
     }

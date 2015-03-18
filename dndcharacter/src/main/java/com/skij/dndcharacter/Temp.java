@@ -119,7 +119,7 @@ public class Temp extends BaseActivity {
         int id = item.getItemId();
         if (id == R.id.action_clear_temp) {
             character.clearTemp();
-            Toast.makeText(this, "Temporary stats cleared", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Temporary stats cleared", Toast.LENGTH_SHORT).show();
             Utils.editCharacter(character, posInArray, this);
             finish();
             startActivity(getIntent());
@@ -169,11 +169,11 @@ public class Temp extends BaseActivity {
                 character.setTempSaving(DnDCharacter.SAVING.WILL, tmp);
             }
         } catch (DnDCharacter.InvalidCharacterException e) {
-            Toast.makeText(this, "Invalid Parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Invalid Parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
     }

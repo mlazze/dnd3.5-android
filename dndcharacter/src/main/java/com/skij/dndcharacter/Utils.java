@@ -130,7 +130,7 @@ public class Utils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Toast.makeText(c, "Data Saved in " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(c.getApplicationContext(), "Data Saved in " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
     }
 
     public static void loadData(Context c) {
@@ -149,17 +149,17 @@ public class Utils {
                 characterList = jsonStringtoArrList(tmp);
 
             } catch (Exception e) {
-                Toast.makeText(c, "Error reading file " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                Toast.makeText(c.getApplicationContext(), "Error reading file " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
                 return;
             }
             savePrefs(c);
-            Toast.makeText(c, "Data loaded from " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            Toast.makeText(c.getApplicationContext(), "Data loaded from " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
 
         } catch (FileNotFoundException e) {
-            Toast.makeText(c, "File not found in " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            Toast.makeText(c.getApplicationContext(), "File not found in " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(c, "Error reading file " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            Toast.makeText(c.getApplicationContext(), "Error reading file " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
         }
     }
 }

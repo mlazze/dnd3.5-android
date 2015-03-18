@@ -59,7 +59,7 @@ public class Spells extends BaseActivity {
     }
 
     public void apply(View view) {
-        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
     }
@@ -78,7 +78,7 @@ public class Spells extends BaseActivity {
         try {
             level = Integer.parseInt(((EditText) findViewById(R.id.spells_new_spell_lvl)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -171,8 +171,10 @@ public class Spells extends BaseActivity {
                 public void onClick(View view) {
                     String spell = ai.split("\\(lv[0-9]*\\) x")[0];
                     int level = Integer.parseInt(ai.split("\\(lv")[1].split("\\) x")[0]);
-                    Toast.makeText(parent.getContext(), character.getSpellDesciption(0, spell, level), Toast.LENGTH_LONG).show();
-                    updateSpells();
+                    String s = character.getSpellDesciption(0, spell, level);
+                    if (s.equals(""))
+                        s = "No spell description found";
+                    Toast.makeText(getApplicationContext(), s , Toast.LENGTH_LONG).show();
                 }
             });
             button = (Button) view.findViewById(R.id.spell_item_delete);

@@ -225,12 +225,12 @@ public class CharacterScreen extends BaseActivity {
         Intent i;
         //buttons
         if (posInArray == -1) {
-            Toast.makeText(CharacterScreen.this, "Choose a character first", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Choose a character first", Toast.LENGTH_SHORT).show();
             return super.onOptionsItemSelected(item);
         }
         if (id == R.id.action_clear_temp) {
             character.clearTemp();
-            Toast.makeText(this, "Temporary stats cleared", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Temporary stats cleared", Toast.LENGTH_SHORT).show();
             Utils.editCharacter(character, posInArray, this);
             finish();
             startActivity(getIntent());

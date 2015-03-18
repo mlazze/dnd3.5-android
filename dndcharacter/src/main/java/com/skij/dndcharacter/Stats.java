@@ -72,7 +72,7 @@ public class Stats extends BaseActivity {
             saving[DnDCharacter.SAVING.REFLEX.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_ref)).getText().toString());
             saving[DnDCharacter.SAVING.WILL.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_wil)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_SHORT).show();
             return;
         }
         int[] stats = {str, dex, con, inte, wis, cha};
@@ -85,7 +85,7 @@ public class Stats extends BaseActivity {
         }
 
         //applychanges
-        Toast.makeText(this, "Setting new stats", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Setting new stats", Toast.LENGTH_SHORT).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
 

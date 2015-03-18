@@ -92,7 +92,7 @@ public class HitPoints extends BaseActivity {
 
         if (id == R.id.action_clear_temp_hp) {
             character.clearTempHp();
-            Toast.makeText(this, "Hp Log cleared", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Hp Log cleared", Toast.LENGTH_SHORT).show();
             Utils.editCharacter(character, posInArray, this);
             finish();
             startActivity(getIntent());
@@ -111,11 +111,11 @@ public class HitPoints extends BaseActivity {
                 character.setTempHPDelta(tmp);
             }
         } catch (DnDCharacter.InvalidCharacterException e) {
-            Toast.makeText(this, "Invalid Parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Invalid Parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Toast.makeText(this, "Applying Changes", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
         startActivity(getIntent());

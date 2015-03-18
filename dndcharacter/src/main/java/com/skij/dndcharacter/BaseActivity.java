@@ -158,7 +158,7 @@ public class BaseActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (posInArray == -1) {
-                    Toast.makeText(BaseActivity.this, "Choose a character first", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Choose a character first", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (id == 0) {

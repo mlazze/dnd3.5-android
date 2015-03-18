@@ -90,7 +90,7 @@ public class NewCharacter extends BaseActivity {
             wil = Integer.parseInt(((EditText) findViewById(R.id.new_char_wil)).getText().toString());
             runspeed = Integer.parseInt(((EditText) findViewById(R.id.new_char_runspeed)).getText().toString());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
         int[] stats = {str, dex, con, inte, wis, cha};
@@ -100,7 +100,7 @@ public class NewCharacter extends BaseActivity {
         name = ((EditText) findViewById(R.id.new_char_name)).getText().toString();
         race = ((EditText) findViewById(R.id.new_char_race)).getText().toString();
         if (name.equals("") || race.equals("")) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -110,7 +110,7 @@ public class NewCharacter extends BaseActivity {
         try {
             dndclass = DNDCLASS.values()[pos];
         } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -123,7 +123,7 @@ public class NewCharacter extends BaseActivity {
             customclassname = ((EditText) findViewById(R.id.new_char_customclass)).getText().toString();
 
             if (customclassname.equals("")) {
-                Toast.makeText(this, "Missing required parameters", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
                 return;
             }
             newChar = new DnDCharacterManipulator(name, race, dndclass, stats, runspeed, sav, customclassname);
