@@ -95,7 +95,7 @@ public class CharacterScreen extends BaseActivity {
         setTextViewTo(R.id.cs_int, formatStat(DnDCharacter.STATS.INT, getResources().getString(R.string.intellect)));
         setTextViewTo(R.id.cs_init, format("Initiative", character.getInititative()));
         setTextViewTo(R.id.cs_wis, formatStat(DnDCharacter.STATS.WIS, getResources().getString(R.string.wisdom)));
-        setTextViewTo(R.id.cs_baseatk, formatAsList("BAB", character.getBasicAttackBonuses(), "/", "", ""));
+        setTextViewTo(R.id.cs_baseatk, formatAsList("BAB", character.getBasicAttackBonuses(), "/", " ", ""));
         setTextViewTo(R.id.cs_cha, formatStat(DnDCharacter.STATS.CHA, getResources().getString(R.string.charisma)));
         setTextViewTo(R.id.cs_lotta, format("Lotta", character.getLotta()));
         setTextViewTo(R.id.cs_ac, format("AC", character.getAC()));
