@@ -20,8 +20,18 @@
         <!--monospace is overridden in BaseAdapter-->
         <item name="android:typeface">monospace</item>
 
+        <item name="android:spinnerItemStyle">@style/spinnerItem</item>
+
     </style>
 
+    <style name="spinnerItem" parent="Base.Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:background">#8000</item>
+        <item name="android:paddingRight">?android:attr/listPreferredItemPaddingRight</item>
+        <item name="android:paddingTop">?android:attr/listPreferredItemPaddingStart</item>
+        <item name="android:paddingBottom">?android:attr/listPreferredItemPaddingEnd</item>
+        <item name="android:paddingLeft">?android:attr/listPreferredItemPaddingLeft</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
     <style name="ActionBarTabText" parent="Base.Widget.AppCompat.ActionBar.TabText">
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:textColor">#b3cdcdcd</item>
