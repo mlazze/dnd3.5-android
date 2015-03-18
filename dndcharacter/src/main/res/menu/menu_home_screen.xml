@@ -4,8 +4,8 @@
     tools:context="com.skij.dndcharacter.Abilities">
     <item android:id="@+id/action_save_data"
         android:title="@string/action_save_data"
-        app:showAsAction="never"/>
+        app:showAsAction="always"/>
     <item android:id="@+id/action_load_data"
         android:title="@string/action_load_data"
-        app:showAsAction="never"/>
+        app:showAsAction="always"/>
     </menu>

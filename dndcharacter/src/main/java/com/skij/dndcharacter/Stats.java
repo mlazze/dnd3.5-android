@@ -28,6 +28,9 @@ public class Stats extends BaseActivity {
         setEditTextToValue(R.id.stats_int, "" + character.getUnmodifiedStat(DnDCharacter.STATS.INT));
         setEditTextToValue(R.id.stats_wis, "" + character.getUnmodifiedStat(DnDCharacter.STATS.WIS));
         setEditTextToValue(R.id.stats_cha, "" + character.getUnmodifiedStat(DnDCharacter.STATS.CHA));
+        setEditTextToValue(R.id.level_up_for, character.getSavingthrowsbases()[DnDCharacter.SAVING.FORTITUDE.ordinal()] + "");
+        setEditTextToValue(R.id.level_up_ref, character.getSavingthrowsbases()[DnDCharacter.SAVING.REFLEX.ordinal()] + "");
+        setEditTextToValue(R.id.level_up_wil, character.getSavingthrowsbases()[DnDCharacter.SAVING.WILL.ordinal()] + "");
     }
 
     private void setEditTextToValue(int identifier, String value) {
@@ -56,6 +59,7 @@ public class Stats extends BaseActivity {
 
     public void apply(View view) {
         int str, dex, con, inte, wis, cha;
+        int[] saving = new int[3];
         try {
             str = Integer.parseInt(((EditText) findViewById(R.id.stats_str)).getText().toString());
             dex = Integer.parseInt(((EditText) findViewById(R.id.stats_dex)).getText().toString());
@@ -63,14 +67,21 @@ public class Stats extends BaseActivity {
             inte = Integer.parseInt(((EditText) findViewById(R.id.stats_int)).getText().toString());
             wis = Integer.parseInt(((EditText) findViewById(R.id.stats_wis)).getText().toString());
             cha = Integer.parseInt(((EditText) findViewById(R.id.stats_cha)).getText().toString());
+
+            saving[DnDCharacter.SAVING.FORTITUDE.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_for)).getText().toString());
+            saving[DnDCharacter.SAVING.REFLEX.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_ref)).getText().toString());
+            saving[DnDCharacter.SAVING.WILL.ordinal()] = Integer.parseInt(((EditText) findViewById(R.id.level_up_wil)).getText().toString());
         } catch (NumberFormatException e) {
-            finish();
+            Toast.makeText(this, "Missing required parameters", Toast.LENGTH_SHORT).show();
             return;
         }
         int[] stats = {str, dex, con, inte, wis, cha};
 
         for (DnDCharacter.STATS s : DnDCharacter.STATS.values()) {
             character.setStat(s, stats[s.ordinal()]);
+        }
+        for (DnDCharacter.SAVING s : DnDCharacter.SAVING.values()) {
+            character.setSavingThrow(s, saving[s.ordinal()]);
         }
 
         //applychanges

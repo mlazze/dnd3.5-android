@@ -34,7 +34,7 @@
                     android:text=""
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center_horizontal"
@@ -44,9 +44,9 @@
 
                     <TextView
                         android:id="@+id/hitpoints_minhealth"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".10"
+                        android:layout_alignParentLeft="true"
                         android:gravity="center_horizontal"
                         android:text=""
                         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -56,20 +56,21 @@
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".80"
+                        android:layout_toRightOf="@id/hitpoints_minhealth"
+                        android:layout_toLeftOf="@+id/hitpoints_maxhealth"
                         android:progressDrawable="@drawable/progressbar_health" />
 
                     <TextView
                         android:id="@+id/hitpoints_maxhealth"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".10"
+                        android:layout_alignParentRight="true"
                         android:gravity="center_horizontal"
                         android:text=""
                         android:textAppearance="?android:attr/textAppearanceSmall" />
-                </LinearLayout>
+                </RelativeLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/hitpoints_death_layout"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -81,9 +82,9 @@
 
                     <TextView
                         android:id="@+id/hitpoints_mindeath"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".10"
+                        android:layout_alignParentLeft="true"
                         android:gravity="center_horizontal"
                         android:text=""
                         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -92,19 +93,20 @@
                         android:id="@+id/hitpoints_death_bar"
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="0dp"
+                        android:layout_toLeftOf="@+id/hitpoints_maxdeath"
+                        android:layout_toRightOf="@id/hitpoints_mindeath"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".80"
                         android:progressDrawable="@drawable/progressbar_death" />
 
                     <TextView
                         android:id="@+id/hitpoints_maxdeath"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".10"
+                        android:layout_alignParentRight="true"
                         android:gravity="center_horizontal"
                         android:text=""
                         android:textAppearance="?android:attr/textAppearanceSmall" />
-                </LinearLayout>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"

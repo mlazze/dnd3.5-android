@@ -26,6 +26,11 @@ public class CharacterScreen extends BaseActivity {
         super.onCreate(savedInstanceState);
         if (posInArray == -1) {
             setContentView(R.layout.activity_character_screen_nochar);
+            String s = "";
+            s += "1. Choose or add a character from Character List\n";
+            s += "2. Edit its properties\n";
+            s += "3. Profit!";
+            ((TextView) findViewById(R.id.char_screen_tutorial)).setText(s);
         } else {
             setContentView(R.layout.activity_character_screen);
 
@@ -174,7 +179,7 @@ public class CharacterScreen extends BaseActivity {
     }
 
     private String formatStat(DnDCharacter.STATS s, String label) {
-        return label + ": " + character.getStat(s) + " | M: " + character.getMod(s);
+        return label + ": " + character.getStat(s) + " | " + character.getMod(s);
     }
 
     private String formatSaving(DnDCharacter.SAVING s, String label) {

@@ -33,18 +33,17 @@ public class BaseActivity extends ActionBarActivity {
         // use the default view if anything goes wrong.
         // Get the font size value from SharedPreferences.
         super.onCreate(savedInstancestate);
+        setFonts();
         if (!(this instanceof NewCharacter))
             setCharSpinner();
         if (!(this instanceof HomeScreen) && !(this instanceof NewCharacter))
             loadChar();
-
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        setFonts();
+
         if (!(this instanceof NewCharacter))
             setNavBar();
         if (!(this instanceof NewCharacter))
@@ -92,7 +91,6 @@ public class BaseActivity extends ActionBarActivity {
         getSupportActionBar().setListNavigationCallbacks(adapter, navigationListener);
         //noinspection deprecation
         getSupportActionBar().setSelectedNavigationItem(posInArray + 1);
-
     }
 
     private ArrayList<String> getInfoFromCharacterList
@@ -221,13 +219,16 @@ public class BaseActivity extends ActionBarActivity {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        mDrawerToggle.onConfigurationChanged(newConfig);
+        if (mDrawerToggle != null)
+            mDrawerToggle.onConfigurationChanged(newConfig);
         super.onConfigurationChanged(newConfig);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+        if (mDrawerToggle != null)
+            return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -19,8 +19,7 @@
             android:layout_height="fill_parent">
 
             <TextView
-                android:id="@+id/char_screen_infos"
-                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:id="@+id/char_screen_tutorial"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
         </ScrollView>
