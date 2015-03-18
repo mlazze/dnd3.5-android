@@ -1,78 +1,81 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.skij.dndcharacter.CharacterScreen">
-    <item android:id="@+id/action_clear_temp"
+    <item
+        android:id="@+id/action_clear_temp"
         android:title="@string/action_clear_temp"
-        app:showAsAction="always"/>
-    <item android:id="@+id/action_hit_points"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_hit_points"
         android:title="@string/action_hit_points"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
-    <item android:id="@+id/action_temp"
+    <item
+        android:id="@+id/action_temp"
         android:title="@string/action_set_temp"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
 
     <!--<item-->
-        <!--android:id="@+id/char_screen_levelup"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_levelup" />-->
+    <!--android:id="@+id/char_screen_levelup"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_levelup" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_abilities"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_abilities" />-->
+    <!--android:id="@+id/char_screen_abilities"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_abilities" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_spells"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_spells" />-->
+    <!--android:id="@+id/char_screen_spells"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_spells" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_dmgred"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_dmgred" />-->
+    <!--android:id="@+id/char_screen_dmgred"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_dmgred" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_equipment"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_equipment" />-->
+    <!--android:id="@+id/char_screen_equipment"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_equipment" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_feat"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_feat" />-->
+    <!--android:id="@+id/char_screen_feat"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_feat" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_hp"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_hp" />-->
+    <!--android:id="@+id/char_screen_hp"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_hp" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_Inventory"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_Inventory" />-->
+    <!--android:id="@+id/char_screen_Inventory"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_Inventory" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_Langauges"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_Langauges" />-->
+    <!--android:id="@+id/char_screen_Langauges"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_Langauges" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_misc"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_misc" />-->
+    <!--android:id="@+id/char_screen_misc"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_misc" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_spabilities"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_spabilities" />-->
+    <!--android:id="@+id/char_screen_spabilities"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_spabilities" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_stats"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_stats" />-->
+    <!--android:id="@+id/char_screen_stats"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_stats" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_temp"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_temp" />-->
+    <!--android:id="@+id/char_screen_temp"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_temp" />-->
     <!--<item-->
-        <!--android:id="@+id/char_screen_Weapon"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_Weapon" />-->
-<!---->
+    <!--android:id="@+id/char_screen_Weapon"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_Weapon" />-->
+    <!---->
     <!--<item-->
-        <!--android:id="@+id/char_screen_CharInfo"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/char_screen_CharInfo" />-->
+    <!--android:id="@+id/char_screen_CharInfo"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/char_screen_CharInfo" />-->
 </menu>

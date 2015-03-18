@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.skij.dndcharacter.Misc">
-    <item android:id="@+id/action_clear_temp_hp"
+    <item
+        android:id="@+id/action_clear_temp_hp"
         android:title="@string/action_clear_temp_hp"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 </menu>
