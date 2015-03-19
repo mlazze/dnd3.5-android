@@ -62,6 +62,7 @@ public class CharacterScreen extends BaseActivity {
         setOnClickStartActivity(Feats.class, R.id.cs_feats);
         setOnClickStartActivity(SpecialAbilities.class, R.id.cs_special);
         setOnClickStartActivity(Inventory.class, R.id.cs_inventory);
+        setOnClickStartActivity(EquipmentActivity.class, R.id.cs_equipment);
         setOnClickStartActivity(Languages.class, R.id.cs_languages);
     }
 
@@ -105,6 +106,7 @@ public class CharacterScreen extends BaseActivity {
         setTextViewContent(R.id.cs_feats, f.formatAsList("Feats", character.getFeatsAsStringListWithoutDesc(), "\n", "\n", "  "));
         setTextViewContent(R.id.cs_special, f.formatAsList("Special Abilities", character.getSpecialAbilities(), "\n", "\n", "  "));
         setTextViewContent(R.id.cs_inventory, f.formatAsList("Inventory", character.getInventoryAsStringList(), "\n", "\n", "  "));
+        setTextViewContent(R.id.cs_equipment, f.formatAsList("Equipment", character.getEquipment(), "\n", "\n", "  "));
         setTextViewContent(R.id.cs_languages, f.formatAsList("Langauges", character.getLanguages(), "\n", "\n", "  "));
 
     }
