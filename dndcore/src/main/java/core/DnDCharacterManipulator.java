@@ -26,7 +26,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
     }
 
     public void setSavingThrow(SAVING s, int value) {
-        savingthrowsbases[s.ordinal()]=value;
+        savingthrowsbases[s.ordinal()] = value;
     }
 
     public void setTempHPMaxDelta(int value) {
@@ -101,13 +101,13 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         tempattackroll = 0;
         tempstats = new int[6];
         tempsavingthrows = new int[3];
-        tempstatuses = new ArrayList<String>(0);
+        tempstatuses = new ArrayList<>(0);
         tempAC = 0;
         recalculate();
     }
 
     public void clearTempHp() {
-        temphitpoints = new ArrayList<Integer>(0);
+        temphitpoints = new ArrayList<>(0);
         recalculate();
     }
 
@@ -124,7 +124,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         int oldclasslevel = classes.get(improvedclass) == null ? 0 : classes.get(improvedclass);
         classes.put(improvedclass, oldclasslevel + 1);
         if (newattackrolls != null) {
-            basicattackbonus = new ArrayList<Integer>(0);
+            basicattackbonus = new ArrayList<>(0);
             for (int i : newattackrolls)
                 basicattackbonus.add(i);
         }
@@ -235,12 +235,12 @@ public class DnDCharacterManipulator extends DnDCharacter implements
     }
 
     public void setChosenSpellUsageDelta(String spell, int level, int delta, int index) {
-        Spell a = new Spell(spell, null,level);
+        Spell a = new Spell(spell, null, level);
 
         HashMap<Spell, Integer> temp = chosenspells.get(index);
         int originalvalue = temp.get(a);
-        if (originalvalue+delta>=0) {
-            temp.put(a,originalvalue+delta);
+        if (originalvalue + delta >= 0) {
+            temp.put(a, originalvalue + delta);
         }
         recalculate();
     }
@@ -269,7 +269,7 @@ public class DnDCharacterManipulator extends DnDCharacter implements
     }
 
     public void setExpDelta(int value) {
-        exp = exp+value<0?0:exp+value;
+        exp = exp + value < 0 ? 0 : exp + value;
         recalculate();
     }
 

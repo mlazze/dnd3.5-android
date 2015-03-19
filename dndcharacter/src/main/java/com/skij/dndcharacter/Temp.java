@@ -99,15 +99,10 @@ public class Temp extends BaseActivity {
         }
     }
 
-    private void setEditTextContent(int identifier, String originalValue) {
-        ((EditText) findViewById(identifier)).getText().clear();
-        ((EditText) findViewById(identifier)).getText().insert(0, originalValue);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_level_up, menu);
+        getMenuInflater().inflate(R.menu.menu_temp, menu);
         return true;
     }
 
@@ -176,14 +171,6 @@ public class Temp extends BaseActivity {
         Toast.makeText(getApplicationContext(), "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
-    }
-
-    private Integer getEditTextContentAsInteger(int identifier) {
-        try {
-            return Integer.parseInt(((EditText) findViewById(identifier)).getText().toString());
-        } catch (NumberFormatException e) {
-            return null;
-        }
     }
 
     public void addStatus(View view) {

@@ -141,7 +141,7 @@ public class Utils {
             InputStreamReader isr = new InputStreamReader(inputStream);
             BufferedReader bf = new BufferedReader(isr);
             String tmp = "";
-            String t = "";
+            String t;
             while ((t = bf.readLine()) != null) {
                 tmp += t;
             }

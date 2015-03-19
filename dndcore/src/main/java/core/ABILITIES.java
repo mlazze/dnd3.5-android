@@ -68,6 +68,6 @@ public enum ABILITIES {
     }
 
     public String toString() {
-        return name + " (" + stat.toString().substring(0,3) + ")";
+        return name + " (" + stat.toString().substring(0, 3) + ")";
     }
 }

@@ -111,7 +111,7 @@ public class HomeScreen extends BaseActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        Intent i;
+//        Intent i;
         //noinspection SimplifiableIfStatement
         //buttons
 

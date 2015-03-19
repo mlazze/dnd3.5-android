@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import core.DnDCharacter;
@@ -40,11 +39,6 @@ public class Misc extends BaseActivity {
         setEditTextContent(R.id.misc_magic_wil, character.getMiscmagicsavingthrows(DnDCharacter.SAVING.WILL) + "");
 
 
-    }
-
-    private void setEditTextContent(int identifier, String originalValue) {
-        ((EditText) findViewById(identifier)).getText().clear();
-        ((EditText) findViewById(identifier)).getText().insert(0, originalValue);
     }
 
     @Override
@@ -133,11 +127,4 @@ public class Misc extends BaseActivity {
         finish();
     }
 
-    private Integer getEditTextContentAsInteger(int identifier) {
-        try {
-            return Integer.parseInt(((EditText) findViewById(identifier)).getText().toString());
-        } catch (NumberFormatException e) {
-            return null;
-        }
-    }
 }

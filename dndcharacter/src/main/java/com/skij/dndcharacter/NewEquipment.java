@@ -43,7 +43,7 @@ public class NewEquipment extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home_screen, menu);
+        getMenuInflater().inflate(R.menu.menu_new_equipment, menu);
         return true;
     }
 
@@ -52,22 +52,23 @@ public class NewEquipment extends BaseActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
 
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("EmptyCatchBlock")
     public void apply(View view) {
         int maxdex;
         try {
-            maxdex = Integer.parseInt(getValueFromEditText(R.id.new_equipment_maxdex));
+            maxdex = Integer.parseInt(getEditTextContent(R.id.new_equipment_maxdex));
         } catch (NumberFormatException e) {
             Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
-        String name = getValueFromEditText(R.id.new_equipment_name);
+        String name = getEditTextContent(R.id.new_equipment_name);
         if (name.equals("")) {
             Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
@@ -85,35 +86,35 @@ public class NewEquipment extends BaseActivity {
         Integer acbonus = null, deflectionbonus = null, naturalbonus = null, savepenalty = null, speed = null, spellfail = null;
         Double weight = null;
         try {
-            acbonus = Integer.parseInt(getValueFromEditText(R.id.new_equipment_acbonus));
+            acbonus = Integer.parseInt(getEditTextContent(R.id.new_equipment_acbonus));
         } catch (NumberFormatException e) {
         }
         try {
-            deflectionbonus = Integer.parseInt(getValueFromEditText(R.id.new_equipment_deflectionbonus));
+            deflectionbonus = Integer.parseInt(getEditTextContent(R.id.new_equipment_deflectionbonus));
         } catch (NumberFormatException e) {
         }
         try {
-            naturalbonus = Integer.parseInt(getValueFromEditText(R.id.new_equipment_naturalbonus));
+            naturalbonus = Integer.parseInt(getEditTextContent(R.id.new_equipment_naturalbonus));
         } catch (NumberFormatException e) {
         }
         try {
-            savepenalty = Integer.parseInt(getValueFromEditText(R.id.new_equipment_savepenalty));
+            savepenalty = Integer.parseInt(getEditTextContent(R.id.new_equipment_savepenalty));
         } catch (NumberFormatException e) {
         }
         try {
-            speed = Integer.parseInt(getValueFromEditText(R.id.new_equipment_speed));
+            speed = Integer.parseInt(getEditTextContent(R.id.new_equipment_speed));
         } catch (NumberFormatException e) {
         }
         try {
-            spellfail = Integer.parseInt(getValueFromEditText(R.id.new_equipment_spellfail));
+            spellfail = Integer.parseInt(getEditTextContent(R.id.new_equipment_spellfail));
         } catch (NumberFormatException e) {
         }
         try {
-            weight = Double.parseDouble(getValueFromEditText(R.id.new_equipment_weight));
+            weight = Double.parseDouble(getEditTextContent(R.id.new_equipment_weight));
         } catch (NumberFormatException e) {
         }
 
-        String specialproperties = getValueFromEditText(R.id.new_equipment_special);
+        String specialproperties = getEditTextContent(R.id.new_equipment_special);
 
 
         Equipment e = new Equipment(name, t);
@@ -142,7 +143,5 @@ public class NewEquipment extends BaseActivity {
         finish();
     }
 
-    private String getValueFromEditText(int id) {
-        return ((EditText) findViewById(id)).getText().toString();
-    }
+
 }

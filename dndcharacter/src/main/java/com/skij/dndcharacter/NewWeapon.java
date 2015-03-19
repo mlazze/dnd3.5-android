@@ -47,7 +47,7 @@ public class NewWeapon extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home_screen, menu);
+        getMenuInflater().inflate(R.menu.menu_new_weapon, menu);
         return true;
     }
 
@@ -56,7 +56,7 @@ public class NewWeapon extends BaseActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
 
@@ -67,40 +67,40 @@ public class NewWeapon extends BaseActivity {
         int critminrange;
         double critmult, range;
         try {
-            critminrange = Integer.parseInt(getValueFromEditText(R.id.new_weapon_critminrange));
-            critmult = Double.parseDouble(getValueFromEditText(R.id.new_weapon_critmult));
-            range = Double.parseDouble(getValueFromEditText(R.id.new_weapon_range));
+            critminrange = Integer.parseInt(getEditTextContent(R.id.new_weapon_critminrange));
+            critmult = Double.parseDouble(getEditTextContent(R.id.new_weapon_critmult));
+            range = Double.parseDouble(getEditTextContent(R.id.new_weapon_range));
         } catch (NumberFormatException e) {
             Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
         double damagemod;
         try {
-            damagemod = Double.parseDouble(getValueFromEditText(R.id.new_weapon_damagemod));
+            damagemod = Double.parseDouble(getEditTextContent(R.id.new_weapon_damagemod));
         } catch (NumberFormatException e) {
             damagemod = 1;
         }
 
         int additionaldamage;
         try {
-            additionaldamage = Integer.parseInt(getValueFromEditText(R.id.new_weapon_additionaldamage));
+            additionaldamage = Integer.parseInt(getEditTextContent(R.id.new_weapon_additionaldamage));
         } catch (NumberFormatException e) {
             additionaldamage = 0;
         }
 
-        String damagedices = getValueFromEditText(R.id.new_weapon_damagedices);
+        String damagedices = getEditTextContent(R.id.new_weapon_damagedices);
         if (damagedices.equals("")) {
             Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
-        String name = getValueFromEditText(R.id.new_weapon_name);
+        String name = getEditTextContent(R.id.new_weapon_name);
         if (name.equals("")) {
             Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
             return;
         }
 
-        String notes = getValueFromEditText(R.id.new_weapon_notes);
-        String type = getValueFromEditText(R.id.new_weapon_type);
+        String notes = getEditTextContent(R.id.new_weapon_notes);
+        String type = getEditTextContent(R.id.new_weapon_type);
 
         boolean ranged = ((CheckBox) findViewById(R.id.new_weapon_ranged_checkbox)).isChecked();
 
@@ -125,10 +125,6 @@ public class NewWeapon extends BaseActivity {
         Utils.editCharacter(character, posInArray, this);
         Toast.makeText(getApplicationContext(), "Weapon Added", Toast.LENGTH_SHORT).show();
         finish();
-    }
-
-    private String getValueFromEditText(int id) {
-        return ((EditText) findViewById(id)).getText().toString();
     }
 
     private ArrayList<Integer> getAtkBonus() {

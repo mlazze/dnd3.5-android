@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">DnD 3.5 Character Creator</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_character_screen">""</string>
     <string name="title_activity_new_character">NewCharacter</string>
     <string name="new_char_name_label">Name:*</string>
     <string name="new_char_race_label">Race:*</string>
@@ -75,7 +72,6 @@
     <string name="temp_ac_label">Armor Class</string>
     <string name="temp_attack_roll_label">Attack Roll</string>
     <string name="temp_max_hp_label">Max Hp</string>
-    <string name="temp_initiative_label">Initiative</string>
     <string name="temp_status_label">Statuses</string>
     <string name="temp_new_status_label">New Status*</string>
     <string name="magic">Magic</string>
@@ -133,7 +129,6 @@
     <string name="specialabilities_new_specialability_name_label">Name:*</string>
     <string name="specialabilities_list_label">Special Abilities:</string>
     <string name="title_activity_spells">Spells</string>
-    <string name="spells_list_label">Spells</string>
     <string name="spells_new_spell_name_label">Name*</string>
     <string name="spells_new_spell_descr_label">Description</string>
     <string name="spells_new_spell_lvl_label">Level*</string>

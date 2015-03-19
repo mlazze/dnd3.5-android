@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,14 +118,6 @@ public class HitPoints extends BaseActivity {
         Utils.editCharacter(character, posInArray, this);
         finish();
         startActivity(getIntent());
-    }
-
-    private Integer getEditTextContentAsInteger(int identifier) {
-        try {
-            return Integer.parseInt(((EditText) findViewById(identifier)).getText().toString());
-        } catch (NumberFormatException e) {
-            return null;
-        }
     }
 
     public void plusTurn(View view) {

@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 import core.DNDCLASS;
 import core.DnDCharacter.SAVING;
+import core.DnDCharacter.STATS;
 import core.DnDCharacterManipulator;
 import core.Equipment;
-import core.Weapon;
-import core.DnDCharacter.STATS;
 import core.Equipment.TYPE;
+import core.Weapon;
 
 public class BarbarianTest {
     public static void main(String[] args) {
@@ -125,7 +125,7 @@ public class BarbarianTest {
         int[] stats = new int[]{18, 14, 18, 10, 14, 8};
         int[] sav = new int[]{4, 1, 1};
         DnDCharacterManipulator stranger = new DnDCharacterManipulator(
-                "Stranger","Umano", DNDCLASS.BARBARIAN, stats, 12, sav);
+                "Stranger", "Umano", DNDCLASS.BARBARIAN, stats, 12, sav);
         stranger.setAttackBonus(0, 5, false);
         Weapon w = new Weapon("Spadone 2h", false, STATS.STR, 1.5, 1.5, "2d6",
                 19, 2);
@@ -163,7 +163,7 @@ public class BarbarianTest {
     private static DnDCharacterManipulator creaCleric() {
         int[] stats = new int[]{14, 12, 16, 10, 18, 12};
         int[] sav = new int[]{4, 1, 4};
-        DnDCharacterManipulator cleric = new DnDCharacterManipulator("Cleric","Umano",
+        DnDCharacterManipulator cleric = new DnDCharacterManipulator("Cleric", "Umano",
                 DNDCLASS.CLERIC, stats, 6, sav);
         cleric.levelup(DNDCLASS.CLERIC, 3, null, null, 0, null);
         cleric.levelup(DNDCLASS.CLERIC, 6, null, null, 0, null);

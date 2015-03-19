@@ -1,5 +1,6 @@
 package com.skij.dndcharacter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -12,13 +13,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import core.DnDCharacterManipulator;
 
+@SuppressLint("Registered")
 public class BaseActivity extends ActionBarActivity {
     protected DnDCharacterManipulator character;
     protected int posInArray = -1;
@@ -49,6 +53,7 @@ public class BaseActivity extends ActionBarActivity {
         if (!(this instanceof NewCharacter))
             setTitle();
         if (!(this instanceof NewCharacter))
+            //noinspection deprecation
             getSupportActionBar().setSelectedNavigationItem(posInArray + 1);
     }
 
@@ -211,6 +216,34 @@ public class BaseActivity extends ActionBarActivity {
                 }
             }
         });
+    }
+
+    protected void setTextViewContent(int resource, String value) {
+        if (value == null)
+            (findViewById(resource)).setVisibility(View.GONE);
+        ((TextView) findViewById(resource)).setText(value);
+    }
+
+    protected void setEditTextContent(int identifier, String originalValue) {
+        ((EditText) findViewById(identifier)).getText().clear();
+        ((EditText) findViewById(identifier)).getText().insert(0, originalValue);
+    }
+
+    protected void setEditTextContentValue(int identifier, String originalValue) {
+        ((EditText) findViewById(identifier)).getText().clear();
+        ((EditText) findViewById(identifier)).getText().insert(0, originalValue);
+    }
+
+    protected Integer getEditTextContentAsInteger(int identifier) {
+        try {
+            return Integer.parseInt(((EditText) findViewById(identifier)).getText().toString());
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    protected String getEditTextContent(int id) {
+        return ((EditText) findViewById(id)).getText().toString();
     }
 
     private void startActivityWithCharacterInfo(Class c) {

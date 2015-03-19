@@ -15,14 +15,14 @@ public class Weapon implements Serializable {
     public boolean ranged;
     public double damagemod;
     public int additionaldamage;
-    DnDCharacter.STATS stat;
     public ArrayList<Integer> customattackbonus;
+    DnDCharacter.STATS stat;
 
     public Weapon(String name, boolean ranged, DnDCharacter.STATS stat, double damagemod, double range, String damagedices, int critminrange, double critmult) {
         this.name = name;
         this.ranged = ranged;
         if (ranged) {
-            ammo=1;
+            ammo = 1;
         }
         this.stat = stat;
         this.damagemod = damagemod;

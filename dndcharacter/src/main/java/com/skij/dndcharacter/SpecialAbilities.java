@@ -96,7 +96,7 @@ public class SpecialAbilities extends BaseActivity {
         // Handle action bar specialability clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = specialability.getItemId();
+//        int id = specialability.getItemId();
         //noinspection SimplifiableIfStatement
         return super.onOptionsItemSelected(specialability);
     }

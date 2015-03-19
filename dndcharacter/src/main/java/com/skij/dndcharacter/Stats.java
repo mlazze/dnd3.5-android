@@ -22,26 +22,21 @@ public class Stats extends BaseActivity {
     }
 
     private void setOriginalValues() {
-        setEditTextToValue(R.id.stats_str, "" + character.getUnmodifiedStat(DnDCharacter.STATS.STR));
-        setEditTextToValue(R.id.stats_dex, "" + character.getUnmodifiedStat(DnDCharacter.STATS.DEX));
-        setEditTextToValue(R.id.stats_con, "" + character.getUnmodifiedStat(DnDCharacter.STATS.CON));
-        setEditTextToValue(R.id.stats_int, "" + character.getUnmodifiedStat(DnDCharacter.STATS.INT));
-        setEditTextToValue(R.id.stats_wis, "" + character.getUnmodifiedStat(DnDCharacter.STATS.WIS));
-        setEditTextToValue(R.id.stats_cha, "" + character.getUnmodifiedStat(DnDCharacter.STATS.CHA));
-        setEditTextToValue(R.id.level_up_for, character.getSavingthrowsbases()[DnDCharacter.SAVING.FORTITUDE.ordinal()] + "");
-        setEditTextToValue(R.id.level_up_ref, character.getSavingthrowsbases()[DnDCharacter.SAVING.REFLEX.ordinal()] + "");
-        setEditTextToValue(R.id.level_up_wil, character.getSavingthrowsbases()[DnDCharacter.SAVING.WILL.ordinal()] + "");
-    }
-
-    private void setEditTextToValue(int identifier, String value) {
-        ((EditText) findViewById(identifier)).getText().clear();
-        ((EditText) findViewById(identifier)).getText().insert(0, value);
+        setEditTextContentValue(R.id.stats_str, "" + character.getUnmodifiedStat(DnDCharacter.STATS.STR));
+        setEditTextContentValue(R.id.stats_dex, "" + character.getUnmodifiedStat(DnDCharacter.STATS.DEX));
+        setEditTextContentValue(R.id.stats_con, "" + character.getUnmodifiedStat(DnDCharacter.STATS.CON));
+        setEditTextContentValue(R.id.stats_int, "" + character.getUnmodifiedStat(DnDCharacter.STATS.INT));
+        setEditTextContentValue(R.id.stats_wis, "" + character.getUnmodifiedStat(DnDCharacter.STATS.WIS));
+        setEditTextContentValue(R.id.stats_cha, "" + character.getUnmodifiedStat(DnDCharacter.STATS.CHA));
+        setEditTextContentValue(R.id.level_up_for, character.getSavingthrowsbases()[DnDCharacter.SAVING.FORTITUDE.ordinal()] + "");
+        setEditTextContentValue(R.id.level_up_ref, character.getSavingthrowsbases()[DnDCharacter.SAVING.REFLEX.ordinal()] + "");
+        setEditTextContentValue(R.id.level_up_wil, character.getSavingthrowsbases()[DnDCharacter.SAVING.WILL.ordinal()] + "");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_abilities, menu);
+        getMenuInflater().inflate(R.menu.menu_stats, menu);
         return true;
     }
 
@@ -50,7 +45,7 @@ public class Stats extends BaseActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
 

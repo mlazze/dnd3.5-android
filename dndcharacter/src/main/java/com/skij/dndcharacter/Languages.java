@@ -96,7 +96,7 @@ public class Languages extends BaseActivity {
         // Handle action bar language clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = language.getItemId();
+//        int id = language.getItemId();
         //noinspection SimplifiableIfStatement
         return super.onOptionsItemSelected(language);
     }

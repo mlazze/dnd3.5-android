@@ -9,13 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Arrays;
-import java.util.List;
-
-import core.ABILITIES;
-import core.DNDCLASS;
 import core.DnDCharacter;
-import core.Weapon;
 
 
 public class CharacterScreen extends BaseActivity {
@@ -81,83 +75,38 @@ public class CharacterScreen extends BaseActivity {
     }
 
     private void setOriginalValues() {
-        setTextViewTo(R.id.cs_name, character.getName());
-        setTextViewTo(R.id.cs_classes, formatClasses());
+        CharacterFormatter f = new CharacterFormatter(character);
+        setTextViewContent(R.id.cs_name, character.getName());
+        setTextViewContent(R.id.cs_classes, f.formatClasses());
         setHealthBar();
-        setTextViewTo(R.id.cs_exp, format("Exp", character.getExp()));
-        setTextViewTo(R.id.cs_runspeed, format("Runspeed", character.getRunspeed()));
-        setTextViewTo(R.id.cs_str, formatStat(DnDCharacter.STATS.STR, getResources().getString(R.string.strength)));
-        setTextViewTo(R.id.cs_for, formatSaving(DnDCharacter.SAVING.FORTITUDE, getResources().getString(R.string.fortitude)));
-        setTextViewTo(R.id.cs_dex, formatStat(DnDCharacter.STATS.DEX, getResources().getString(R.string.dexterity)));
-        setTextViewTo(R.id.cs_ref, formatSaving(DnDCharacter.SAVING.REFLEX, getResources().getString(R.string.reflex)));
-        setTextViewTo(R.id.cs_con, formatStat(DnDCharacter.STATS.CON, getResources().getString(R.string.constitution)));
-        setTextViewTo(R.id.cs_wil, formatSaving(DnDCharacter.SAVING.WILL, getResources().getString(R.string.will)));
-        setTextViewTo(R.id.cs_int, formatStat(DnDCharacter.STATS.INT, getResources().getString(R.string.intellect)));
-        setTextViewTo(R.id.cs_init, format("Initiative", character.getInititative()));
-        setTextViewTo(R.id.cs_wis, formatStat(DnDCharacter.STATS.WIS, getResources().getString(R.string.wisdom)));
-        setTextViewTo(R.id.cs_baseatk, formatAsList("BAB", character.getBasicAttackBonuses(), "/", " ", ""));
-        setTextViewTo(R.id.cs_cha, formatStat(DnDCharacter.STATS.CHA, getResources().getString(R.string.charisma)));
-        setTextViewTo(R.id.cs_lotta, format("Lotta", character.getLotta()));
-        setTextViewTo(R.id.cs_ac, format("AC", character.getAC()));
-        setTextViewTo(R.id.cs_touch, format("Cont", character.getTouch()));
-        setTextViewTo(R.id.cs_sprovvista, format("Sprovv", character.getSprovvista()));
-        setTextViewTo(R.id.cs_dmgred, format("Dmg. Red", character.getDamageReduction()));
-        setTextViewTo(R.id.cs_spellres, format("Spell. Res", character.getSpellResist()));
-        setTextViewTo(R.id.cs_weap1, formatWeapon(0));
-        setTextViewTo(R.id.cs_weap2, formatWeapon(1));
-        setTextViewTo(R.id.cs_abilit, formatAbilities());
-        setTextViewTo(R.id.cs_spells, formatSpells(0));
-        setTextViewTo(R.id.cs_feats, formatAsList("Feats", character.getFeatsAsStringListWithoutDesc(), "\n", "\n", "  "));
-        setTextViewTo(R.id.cs_special, formatAsList("Special Abilities", character.getSpecialAbilities(), "\n", "\n", "  "));
-        setTextViewTo(R.id.cs_inventory, formatAsList("Inventory", character.getInventoryAsStringList(), "\n", "\n", "  "));
-        setTextViewTo(R.id.cs_languages, formatAsList("Langauges", character.getLanguages(), "\n", "\n", "  "));
+        setTextViewContent(R.id.cs_exp, f.format("Exp", character.getExp()));
+        setTextViewContent(R.id.cs_runspeed, f.format("Runspeed", character.getRunspeed()));
+        setTextViewContent(R.id.cs_str, f.formatStat(DnDCharacter.STATS.STR, getResources().getString(R.string.strength)));
+        setTextViewContent(R.id.cs_for, f.formatSaving(DnDCharacter.SAVING.FORTITUDE, getResources().getString(R.string.fortitude)));
+        setTextViewContent(R.id.cs_dex, f.formatStat(DnDCharacter.STATS.DEX, getResources().getString(R.string.dexterity)));
+        setTextViewContent(R.id.cs_ref, f.formatSaving(DnDCharacter.SAVING.REFLEX, getResources().getString(R.string.reflex)));
+        setTextViewContent(R.id.cs_con, f.formatStat(DnDCharacter.STATS.CON, getResources().getString(R.string.constitution)));
+        setTextViewContent(R.id.cs_wil, f.formatSaving(DnDCharacter.SAVING.WILL, getResources().getString(R.string.will)));
+        setTextViewContent(R.id.cs_int, f.formatStat(DnDCharacter.STATS.INT, getResources().getString(R.string.intellect)));
+        setTextViewContent(R.id.cs_init, f.format("Initiative", character.getInititative()));
+        setTextViewContent(R.id.cs_wis, f.formatStat(DnDCharacter.STATS.WIS, getResources().getString(R.string.wisdom)));
+        setTextViewContent(R.id.cs_baseatk, f.formatAsList("BAB", character.getBasicAttackBonuses(), "/", " ", ""));
+        setTextViewContent(R.id.cs_cha, f.formatStat(DnDCharacter.STATS.CHA, getResources().getString(R.string.charisma)));
+        setTextViewContent(R.id.cs_lotta, f.format("Lotta", character.getLotta()));
+        setTextViewContent(R.id.cs_ac, f.format("AC", character.getAC()));
+        setTextViewContent(R.id.cs_touch, f.format("Cont", character.getTouch()));
+        setTextViewContent(R.id.cs_sprovvista, f.format("Sprovv", character.getSprovvista()));
+        setTextViewContent(R.id.cs_dmgred, f.format("Dmg. Red", character.getDamageReduction()));
+        setTextViewContent(R.id.cs_spellres, f.format("Spell. Res", character.getSpellResist()));
+        setTextViewContent(R.id.cs_weap1, f.formatWeapon(0));
+        setTextViewContent(R.id.cs_weap2, f.formatWeapon(1));
+        setTextViewContent(R.id.cs_abilit, f.formatAbilities());
+        setTextViewContent(R.id.cs_spells, f.formatSpells(0));
+        setTextViewContent(R.id.cs_feats, f.formatAsList("Feats", character.getFeatsAsStringListWithoutDesc(), "\n", "\n", "  "));
+        setTextViewContent(R.id.cs_special, f.formatAsList("Special Abilities", character.getSpecialAbilities(), "\n", "\n", "  "));
+        setTextViewContent(R.id.cs_inventory, f.formatAsList("Inventory", character.getInventoryAsStringList(), "\n", "\n", "  "));
+        setTextViewContent(R.id.cs_languages, f.formatAsList("Langauges", character.getLanguages(), "\n", "\n", "  "));
 
-    }
-
-    private String formatAsList(String label, List list, String entryseparator, String labelseparator, String preentryseparator) {
-        String res = "";
-        res += label + ":" + labelseparator;
-        for (Object s : list)
-            res += preentryseparator + s.toString() + entryseparator;
-        int sizetoberemoved = entryseparator.length();
-        if (entryseparator.equals("\n"))
-            sizetoberemoved = 1;
-        return res.substring(0, res.length() - sizetoberemoved);
-    }
-
-    private String formatSpells(int index) {
-        try {
-            return formatAsList("Spells", character.getSpellSet(index), "\n", "\n", "  ");
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
-    }
-
-    private String formatAbilities() {
-        String res = "";
-        ABILITIES[] set = character.getAbilities().keySet().toArray(new ABILITIES[character.getAbilities().keySet().size()]);
-        Arrays.sort(set);
-        for (ABILITIES a : set)
-            res += a.toString() + ": " + character.getAbilityMod(a) + "\n";
-        return res.substring(0, res.length() - 1);
-    }
-
-    private String formatWeapon(int index) {
-        Weapon w;
-        String res = "";
-        try {
-            w = character.getWeapon(index);
-            res += w.name + " [";
-            for (Integer i : character.getAttackBonuses(w, 0))
-                res += i + "/";
-            res = res.substring(0, res.length() - 1);
-            res += "]\n[";
-            res += character.getDamageNonCrit(w, null) + "]\n";
-            res += w.toString();
-            return res;
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
     }
 
     private void setHealthBar() {
@@ -168,36 +117,6 @@ public class CharacterScreen extends BaseActivity {
         ((TextView) findViewById(R.id.hitpoints_minhealth)).setText(hmin + "");
         ((TextView) findViewById(R.id.hitpoints_maxhealth)).setText(hmax + "");
         healthbar.setProgress(character.getcurrentHP() < hmin ? hmin : character.getcurrentHP());
-    }
-
-    private String format(String label, String value) {
-        return label + ": " + value;
-    }
-
-    private String format(String label, int value) {
-        return format(label, "" + value);
-    }
-
-    private String formatStat(DnDCharacter.STATS s, String label) {
-        return label + ": " + character.getStat(s) + " | " + character.getMod(s);
-    }
-
-    private String formatSaving(DnDCharacter.SAVING s, String label) {
-        return format(label, character.getThrow(s));
-    }
-
-    private String formatClasses() {
-        String res = "";
-        for (DNDCLASS c : character.getClasses()) {
-            res += character.getClassName(c) + " " + character.getClassLevel(c) + " | ";
-        }
-        return res.substring(0, res.length() - 2);
-    }
-
-    private void setTextViewTo(int resource, String value) {
-        if (value == null)
-            (findViewById(resource)).setVisibility(View.GONE);
-        ((TextView) findViewById(resource)).setText(value);
     }
 
     @Override
@@ -222,7 +141,6 @@ public class CharacterScreen extends BaseActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        Intent i;
         //buttons
         if (posInArray == -1) {
             Toast.makeText(getApplicationContext(), "Choose a character first", Toast.LENGTH_SHORT).show();
@@ -245,6 +163,7 @@ public class CharacterScreen extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     private void setActionBarOverflowBehaviours(int id) {
 //        otehrs
 //        if (id == R.id.char_screen_levelup) {

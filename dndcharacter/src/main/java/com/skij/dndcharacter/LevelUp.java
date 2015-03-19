@@ -32,6 +32,7 @@ public class LevelUp extends BaseActivity {
 
     private void setOriginalValues() {
         setEditTextContent(R.id.level_up_atk1, character.getBasicAttackBonuses().get(0) + "");
+        //noinspection EmptyCatchBlock
         try {
             setEditTextContent(R.id.level_up_atk2, character.getBasicAttackBonuses().get(1) + "");
             setEditTextContent(R.id.level_up_atk3, character.getBasicAttackBonuses().get(2) + "");
@@ -76,10 +77,6 @@ public class LevelUp extends BaseActivity {
         });
     }
 
-    private void setEditTextContent(int identifier, String originalValue) {
-        ((EditText) findViewById(identifier)).getText().clear();
-        ((EditText) findViewById(identifier)).getText().insert(0, originalValue);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,7 +90,7 @@ public class LevelUp extends BaseActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         return super.onOptionsItemSelected(item);

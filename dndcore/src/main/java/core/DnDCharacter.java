@@ -34,7 +34,7 @@ public class DnDCharacter implements Serializable {
     protected HashMap<ABILITIES, Integer> abilities;
     protected ArrayList<String> specialabilities;
     protected ArrayList<Feat> feats;
-//    protected ArrayList<Spell> knownspells;
+    //    protected ArrayList<Spell> knownspells;
     protected ArrayList<HashMap<Spell, Integer>> chosenspells;
     // equipment & inventory
     protected ArrayList<Equipment> equipment;
@@ -223,8 +223,8 @@ public class DnDCharacter implements Serializable {
         return classToNames.get(c);
     }
 
-    public int getLotta()  {
-        return basicattackbonus.get(0)+getMod(STATS.STR)+miscattackroll+tempattackroll;
+    public int getLotta() {
+        return basicattackbonus.get(0) + getMod(STATS.STR) + miscattackroll + tempattackroll;
     }
 
     public int getClassLevel(DNDCLASS s) {
@@ -422,7 +422,7 @@ public class DnDCharacter implements Serializable {
         }
         Collections.sort(temparr);
         for (Spell s : temparr) {
-             res.add(s + " x" + h.get(s));
+            res.add(s + " x" + h.get(s));
         }
 
         return res;

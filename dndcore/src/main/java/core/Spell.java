@@ -26,9 +26,8 @@ public class Spell implements Serializable, Comparable {
 
         Spell spell = (Spell) o;
 
-        if (!name.equals(spell.name)) return false;
+        return name.equals(spell.name);
 
-        return true;
     }
 
     @Override
@@ -39,14 +38,14 @@ public class Spell implements Serializable, Comparable {
     }
 
     public int compareTo(Spell s) {
-        if (this.level<s.level) return -1;
-        if (this.level>s.level) return 1;
+        if (this.level < s.level) return -1;
+        if (this.level > s.level) return 1;
         return this.name.compareTo(s.name);
     }
 
     @Override
     public int compareTo(Object o) {
-        if (o.getClass()==this.getClass())
+        if (o.getClass() == this.getClass())
             return compareTo((Spell) o);
         return 0;
     }

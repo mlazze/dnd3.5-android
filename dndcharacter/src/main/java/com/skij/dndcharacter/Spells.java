@@ -1,8 +1,6 @@
 package com.skij.dndcharacter;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +33,7 @@ public class Spells extends BaseActivity {
 
     private void updateSpells() {
         CustomSpellAdapter arrayAdapter;
-        arrayAdapter = new CustomSpellAdapter(this, character.getSpellSet(0));
+        arrayAdapter = new CustomSpellAdapter(character.getSpellSet(0));
         ListView statusListView = (ListView) findViewById(R.id.spells_list);
         statusListView.setAdapter(arrayAdapter);
         registerForContextMenu(statusListView);
@@ -44,7 +42,7 @@ public class Spells extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_level_up, menu);
+        getMenuInflater().inflate(R.menu.menu_spells, menu);
         return true;
     }
 
@@ -53,7 +51,7 @@ public class Spells extends BaseActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         return super.onOptionsItemSelected(item);
     }
@@ -62,14 +60,6 @@ public class Spells extends BaseActivity {
         Toast.makeText(getApplicationContext(), "Applying Changes", Toast.LENGTH_LONG).show();
         Utils.editCharacter(character, posInArray, this);
         finish();
-    }
-
-    private Integer getEditTextContentAsInteger(int identifier) {
-        try {
-            return Integer.parseInt(((EditText) findViewById(identifier)).getText().toString());
-        } catch (NumberFormatException e) {
-            return null;
-        }
     }
 
     public void addSpell(View view) {
@@ -94,27 +84,10 @@ public class Spells extends BaseActivity {
 
     public class CustomSpellAdapter extends BaseAdapter {
 
-        private ListView listView;
-        private Context context;
         private List<String> list;
-        private View.OnClickListener mOnPlusClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int position = listView.getPositionForView((View) v.getParent());
-                String spell = (listView.getChildAt(listView.getPositionForView((View) v.getParent()))).toString();
-                Log.e("Mario", "Title clicked, row " + spell);
-            }
-        };
-        private View.OnClickListener mOnTextClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int position = listView.getPositionForView((View) v.getParent());
-            }
-        };
 
-        public CustomSpellAdapter(Context context, List<String> list) {
+        public CustomSpellAdapter(List<String> list) {
             this.list = list;
-            this.context = context;
         }
 
         @Override
@@ -174,7 +147,7 @@ public class Spells extends BaseActivity {
                     String s = character.getSpellDesciption(0, spell, level);
                     if (s.equals(""))
                         s = "No spell description found";
-                    Toast.makeText(getApplicationContext(), s , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
                 }
             });
             button = (Button) view.findViewById(R.id.spell_item_delete);

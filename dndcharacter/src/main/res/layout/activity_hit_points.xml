@@ -56,8 +56,8 @@
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/hitpoints_minhealth"
                         android:layout_toLeftOf="@+id/hitpoints_maxhealth"
+                        android:layout_toRightOf="@id/hitpoints_minhealth"
                         android:progressDrawable="@drawable/progressbar_health" />
 
                     <TextView
@@ -93,9 +93,9 @@
                         android:id="@+id/hitpoints_death_bar"
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_toLeftOf="@+id/hitpoints_maxdeath"
                         android:layout_toRightOf="@id/hitpoints_mindeath"
-                        android:layout_height="wrap_content"
                         android:progressDrawable="@drawable/progressbar_death" />
 
                     <TextView

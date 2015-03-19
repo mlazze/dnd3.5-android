@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,11 +23,6 @@ public class Exp extends BaseActivity {
         ((TextView) findViewById(R.id.exp_value)).setText("Current exp:" + character.getExp());
     }
 
-    private void setEditTextContent(int identifier, String originalValue) {
-        ((EditText) findViewById(identifier)).getText().clear();
-        ((EditText) findViewById(identifier)).getText().insert(0, originalValue);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -41,7 +35,7 @@ public class Exp extends BaseActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         return super.onOptionsItemSelected(item);
     }
@@ -52,13 +46,6 @@ public class Exp extends BaseActivity {
         finish();
     }
 
-    private Integer getEditTextContentAsInteger(int identifier) {
-        try {
-            return Integer.parseInt(((EditText) findViewById(identifier)).getText().toString());
-        } catch (NumberFormatException e) {
-            return null;
-        }
-    }
 
     public void plusExp(View view) {
         Integer i = getEditTextContentAsInteger(R.id.exp_new_value);
