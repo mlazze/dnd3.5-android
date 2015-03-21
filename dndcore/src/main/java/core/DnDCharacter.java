@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
 
 public class DnDCharacter implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -19,8 +18,7 @@ public class DnDCharacter implements Serializable {
     protected String race;
     protected int runspeed;
     protected int exp;
-    protected HashMap<DNDCLASS, Integer> classes;
-    protected HashMap<DNDCLASS, String> classToNames;
+    protected DnDClassManager classes = new DnDClassManager();
     protected ArrayList<Integer> liferolls;
     protected ArrayList<String> knownlanguages;
     protected ArrayList<Integer> basicattackbonus;
@@ -58,26 +56,37 @@ public class DnDCharacter implements Serializable {
     protected int miscattackroll;
 
     // COSTR
-    public DnDCharacter(String name, String race, DNDCLASS mainclass, int[] stats,
+    public DnDCharacter(String name, String race, String mainclass, int[] stats,
                         int runspeed, int[] savingthrowsbases) {
         this.name = name;
         this.level = 1;
+        this.race = race;
+        if (classes == null)
+            classes = new DnDClassManager();
+        classes.levelUpClass(mainclass);
         liferolls = new ArrayList<>(1);
-        liferolls.add(mainclass.getLifeDice());
+        liferolls.add(classes.getLifeDice(mainclass));
         this.runspeed = runspeed;
-        classes = new HashMap<>();
-        classes.put(mainclass, 1);
-        classToNames = new HashMap<>();
-        classToNames.put(mainclass, mainclass.toString());
         this.stats = stats;
         this.savingthrowsbases = savingthrowsbases;
         setupEmptyCharacter();
     }
 
-    public DnDCharacter(String name, String race, DNDCLASS mainclass, int[] stats,
-                        int runspeed, int[] savingthrowsbases, String classname) {
-        this(name, race, mainclass, stats, runspeed, savingthrowsbases);
-        classToNames.put(mainclass, classname);
+    public DnDCharacter(String name, String race, String mainclass, int lifedice, int[] stats,
+                        int runspeed, int[] savingthrowsbases) {
+        classes = new DnDClassManager();
+        classes.addNewClass(mainclass, lifedice);
+
+        this.name = name;
+        this.level = 1;
+        this.race = race;
+        classes.levelUpClass(mainclass);
+        liferolls = new ArrayList<>(1);
+        liferolls.add(classes.getLifeDice(mainclass));
+        this.runspeed = runspeed;
+        this.stats = stats;
+        this.savingthrowsbases = savingthrowsbases;
+        setupEmptyCharacter();
     }
 
 
@@ -207,28 +216,27 @@ public class DnDCharacter implements Serializable {
         return basicattackbonus;
     }
 
-    public Set<DNDCLASS> getClasses() {
-        return classes.keySet();
-    }
-
-    public ArrayList<String> getClassesNames() {
-        ArrayList<String> res = new ArrayList<>();
-        for (DNDCLASS c : classes.keySet()) {
-            res.add(classToNames.get(c));
-        }
+    public ArrayList<String> getClasses() {
+        ArrayList<String> res = new ArrayList<>(0);
+        for (String s : classes.getLevelledClasses().keySet())
+            res.add(s);
         return res;
     }
 
-    public String getClassName(DNDCLASS c) {
-        return classToNames.get(c);
+    public ArrayList<String> getKnownClasses() {
+        ArrayList<String> res = new ArrayList<>(0);
+        for (String s : classes.getKnownClasses().keySet())
+            res.add(s);
+        Collections.sort(res);
+        return res;
     }
 
     public int getLotta() {
         return basicattackbonus.get(0) + getMod(STATS.STR) + miscattackroll + tempattackroll;
     }
 
-    public int getClassLevel(DNDCLASS s) {
-        return classes.get(s);
+    public int getClassLevel(String s) {
+        return classes.getLevel(s);
     }
 
     public int getcurrentHP() {
@@ -554,7 +562,7 @@ public class DnDCharacter implements Serializable {
 
         //
         int level = 0;
-        for (int i : classes.values())
+        for (int i : classes.getLevelledClasses().values())
             level += i;
         if (level != this.level)
             raise = true;

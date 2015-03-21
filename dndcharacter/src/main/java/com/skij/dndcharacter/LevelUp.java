@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import core.DNDCLASS;
 import core.DnDCharacter;
 
 
@@ -25,7 +24,8 @@ public class LevelUp extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_up);
 
-        setClassSpinner(R.id.level_up_class_spinner, R.id.level_up_customclasslay);
+        int[] lays = new int[]{R.id.level_up_customclassdice_lay, R.id.level_up_customclasslay};
+        setClassSpinner(R.id.level_up_class_spinner, lays);
         setSpinner(DnDCharacter.STATS.values(), R.id.level_up_new_stat_spinner);
         setOriginalValues();
     }
@@ -50,8 +50,10 @@ public class LevelUp extends BaseActivity {
         s.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, array));
     }
 
-    private void setClassSpinner(int resourceId, final int layoutToShow) {
-        setSpinner(DNDCLASS.values(), resourceId);
+    private void setClassSpinner(int resourceId, final int[] layoutsToShow) {
+        ArrayList<String> res = character.getKnownClasses();
+        res.add("Custom Class");
+        setSpinner(res.toArray(), resourceId);
 
         //showcustomclassname
         final Spinner s = (Spinner) findViewById(resourceId);
@@ -60,19 +62,25 @@ public class LevelUp extends BaseActivity {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                        long arg3) {
                 int x = s.getSelectedItemPosition();
-                if (x > 10) { //is not default class
-                    LinearLayout l = (LinearLayout) findViewById(layoutToShow);
-                    l.setVisibility(View.VISIBLE);
+                if (x >= character.getKnownClasses().size()) { //is not default class
+                    for (int layoutToShow : layoutsToShow) {
+                        LinearLayout l = (LinearLayout) findViewById(layoutToShow);
+                        l.setVisibility(View.VISIBLE);
+                    }
                 } else {
-                    LinearLayout l = (LinearLayout) findViewById(layoutToShow);
-                    l.setVisibility(View.GONE);
+                    for (int layoutToShow : layoutsToShow) {
+                        LinearLayout l = (LinearLayout) findViewById(layoutToShow);
+                        l.setVisibility(View.GONE);
+                    }
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                LinearLayout l = (LinearLayout) findViewById(layoutToShow);
-                l.setVisibility(View.GONE);
+                for (int layoutToShow : layoutsToShow) {
+                    LinearLayout l = (LinearLayout) findViewById(layoutToShow);
+                    l.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -121,14 +129,8 @@ public class LevelUp extends BaseActivity {
             return;
         }
 
-        DNDCLASS dndclass;
         int pos = (((Spinner) findViewById(R.id.level_up_class_spinner)).getSelectedItemPosition());
-        try {
-            dndclass = DNDCLASS.values()[pos];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
-            return;
-        }
+
         DnDCharacter.STATS s;
         int x = (((Spinner) findViewById(R.id.level_up_new_stat_spinner)).getSelectedItemPosition());
         try {
@@ -147,8 +149,16 @@ public class LevelUp extends BaseActivity {
 
         //applychanges
         try {
-            if (pos <= 10)
+            if (pos < character.getKnownClasses().size()) {
+                String dndclass;
+                try {
+                    dndclass = (String) character.getKnownClasses().toArray()[pos];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 character.levelup(dndclass, liferoll, atkbonus, s, newstatdelta, saving);
+            }
             else {//customclass
                 String customclassname;
                 customclassname = ((EditText) findViewById(R.id.level_up_customclass)).getText().toString();
@@ -157,9 +167,16 @@ public class LevelUp extends BaseActivity {
                     Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
                     return;
                 }
-                character.levelup(dndclass, customclassname, liferoll, atkbonus, s, newstatdelta, saving);
+
+                Integer maxlifedice = getEditTextContentAsInteger(R.id.level_up_customclassdice);
+                if (maxlifedice==null) {
+                    Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                character.levelup(customclassname, maxlifedice, liferoll, atkbonus, s, newstatdelta, saving);
             }
         } catch (DnDCharacter.InvalidCharacterException e) {
+            e.printStackTrace();
             Toast.makeText(getApplicationContext(), "Invalid Values", Toast.LENGTH_LONG).show();
             return;
         }

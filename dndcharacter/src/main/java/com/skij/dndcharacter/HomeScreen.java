@@ -90,7 +90,7 @@ public class HomeScreen extends BaseActivity {
 
         for (int i = 0; i < characterList.size(); i++) {
             DnDCharacterManipulator tmpchar = characterList.get(i);
-            tmp = tmpchar.getName() + "\nClass: " + tmpchar.getClassesNames().get(0) + "\nLevel " + tmpchar.getGlobalLevel();
+            tmp = tmpchar.getName() + "\nClass: " + tmpchar.getClasses().get(0) + "\nLevel " + tmpchar.getGlobalLevel();
             res.add(tmp);
         }
 

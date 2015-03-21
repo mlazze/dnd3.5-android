@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import core.ABILITIES;
-import core.DNDCLASS;
 import core.DnDCharacter;
 import core.DnDCharacterManipulator;
 import core.Weapon;
@@ -80,8 +79,8 @@ public class CharacterFormatter {
 
     public String formatClasses() {
         String res = "";
-        for (DNDCLASS c : character.getClasses()) {
-            res += character.getClassName(c) + " " + character.getClassLevel(c) + " | ";
+        for (String s : character.getClasses()) {
+            res += s + " " + character.getClassLevel(s) + " | ";
         }
         return res.substring(0, res.length() - 2);
     }

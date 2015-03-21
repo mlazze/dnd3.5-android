@@ -7,16 +7,15 @@ import java.util.HashMap;
 public class DnDCharacterManipulator extends DnDCharacter implements
         Serializable {
 
-    public DnDCharacterManipulator(String name, String race, DNDCLASS mainclass,
+    public DnDCharacterManipulator(String name, String race, String mainclass,
                                    int[] stats, int runspeed, int[] savingthrowsbases) {
         super(name, race, mainclass, stats, runspeed, savingthrowsbases);
         recalculate();
     }
 
-    public DnDCharacterManipulator(String name, String race, DNDCLASS mainclass, int[] stats,
-                                   int runspeed, int[] savingthrowsbases, String classname) {
-        super(name, race, mainclass, stats, runspeed, savingthrowsbases);
-        classToNames.put(mainclass, classname);
+    public DnDCharacterManipulator(String name, String race, String mainclass, int lifedice, int[] stats,
+                                   int runspeed, int[] savingthrowsbases) {
+        super(name, race, mainclass, lifedice, stats, runspeed, savingthrowsbases);
         recalculate();
     }
 
@@ -112,17 +111,19 @@ public class DnDCharacterManipulator extends DnDCharacter implements
     }
 
 
-    public String levelup(DNDCLASS improvedclass, int liferoll,
+    public void levelup(String improvedclass, int liferoll,
                           ArrayList<Integer> newattackrolls, STATS newstat, int newstatdelta, int[] newsavingthrows) {
         clearMisc();
         clearTemp();
-        if (liferoll > improvedclass.getLifeDice())
-            throw new DnDCharacter.InvalidCharacterException();
+        try {
+            if (liferoll > classes.getLifeDice(improvedclass))
+                throw new DnDCharacter.InvalidCharacterException();
+        } catch (DnDClassManager.UnknownDnDClassException ignored) {
+        }
 
         liferolls.add(liferoll);
         level++;
-        int oldclasslevel = classes.get(improvedclass) == null ? 0 : classes.get(improvedclass);
-        classes.put(improvedclass, oldclasslevel + 1);
+        classes.levelUpClass(improvedclass);
         if (newattackrolls != null) {
             basicattackbonus = new ArrayList<>(0);
             for (int i : newattackrolls)
@@ -137,15 +138,12 @@ public class DnDCharacterManipulator extends DnDCharacter implements
         clearMisc();
         clearTemp();
         recalculate();
-
-        return improvedclass.getLevelUpInfos();
     }
 
-    public String levelup(DNDCLASS improvedclass, String customclass, int liferoll,
+    public void levelup(String improvedclass, int maxLifeRoll , int liferoll,
                           ArrayList<Integer> newattackrolls, STATS newstat, int newstatdelta, int[] newsavingthrows) {
-        String ret = levelup(improvedclass, liferoll, newattackrolls, newstat, newstatdelta, newsavingthrows);
-        classToNames.put(improvedclass, customclass);
-        return ret;
+        classes.addNewClass(improvedclass,maxLifeRoll);
+        levelup(improvedclass, liferoll, newattackrolls, newstat, newstatdelta, newsavingthrows);
     }
 
     public void recalculate() {
@@ -458,8 +456,8 @@ public class DnDCharacterManipulator extends DnDCharacter implements
             res += "====INFOS====\n";
             // infos
             res += "-Nome: " + getName() + "\n";
-            for (DNDCLASS s : getClasses())
-                res += "-Class: " + getClassName(s) + " level " + getClassLevel(s) + "\n";
+            for ( String s : getClasses())
+                res += "-Class: " + s + " level " + getClassLevel(s) + "\n";
             res += "-ToTLevel: " + getGlobalLevel() + "\n";
             res += "-Exp: " + getExp() + "\n";
             res += "-Run Speed: " + getRunspeed() + "\n";
