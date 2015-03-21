@@ -7,6 +7,7 @@
     <string name="new_char_class_label">Class:*</string>
     <string name="new_char_runspeed_label">Runspeed:*</string>
     <string name="new_char_customclass_label">Class Name:*</string>
+    <string name="new_char_customclassdice_label">Class Dice:*</string>
     <string name="strength_required">STR*</string>
     <string name="dexterity_required">DEX*</string>
     <string name="constitution_required">CON*</string>
@@ -51,6 +52,7 @@
     <string name="level_up_attack_bonus_label">AtkBonus*</string>
     <string name="level_up_new_stat_label">Improved Stat</string>
     <string name="level_up_customclass_label">Custom Class Name*</string>
+    <string name="level_up_customclassdice_label">Custom Class Dice*</string>
     <string name="abilities_ability_label">Ability</string>
     <string name="abilities_value_label">New Value*</string>
     <string name="apply">Apply</string>
@@ -109,6 +111,7 @@
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="delete">x</string>
+    <string name="deleteverbose">Delete</string>
     <string name="description">D</string>
     <string name="set">Set</string>
     <string name="title_activity_damage_reduction">DamageReduction</string>

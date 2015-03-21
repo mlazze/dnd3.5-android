@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import core.DNDCLASS;
 import core.DnDCharacter.SAVING;
 import core.DnDCharacter.STATS;
 import core.DnDCharacterManipulator;
@@ -125,7 +124,7 @@ public class BarbarianTest {
         int[] stats = new int[]{18, 14, 18, 10, 14, 8};
         int[] sav = new int[]{4, 1, 1};
         DnDCharacterManipulator stranger = new DnDCharacterManipulator(
-                "Stranger", "Umano", DNDCLASS.BARBARIAN, stats, 12, sav);
+                "Stranger", "Umano", "Barbarian", stats, 12, sav);
         stranger.setAttackBonus(0, 5, false);
         Weapon w = new Weapon("Spadone 2h", false, STATS.STR, 1.5, 1.5, "2d6",
                 19, 2);
@@ -145,16 +144,15 @@ public class BarbarianTest {
         Equipment ring = new Equipment("Anello Protettivo +1");
         ring.deflectionbonus = 1;
         stranger.setEquipment(ring, false);
-        stranger.levelup(DNDCLASS.BARBARIAN, 8, null, null, 0, null);
-        stranger.levelup(DNDCLASS.BARBARIAN, 11, null, null, 0, null);
-        stranger.levelup(DNDCLASS.BARBARIAN, 8, null, STATS.STR, 1, null);
-        stranger.levelup(DNDCLASS.BARBARIAN, 8, null, null, 0, null);
+        stranger.levelup("Barbarian", 8, null, null, 0, null);
+        stranger.levelup("Barbarian", 11, null, null, 0, null);
+        stranger.levelup("Barbarian", 8, null, STATS.STR, 1, null);
+        stranger.levelup("Barbarian", 8, null, null, 0, null);
         sav = new int[]{5, 2, 2};
-        String s = stranger.levelup(DNDCLASS.BARBARIAN, 6, null, null, 0, sav);
+        stranger.levelup("Barbarian", 6, null, null, 0, sav);
         stranger.clearTemp();
         stranger.clearMisc();
         System.out.println("=====LVLUP=====");
-        System.out.println(s);
         System.out.println(stranger.toString());
         System.out.println("=====================");
         return stranger;
@@ -164,15 +162,15 @@ public class BarbarianTest {
         int[] stats = new int[]{14, 12, 16, 10, 18, 12};
         int[] sav = new int[]{4, 1, 4};
         DnDCharacterManipulator cleric = new DnDCharacterManipulator("Cleric", "Umano",
-                DNDCLASS.CLERIC, stats, 6, sav);
-        cleric.levelup(DNDCLASS.CLERIC, 3, null, null, 0, null);
-        cleric.levelup(DNDCLASS.CLERIC, 6, null, null, 0, null);
-        cleric.levelup(DNDCLASS.CLERIC, 4, null, null, 0, null);
-        cleric.levelup(DNDCLASS.CLERIC, 5, null, null, 0, null);
+                "Cleric", stats, 6, sav);
+        cleric.levelup("Cleric", 3, null, null, 0, null);
+        cleric.levelup("Cleric", 6, null, null, 0, null);
+        cleric.levelup("Cleric", 4, null, null, 0, null);
+        cleric.levelup("Cleric", 5, null, null, 0, null);
         ArrayList<Integer> atkrolls = new ArrayList<>();
         atkrolls.add(4);
         sav = new int[]{5, 2, 5};
-        String s = cleric.levelup(DNDCLASS.CLERIC, 4, atkrolls, STATS.WIS, 1,
+        cleric.levelup("Cleric", 4, atkrolls, STATS.WIS, 1,
                 sav);
         Weapon w = new Weapon("Mazza pes Folgore", false, STATS.STR, 1, 1.5,
                 "1d8", 20, 2);
@@ -196,7 +194,6 @@ public class BarbarianTest {
         ring.deflectionbonus = 1;
         cleric.setEquipment(ring, false);
         System.out.println("=====START=====");
-        System.out.println(s);
         System.out.println(cleric.toString());
         System.out.println("=====================");
         return cleric;

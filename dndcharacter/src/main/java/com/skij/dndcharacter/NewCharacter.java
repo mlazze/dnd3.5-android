@@ -12,8 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import core.DNDCLASS;
+import java.util.ArrayList;
+
 import core.DnDCharacterManipulator;
+import core.DnDClassManager;
 
 
 public class NewCharacter extends BaseActivity {
@@ -22,7 +24,8 @@ public class NewCharacter extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_character);
-        setClassSpinner(R.id.new_char_class_spinner, R.id.new_char_customclassname);
+        int[] lays = new int[]{R.id.new_char_customclassdice_lay, R.id.new_char_customclassname};
+        setClassSpinner(R.id.new_char_class_spinner, lays);
 
     }
 
@@ -31,8 +34,10 @@ public class NewCharacter extends BaseActivity {
         s.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, array));
     }
 
-    private void setClassSpinner(int resourceId, final int layoutToShow) {
-        setSpinner(DNDCLASS.values(), resourceId);
+    private void setClassSpinner(int resourceId, final int[] layoutsToShow) {
+        ArrayList<String> res = DnDClassManager.getDefaultClasses();
+        res.add("Custom Class");
+        setSpinner(res.toArray(), resourceId);
 
         //showcustomclassname
         final Spinner s = (Spinner) findViewById(resourceId);
@@ -41,19 +46,25 @@ public class NewCharacter extends BaseActivity {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                        long arg3) {
                 int x = s.getSelectedItemPosition();
-                if (x > 10) { //is not default class
-                    LinearLayout l = (LinearLayout) findViewById(layoutToShow);
-                    l.setVisibility(View.VISIBLE);
+                if (x >= DnDClassManager.getDefaultClasses().size()) { //is not default class
+                    for (int layoutToShow : layoutsToShow) {
+                        LinearLayout l = (LinearLayout) findViewById(layoutToShow);
+                        l.setVisibility(View.VISIBLE);
+                    }
                 } else {
-                    LinearLayout l = (LinearLayout) findViewById(layoutToShow);
-                    l.setVisibility(View.GONE);
+                    for (int layoutToShow : layoutsToShow) {
+                        LinearLayout l = (LinearLayout) findViewById(layoutToShow);
+                        l.setVisibility(View.GONE);
+                    }
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                LinearLayout l = (LinearLayout) findViewById(layoutToShow);
-                l.setVisibility(View.GONE);
+                for (int layoutToShow : layoutsToShow) {
+                    LinearLayout l = (LinearLayout) findViewById(layoutToShow);
+                    l.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -105,20 +116,22 @@ public class NewCharacter extends BaseActivity {
         }
 
         //class
-        DNDCLASS dndclass;
         int pos = (((Spinner) findViewById(R.id.new_char_class_spinner)).getSelectedItemPosition());
-        try {
-            dndclass = DNDCLASS.values()[pos];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
-            return;
-        }
+
 
         DnDCharacterManipulator newChar;
 
-        if (pos <= 10)
+        if (pos < DnDClassManager.getDefaultClasses().size()) {
+            String dndclass;
+            try {
+                dndclass = DnDClassManager.getDefaultClasses().get(pos);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
+                return;
+            }
+
             newChar = new DnDCharacterManipulator(name, race, dndclass, stats, runspeed, sav);
-        else {//customclass
+        } else {//customclass
             String customclassname;
             customclassname = ((EditText) findViewById(R.id.new_char_customclass)).getText().toString();
 
@@ -126,7 +139,13 @@ public class NewCharacter extends BaseActivity {
                 Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
                 return;
             }
-            newChar = new DnDCharacterManipulator(name, race, dndclass, stats, runspeed, sav, customclassname);
+            Integer lifedice = getEditTextContentAsInteger(R.id.new_char_customclassdice);
+            if (lifedice == null) {
+                Toast.makeText(getApplicationContext(), "Missing required parameters", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            newChar = new DnDCharacterManipulator(name, race, customclassname, lifedice, stats, runspeed, sav);
         }
 
         Utils.addCharacter(newChar, this);
